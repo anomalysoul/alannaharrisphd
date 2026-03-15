@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Alanna Harris — Scholar · Educator · Speaker</title>
+<meta name="description" content="Dr. Alanna Harris, Ph.D. — Equity-centered educator, literacy leader, speaker, and qualitative researcher. Milwaukee, WI. Available for keynotes, workshops, and professional development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --plum:         #5E2750;
+  --plum-mid:     #8B3D7A;
+  --plum-light:   #C47FB0;
+  --slate:        #3D5A80;
+  --slate-mid:    #5D7FA8;
+  --slate-light:  #9BB8D4;
+  --gold:         #B07D2A;
+  --gold-light:   #D4A554;
+  --bg:           #FAFAF8;
+  --bg2:          #F4F2EE;
+  --bg3:          #EDE9E3;
+  --surface:      #FFFFFF;
+  --border:       #E2DDD6;
+  --border-mid:   #C8C0B5;
+  --text:         #1A1714;
+  --text-mid:     #4A4440;
+  --text-dim:     #7A726A;
+  --text-label:   #9A9088;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 3rem;
+  background: rgba(250, 250, 248, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; letter-spacing: .02em;
+  color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--plum); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: .78rem; letter-spacing: .06em; font-weight: 500;
+  text-transform: uppercase; color: var(--text-dim); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--plum); }
+.nav-cta {
+  background: var(--plum); color: #fff !important;
+  padding: .45rem 1.2rem; border-radius: 3px;
+  transition: background .2s !important;
+}
+.nav-cta:hover { background: var(--plum-mid) !important; color: #fff !important; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding: 0 3rem;
+  background: linear-gradient(160deg, #fff 0%, var(--bg2) 60%, var(--bg3) 100%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner { max-width: 800px; padding-top: 5rem; }
+.hero-eyebrow {
+  font-size: .72rem; letter-spacing: .28em; font-weight: 500;
+  text-transform: uppercase; color: var(--plum); margin-bottom: 1.8rem;
+  opacity: 0; animation: riseIn .9s ease .15s forwards;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 8vw, 7rem); font-weight: 600;
+  line-height: .95; letter-spacing: -.02em; color: var(--text);
+  opacity: 0; animation: riseIn .9s ease .3s forwards;
+}
+.hero-name em {
+  font-style: italic; font-weight: 300; color: var(--plum);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--text-mid);
+  margin-top: 1.6rem; line-height: 1.6; max-width: 600px;
+  opacity: 0; animation: riseIn .9s ease .5s forwards;
+}
+.hero-cta-row {
+  display: flex; gap: .9rem; margin-top: 2.5rem; flex-wrap: wrap;
+  opacity: 0; animation: riseIn .9s ease .7s forwards;
+}
+.btn {
+  font-size: .72rem; letter-spacing: .1em; font-weight: 600;
+  text-transform: uppercase; padding: .75rem 1.8rem; text-decoration: none;
+  border-radius: 3px; transition: all .25s; cursor: pointer; display: inline-block;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--plum); color: #fff; border: 1.5px solid var(--plum);
+}
+.btn-primary:hover { background: var(--plum-mid); border-color: var(--plum-mid); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(94,39,80,.2); }
+.btn-outline {
+  background: transparent; color: var(--text-mid); border: 1.5px solid var(--border-mid);
+}
+.btn-outline:hover { border-color: var(--plum); color: var(--plum); transform: translateY(-1px); }
+.btn-slate {
+  background: var(--slate); color: #fff; border: 1.5px solid var(--slate);
+}
+.btn-slate:hover { background: var(--slate-mid); border-color: var(--slate-mid); transform: translateY(-1px); }
+
+.hero-badges {
+  display: flex; gap: .6rem; margin-top: 2rem; flex-wrap: wrap;
+  opacity: 0; animation: riseIn .9s ease .9s forwards;
+}
+.hero-badge {
+  font-size: .65rem; letter-spacing: .1em; font-weight: 500; text-transform: uppercase;
+  padding: .3rem .85rem; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--text-dim); background: var(--surface);
+}
+
+@keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── SECTION SHARED ─── */
+section { position: relative; }
+.section-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+.section-label {
+  font-size: .65rem; letter-spacing: .28em; font-weight: 600;
+  text-transform: uppercase; color: var(--plum); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.section-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--border); max-width: 120px;
+}
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 600;
+  line-height: 1.05; letter-spacing: -.01em; color: var(--text); margin-bottom: 1.2rem;
+}
+.section-subheading {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.15rem; color: var(--text-mid); max-width: 620px; line-height: 1.7;
+  margin-bottom: 3.5rem;
+}
+
+/* ─── ABOUT ─── */
+#about { background: var(--surface); border-bottom: 1px solid var(--border); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.about-text p {
+  color: var(--text-mid); font-size: 1rem; margin-bottom: 1.3rem; line-height: 1.85;
+}
+.about-text strong { color: var(--text); }
+.about-actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2rem; }
+.competency-list { display: flex; flex-direction: column; gap: .75rem; }
+.competency-item {
+  padding: 1.1rem 1.4rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--plum-light);
+  background: var(--bg);
+  border-radius: 2px;
+  transition: border-color .25s, background .25s;
+}
+.competency-item:hover { border-color: var(--border-mid); border-left-color: var(--plum); background: #fff; }
+.competency-item h4 {
+  font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--plum); margin-bottom: .4rem;
+}
+.competency-item p { font-size: .83rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+/* ─── EXPERIENCE ─── */
+#experience { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.exp-timeline { display: flex; flex-direction: column; }
+.exp-item {
+  display: grid; grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid var(--border);
+  padding: 2.2rem 0;
+  transition: background .2s;
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-item:hover { background: rgba(94,39,80,.03); }
+.exp-meta { padding-right: 2rem; }
+.exp-years { font-size: .68rem; font-weight: 600; color: var(--slate); letter-spacing: .08em; text-transform: uppercase; }
+.exp-org { font-size: .75rem; font-weight: 500; color: var(--text-dim); margin-top: .3rem; line-height: 1.4; }
+.exp-role { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+.exp-desc {
+  font-size: .88rem; color: var(--text-mid); line-height: 1.75;
+  max-height: 0; overflow: hidden;
+  transition: max-height .5s ease, opacity .4s; opacity: 0;
+}
+.exp-item:hover .exp-desc { max-height: 300px; opacity: 1; }
+
+/* ─── PUBLICATIONS ─── */
+#publications { background: var(--surface); border-bottom: 1px solid var(--border); }
+.pub-grid { display: flex; flex-direction: column; gap: 1.2rem; }
+.pub-card {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 1.8rem 2rem; border-radius: 3px; position: relative; overflow: hidden;
+  transition: border-color .3s, box-shadow .3s;
+  border-left: 3px solid transparent;
+}
+.pub-card:hover { border-left-color: var(--plum); border-color: var(--border-mid); box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+.pub-type { font-size: .62rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--slate); margin-bottom: .6rem; }
+.pub-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
+.pub-citation { font-size: .82rem; color: var(--text-dim); line-height: 1.6; }
+.pub-badge {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  padding: .25rem .75rem; border-radius: 999px;
+  background: rgba(176,125,42,.1); color: var(--gold); border: 1px solid rgba(176,125,42,.25);
+}
+
+/* ─── SPEAKING ─── */
+#speaking { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.speaking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.speaking-topics { display: flex; flex-direction: column; gap: 1rem; }
+.topic-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.5rem 1.8rem; border-radius: 3px;
+  transition: all .25s; cursor: default;
+}
+.topic-card:hover { border-color: var(--plum-light); box-shadow: 0 4px 16px rgba(94,39,80,.08); transform: translateY(-2px); }
+.topic-type {
+  font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--plum); margin-bottom: .5rem;
+}
+.topic-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
+.topic-desc { font-size: .83rem; color: var(--text-dim); line-height: 1.7; }
+.speaking-past { }
+.pres-list { display: flex; flex-direction: column; }
+.pres-item {
+  display: grid; grid-template-columns: 110px 1fr; gap: 1.2rem;
+  padding: 1.1rem 0; border-bottom: 1px solid var(--border); align-items: baseline;
+}
+.pres-item:last-child { border-bottom: none; }
+.pres-year { font-size: .65rem; font-weight: 600; color: var(--slate); letter-spacing: .06em; text-transform: uppercase; }
+.pres-title { font-size: .93rem; color: var(--text); margin-bottom: .2rem; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.pres-venue { font-size: .75rem; color: var(--text-dim); }
+.speaking-booking {
+  background: var(--plum); color: #fff;
+  padding: 2rem 2.2rem; border-radius: 4px; margin-top: 2.5rem;
+}
+.speaking-booking h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: .6rem; }
+.speaking-booking p { font-size: .88rem; opacity: .88; line-height: 1.7; margin-bottom: 1.2rem; }
+.btn-white { background: #fff; color: var(--plum); border: 1.5px solid #fff; }
+.btn-white:hover { background: var(--bg2); border-color: var(--bg2); transform: translateY(-1px); }
+
+/* ─── TEACHING / PD ─── */
+#teaching { background: var(--surface); border-bottom: 1px solid var(--border); }
+.pd-intro { font-size: .93rem; color: var(--text-mid); max-width: 700px; line-height: 1.8; margin-bottom: 3rem; }
+.pd-note { font-size: .78rem; color: var(--text-dim); font-style: italic; margin-bottom: 2rem; }
+.teaching-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
+.teaching-card {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 1.8rem; border-radius: 3px;
+  transition: all .25s;
+}
+.teaching-card:hover { border-color: var(--plum-light); box-shadow: 0 4px 16px rgba(94,39,80,.08); transform: translateY(-2px); }
+.teaching-icon { font-size: 1.4rem; margin-bottom: .85rem; display: block; }
+.teaching-title { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .65rem; }
+.teaching-desc { font-size: .86rem; color: var(--text-mid); line-height: 1.75; }
+.pd-cta-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.pd-cta-note { font-size: .82rem; color: var(--text-dim); font-style: italic; }
+
+/* ─── AWARDS ─── */
+#awards { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.award-cell {
+  padding: 1.5rem 1.8rem; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 3px; display: flex; gap: 1rem; align-items: flex-start;
+  transition: all .25s;
+}
+.award-cell:hover { border-color: rgba(176,125,42,.4); box-shadow: 0 4px 16px rgba(176,125,42,.08); }
+.award-star { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: .15rem; }
+.award-name { font-size: .8rem; font-weight: 600; color: var(--text); margin-bottom: .25rem; line-height: 1.4; }
+.award-detail { font-size: .78rem; color: var(--text-dim); line-height: 1.55; }
+
+/* ─── ANOMALY SOUL ─── */
+#anomaly { background: var(--surface); border-bottom: 1px solid var(--border); }
+.anomaly-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3.5rem; align-items: end; }
+.anomaly-intro {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-style: italic; color: var(--text-mid); line-height: 1.85;
+}
+.anomaly-tagline {
+  font-size: .82rem; color: var(--text-dim); line-height: 1.8;
+  border-left: 3px solid var(--plum-light); padding-left: 1.2rem;
+}
+.programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; }
+.program-card {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 2rem; border-radius: 3px; position: relative;
+  transition: all .3s;
+}
+.program-card:hover { border-color: var(--plum-light); box-shadow: 0 8px 30px rgba(94,39,80,.1); transform: translateY(-3px); }
+.program-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 300; color: var(--plum-light); line-height: 1; margin-bottom: .6rem;
+}
+.program-name { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .8rem; }
+.program-desc { font-size: .88rem; font-style: italic; color: var(--text-mid); line-height: 1.8; font-family: 'Cormorant Garamond', serif; }
+
+/* ─── CONTACT ─── */
+#contact { background: var(--bg2); }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-text p { color: var(--text-mid); font-size: .95rem; line-height: 1.85; margin-bottom: 1.3rem; }
+.contact-links { display: flex; flex-direction: column; gap: .8rem; margin-top: 1.8rem; }
+.contact-link {
+  display: flex; align-items: center; gap: .9rem;
+  font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+  color: var(--text-mid); text-decoration: none; transition: color .2s;
+  padding: .7rem 0; border-bottom: 1px solid var(--border);
+}
+.contact-link:hover { color: var(--plum); }
+.contact-link-icon { width: 20px; text-align: center; color: var(--plum-mid); flex-shrink: 0; }
+.form-group { margin-bottom: 1.3rem; }
+.form-group label {
+  font-size: .65rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text-dim); display: block; margin-bottom: .5rem;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: 'Inter', sans-serif; font-size: .9rem;
+  padding: .75rem 1rem; border-radius: 3px; transition: border-color .2s; outline: none;
+  appearance: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--plum); }
+.form-group textarea { min-height: 110px; resize: vertical; }
+.form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A726A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--text); color: rgba(250,250,248,.6);
+  padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+.footer-brand { color: var(--plum-light); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.4rem; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 4.5rem 1.4rem; }
+  #hero { padding: 0 1.4rem; }
+  .about-grid, .contact-inner, .speaking-layout, .anomaly-header { grid-template-columns: 1fr; gap: 2.5rem; }
+  .exp-item { grid-template-columns: 1fr; gap: .4rem; }
+  .exp-meta { padding-right: 0; }
+  .teaching-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: .8rem; text-align: center; }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; }
+}
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Dr. Alanna <span>Harris</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">CV</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#speaking">Speaking</a></li>
+    <li><a href="#teaching">PD</a></li>
+    <li><a href="#awards">Credentials</a></li>
+    <li><a href="#anomaly">Anomaly Soul</a></li>
+    <li><a href="#contact" class="nav-cta">Book / Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI</p>
+    <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
+    <p class="hero-title">Equity-centered educator · Literacy leader · Speaker · Qualitative researcher.<br>Building joyful, rigorous, and affirming learning environments.</p>
+    <div class="hero-cta-row">
+      <a href="#speaking" class="btn btn-primary">Book a Talk</a>
+      <a href="#teaching" class="btn btn-slate">PD Offerings</a>
+      <a href="#" class="btn btn-outline">Download CV ↗</a>
+      <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge">Scholar</span>
+      <span class="hero-badge">Educator</span>
+      <span class="hero-badge">Speaker</span>
+      <span class="hero-badge">Anomaly Soul</span>
+      <span class="hero-badge">DJ</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-label reveal">About</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-heading">Scholar.<br>Practitioner.<br>Anomaly.</h2>
+        <p>I am an equity-centered educator and qualitative researcher with over a decade of experience spanning K–12 classrooms, higher education, federal grant work, and national conference stages. My Ph.D. in Urban Education from UW-Milwaukee grounds my practice in <strong>culturally responsive literacy, healing-centered pedagogy, and critical mindfulness</strong>.</p>
+        <p>I believe learning environments must affirm the full humanity of every student — their language, their culture, their body, their joy. My work sits at the intersection of <strong>Black feminist epistemology, literacy justice, and transformative teacher development</strong>.</p>
+        <p>When I'm not in a classroom or writing a research paper, I'm behind the decks — because DJing and teaching are the same practice: reading the room, holding the energy, and knowing when to drop the beat.</p>
+        <div class="about-actions">
+          <a href="#" class="btn btn-primary">Download CV ↗</a>
+          <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="competency-list reveal">
+        <div class="competency-item">
+          <h4>Pedagogy &amp; Instruction</h4>
+          <p>Culturally responsive &amp; antiracist pedagogy · Trauma-informed instruction · Literacy curriculum design · Teacher mentorship &amp; coaching</p>
+        </div>
+        <div class="competency-item">
+          <h4>Research</h4>
+          <p>Qualitative &amp; practitioner inquiry · IRB certified · Academic &amp; peer-reviewed writing · Intuitive inquiry · Conference facilitation</p>
+        </div>
+        <div class="competency-item">
+          <h4>Curriculum &amp; Program Design</h4>
+          <p>District-wide literacy frameworks · MTSS design · Equity-focused program strategy · SpringBoard &amp; myView curricula</p>
+        </div>
+        <div class="competency-item">
+          <h4>Leadership &amp; Community</h4>
+          <p>King/Chávez Scholars Alumni · Peer reviewer, NJ English Journal · Youth mentor, Walnut Way · NWP Certified Instructor</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / CV -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-label reveal">Curriculum Vitae</div>
+    <h2 class="section-heading reveal">The Work</h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2023 – Present</div>
+          <div class="exp-org">Brown Deer School District</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Instructional Literacy Coach</div>
+          <div class="exp-desc">Designed and implemented a K–12 district-wide culturally responsive literacy framework. Facilitated 25+ targeted professional learning sessions. Co-led MTSS for literacy including universal screeners and progress monitoring tools. Coaching cycles improved Tier 1 instruction and contributed to measurable student growth.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2023 – 2024</div>
+          <div class="exp-org">Marquette University</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">9th Grade English Instructor</div>
+          <div class="exp-desc">Developed and taught a culturally sustaining ELA curriculum emphasizing inquiry-based learning, reflective writing, and multimodal literacy. Mentored first-year students in academic self-advocacy and writing as empowerment and resistance.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2021 – 2023</div>
+          <div class="exp-org">UW-Milwaukee School of Education</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Senior Lecturer</div>
+          <div class="exp-desc">Taught foundational methods courses in literacy, antiracist pedagogy, and urban teaching. Supervised clinical field placements across MPS and suburban districts. Co-facilitated curriculum redesign aligning state licensure standards with culturally responsive frameworks.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2021 – 2022</div>
+          <div class="exp-org">Universal Hip Hop Museum</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Education Consultant</div>
+          <div class="exp-desc">Designed a national education strategy integrating hip-hop pedagogy, youth voice, and civic engagement. Secured grant funding and built community partnerships to launch pilot programming for youth in arts and literacy.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2019 – Present</div>
+          <div class="exp-org">Alverno College</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Adjunct Lecturer, School of Education</div>
+          <div class="exp-desc">Teach literacy methods, curriculum theory, and reflective teaching rooted in Black feminist pedagogy. Provide academic advising with a focus on pathways for teachers of color and bilingual educators.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2018 – 2020</div>
+          <div class="exp-org">US Dept. of Education ACCESS Grant</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Educational Consultant</div>
+          <div class="exp-desc">Supported 13 MPS schools with culturally responsive instruction. Collaborated with university researchers on qualitative data collection and scholarly dissemination. Co-authored publications for federal grant reporting and peer review.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2013 – 2018</div>
+          <div class="exp-org">Wauwatosa &amp; Kenosha Unified Districts</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">High School English Teacher (Grades 9–12)</div>
+          <div class="exp-desc">Taught American Literature, British Literature, Composition, and AP Literature. Designed rigorous, culturally responsive units incorporating multimodal texts, student-led inquiry, and real-world writing tasks.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-wrap">
+    <div class="section-label reveal">Publications &amp; Research</div>
+    <h2 class="section-heading reveal">The Scholarship</h2>
+    <div class="pub-grid reveal">
+      <div class="pub-card">
+        <span class="pub-badge">Forthcoming 2026</span>
+        <div class="pub-type">Book Chapter · Routledge</div>
+        <div class="pub-title">Mindfulness in Practice: Teachers as Agents of Healing and Growth in the Secondary ELA Classroom</div>
+        <div class="pub-citation">Harris, A. (Forthcoming, 2026). In <em>International Perspectives on the Teaching of English to Generate Hope: Inspiration in the Age of Anxiety</em> [IFTE Volume 6]. Routledge.</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-type">Peer-Reviewed Article · New Jersey English Journal</div>
+        <div class="pub-title">Joy and Pain: Strategies for Transformative Learning in the English Language Arts Curriculum</div>
+        <div class="pub-citation">Harris, A. (2024). <em>New Jersey English Journal, 13</em>(8).</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-type">Peer-Reviewed Article · Journal of Urban Education</div>
+        <div class="pub-title">The Sociohistorical Evolution of the Language of Culturally-Based Pedagogy and Its Impact on Teacher Education</div>
+        <div class="pub-citation">Pasternak, D. L., et al. (2020). <em>Journal of Urban Education</em>.</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-type">Doctoral Dissertation · UW-Milwaukee</div>
+        <div class="pub-title">Critical Mindfulness in the English Language Arts Classroom</div>
+        <div class="pub-citation">Harris, A. (2024). Doctoral Dissertation. University of Wisconsin–Milwaukee.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section id="speaking">
+  <div class="section-wrap">
+    <div class="section-label reveal">Speaking</div>
+    <h2 class="section-heading reveal">On the Stage</h2>
+    <p class="section-subheading reveal">Available for keynotes, workshops, panels, and university guest lectures — on equity, literacy, healing-centered education, and the art of teaching.</p>
+
+    <div class="speaking-layout">
+      <div class="speaking-topics reveal">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Available Topics</h3>
+
+        <div class="topic-card">
+          <div class="topic-type">Keynote · Workshop</div>
+          <div class="topic-title">DJ as Pedagogy: Remix, Synthesis &amp; Reading the Room</div>
+          <div class="topic-desc">Using DJing as a theoretical and practical framework for compositional thinking, student engagement, and radical presence in the classroom.</div>
+        </div>
+
+        <div class="topic-card">
+          <div class="topic-type">Keynote · Workshop</div>
+          <div class="topic-title">Critical Mindfulness in the ELA Classroom</div>
+          <div class="topic-desc">Integrating critical mindfulness and healing-centered practices into English Language Arts instruction — grounded in doctoral research and certified practice.</div>
+        </div>
+
+        <div class="topic-card">
+          <div class="topic-type">Keynote · Workshop · Guest Lecture</div>
+          <div class="topic-title">Equity-Centered Literacy Leadership</div>
+          <div class="topic-desc">Building district-wide literacy systems that center Black and Brown students — where science of reading meets justice and both are non-negotiable.</div>
+        </div>
+
+        <div class="topic-card">
+          <div class="topic-type">Workshop · Panel</div>
+          <div class="topic-title">Healing-Centered Educator Wellness</div>
+          <div class="topic-desc">Sustainable educator practice rooted in somatic awareness, sound therapy, and joy — for individuals and whole school communities ready to shift the culture.</div>
+        </div>
+
+        <div class="speaking-booking">
+          <h3>Ready to Book?</h3>
+          <p>I speak to school districts, national conferences, university departments, and community organizations. Let's build something transformative together.</p>
+          <a href="#contact" class="btn btn-white">Inquire About Booking</a>
+        </div>
+      </div>
+
+      <div class="speaking-past reveal">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Past Presentations</h3>
+        <div class="pres-list">
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2024</div>
+            <div>
+              <div class="pres-title">Writing Across America: DJ Presentation</div>
+              <div class="pres-venue">National Council of Teachers of English · November 2024</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">CQIE 2022</div>
+            <div>
+              <div class="pres-title">Beyond the Unitary Construct of School Culture: A Comparative Case Study</div>
+              <div class="pres-venue">Critical Questions in Education · October 2022</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">UWM 2020</div>
+            <div>
+              <div class="pres-title">Resistance Through Intersectional DJ Music</div>
+              <div class="pres-venue">Black Feminist Symposium, UW-Milwaukee · February 2020</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2019</div>
+            <div>
+              <div class="pres-title">ACCESSING Student Success: Supporting Culturally Relevant Pedagogy Across PD Practice</div>
+              <div class="pres-venue">National Council of Teachers of English · November 2019</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">MLA 2019</div>
+            <div>
+              <div class="pres-title">ACCESSING Culturally Relevant Practice through Professional Development Schools Focused on the Teaching of Writing</div>
+              <div class="pres-venue">Modern Language Association International Symposium · July 2019</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">AERA 2019</div>
+            <div>
+              <div class="pres-title">Teacher Willingness to Participate in PD Focused on Cultural Responsiveness: A School District-University Collaboration</div>
+              <div class="pres-venue">American Educational Research Association · April 2019</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING & PD -->
+<section id="teaching">
+  <div class="section-wrap">
+    <div class="section-label reveal">Professional Development</div>
+    <h2 class="section-heading reveal">PD Offerings</h2>
+    <p class="pd-intro reveal">Available for school districts, conferences, and professional organizations. Each offering can be tailored as a half-day session, full-day workshop, or multi-day series.</p>
+    <div class="pd-note reveal">Offered as workshops, coaching engagements, or embedded PD partnerships.</div>
+    <div class="teaching-grid reveal">
+      <div class="teaching-card">
+        <span class="teaching-icon">✦</span>
+        <div class="teaching-title">Culturally Responsive Pedagogy</div>
+        <div class="teaching-desc">Designing and facilitating learning experiences that center the cultural knowledge, linguistic practices, and lived experiences of Black and Brown students. PD for teachers that goes beyond frameworks to real transformation.</div>
+      </div>
+      <div class="teaching-card">
+        <span class="teaching-icon">◈</span>
+        <div class="teaching-title">Literacy Coaching &amp; MTSS</div>
+        <div class="teaching-desc">Building district-wide literacy infrastructure through tiered instruction, universal screeners, progress monitoring, and data-informed coaching cycles. Science of Reading meets equity — not either/or.</div>
+      </div>
+      <div class="teaching-card">
+        <span class="teaching-icon">◉</span>
+        <div class="teaching-title">Healing-Centered &amp; Mindfulness-Based Instruction</div>
+        <div class="teaching-desc">Integrating critical mindfulness, trauma-informed practices, and healing-centered engagement into ELA and educator wellness. Grounded in doctoral research and certification in mindfulness &amp; sound therapy.</div>
+      </div>
+      <div class="teaching-card">
+        <span class="teaching-icon">⬡</span>
+        <div class="teaching-title">Secondary &amp; Higher Education ELA</div>
+        <div class="teaching-desc">Teaching English Language Arts at grades 9–12 and at the university level: American &amp; British Literature, AP Literature, Composition, Curriculum Theory, Literacy Methods.</div>
+      </div>
+      <div class="teaching-card">
+        <span class="teaching-icon">◬</span>
+        <div class="teaching-title">Teacher Preparation &amp; Mentorship</div>
+        <div class="teaching-desc">Supervising clinical placements, advising graduate students, and mentoring teachers of color through pathways into the profession. Facilitation rooted in CliftonStrengths coaching and Black feminist pedagogy.</div>
+      </div>
+      <div class="teaching-card">
+        <span class="teaching-icon">⬟</span>
+        <div class="teaching-title">Hip-Hop Pedagogy &amp; DJ as Method</div>
+        <div class="teaching-desc">Using DJing as a theoretical framework for compositional practice, synthesis, and student engagement. Presented at NCTE 2024. Building the scholarly argument for DJ as a pedagogy of remix and radical presence.</div>
+      </div>
+    </div>
+    <div class="pd-cta-row reveal">
+      <a href="#contact" class="btn btn-primary">Book a PD Session</a>
+      <span class="pd-cta-note">Available for school districts, conferences, and professional organizations</span>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS & CREDENTIALS -->
+<section id="awards">
+  <div class="section-wrap">
+    <div class="section-label reveal">Awards &amp; Credentials</div>
+    <h2 class="section-heading reveal">Recognition</h2>
+    <div class="awards-grid reveal">
+      <div class="award-cell">
+        <div class="award-star">★</div>
+        <div>
+          <div class="award-name">NCTE Professional Dyads &amp; Culturally Relevant Teaching Award</div>
+          <div class="award-detail">National Council of Teachers of English · 2023</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">★</div>
+        <div>
+          <div class="award-name">King/Chávez Scholar</div>
+          <div class="award-detail">University of Wisconsin-Whitewater · 2013</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">Ph.D., Urban Education</div>
+          <div class="award-detail">University of Wisconsin-Milwaukee · 2024<br><em>Dissertation: Critical Mindfulness in the ELA Classroom</em></div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">LETRS Certified</div>
+          <div class="award-detail">Language Essentials for Teachers of Reading and Spelling</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">IRB Certified Researcher</div>
+          <div class="award-detail">Human subjects research certification · Valid 2025</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">National Writing Project Certified Instructor</div>
+          <div class="award-detail">NWP · Lifetime certification</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">Mindfulness &amp; Sound-Therapy Certified</div>
+          <div class="award-detail">Integrating somatic and sound-based healing practices into education</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">CliftonStrengths Trained Facilitator</div>
+          <div class="award-detail">Strengths-based leadership and team development facilitation</div>
+        </div>
+      </div>
+      <div class="award-cell">
+        <div class="award-star">◈</div>
+        <div>
+          <div class="award-name">Secondary English Education License</div>
+          <div class="award-detail">Grades 6–12 · State of Wisconsin · Lifetime</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANOMALY SOUL -->
+<section id="anomaly">
+  <div class="section-wrap">
+    <div class="section-label reveal">Anomaly Soul</div>
+    <h2 class="section-heading reveal">Signature Programs</h2>
+    <div class="anomaly-header reveal">
+      <p class="anomaly-intro">
+        Anomaly Soul is the vessel for transformative learning outside the institution —
+        where scholarship meets spirit, and education becomes a practice of liberation.
+      </p>
+      <p class="anomaly-tagline">
+        These offerings are available as standalone workshops, multi-session intensives, or as part of school and community PD programming. Each one is designed to shift — not just inform.
+      </p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <div class="program-num">01</div>
+        <div class="program-name">Pedagogy of the Whole Self</div>
+        <div class="program-desc">A healing-centered professional development experience for educators ready to teach from their full humanity — body, spirit, history, and practice integrated into one.</div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-num">02</div>
+        <div class="program-name">DJ as Designer</div>
+        <div class="program-desc">A framework for teaching synthesis, reading the room, and composing meaning — using DJing as a methodology for creative and academic literacy.</div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-num">03</div>
+        <div class="program-name">The Clout Detox</div>
+        <div class="program-desc">A critical inquiry into performative pedagogy and ragebait education culture — helping teachers reclaim their practice from the metrics of virality.</div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-num">04</div>
+        <div class="program-name">Write to Heal / Write to Lead</div>
+        <div class="program-desc">Writing as a technology of transformation — for students and educators who are ready to use the page as a site of healing, resistance, and power.</div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-num">05</div>
+        <div class="program-name">Curriculum as Cultural Work</div>
+        <div class="program-desc">A deep-dive into curriculum design grounded in Black feminist epistemology, culturally sustaining pedagogy, and justice-centered learning outcomes.</div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-num">06</div>
+        <div class="program-name">CliftonStrengths for Educators</div>
+        <div class="program-desc">Strengths-based coaching and team development for educators — discovering and deploying your natural genius in service of your students and community.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-label reveal">Contact</div>
+    <div class="contact-inner">
+      <div class="reveal">
+        <h2 class="section-heading">Let's<br>Connect</h2>
+        <p>Whether you're looking to book a keynote, bring PD to your district, collaborate on research, explore Anomaly Soul programming, or just want to be in community — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:harrisam03@gmail.com">
+            <span class="contact-link-icon">✉</span>
+            harrisam03@gmail.com
+          </a>
+          <a class="contact-link" href="tel:4143366636">
+            <span class="contact-link-icon">◉</span>
+            (414) 336-6636
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank">
+            <span class="contact-link-icon">in</span>
+            LinkedIn Profile ↗
+          </a>
+          <a class="contact-link" href="#">
+            <span class="contact-link-icon">↓</span>
+            Download CV ↗
+          </a>
+          <a class="contact-link" href="#">
+            <span class="contact-link-icon">◈</span>
+            Milwaukee, WI
+          </a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Inquiry Type</label>
+          <select>
+            <option value="">Select one…</option>
+            <option>Keynote / Speaking Booking</option>
+            <option>Professional Development / Workshop</option>
+            <option>Anomaly Soul Program</option>
+            <option>Research Collaboration</option>
+            <option>University Guest Lecture</option>
+            <option>Panel / Fireside Chat</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about your event, project, or idea…"></textarea>
+        </div>
+        <a href="mailto:harrisam03@gmail.com" class="btn btn-primary">Send Message ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span class="footer-brand">Dr. Alanna Harris</span> · Anomaly Soul · Milwaukee, WI</p>
+  <p>Ph.D. Urban Education · Literacy · Justice · Spirit</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
