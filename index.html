@@ -78,7 +78,22 @@ nav {
   background: linear-gradient(160deg, #fff 0%, var(--bg2) 60%, var(--bg3) 100%);
   border-bottom: 1px solid var(--border);
 }
-.hero-inner { max-width: 800px; padding-top: 5rem; }
+.hero-inner {
+  max-width: 1100px; width: 100%; padding-top: 5rem;
+  display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center;
+}
+.hero-text { max-width: 700px; }
+.hero-photo {
+  width: 280px; height: 340px; object-fit: cover; object-position: center top;
+  border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,.12); display: block;
+}
+.hero-photo-placeholder {
+  width: 280px; height: 340px; border-radius: 4px;
+  background: var(--bg3); border: 2px dashed var(--border-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-size: 3rem;
+  color: var(--plum-light); font-style: italic;
+}
 .hero-eyebrow {
   font-size: .72rem; letter-spacing: .28em; font-weight: 500;
   text-transform: uppercase; color: var(--plum); margin-bottom: 1.8rem;
@@ -360,6 +375,8 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .teaching-grid { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: .8rem; text-align: center; }
   .hero-cta-row { flex-direction: column; align-items: flex-start; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-photo, .hero-photo-placeholder { width: 160px; height: 200px; }
 }
 
 /* ─── REVEAL ─── */
@@ -387,21 +404,27 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI</p>
-    <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
-    <p class="hero-title">Equity-centered educator · Literacy leader · Speaker · Qualitative researcher.<br>Building joyful, rigorous, and affirming learning environments.</p>
-    <div class="hero-cta-row">
-      <a href="#speaking" class="btn btn-primary">Book a Talk</a>
-      <a href="#teaching" class="btn btn-slate">PD Offerings</a>
-      <a href="#" class="btn btn-outline">Download CV ↗</a>
-      <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    <div class="hero-text">
+      <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI</p>
+      <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
+      <p class="hero-title">Equity-centered educator · Literacy leader · Speaker · Qualitative researcher.<br>Building joyful, rigorous, and affirming learning environments.</p>
+      <div class="hero-cta-row">
+        <a href="#speaking" class="btn btn-primary">Book a Talk</a>
+        <a href="#teaching" class="btn btn-slate">PD Offerings</a>
+        <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-outline">Download CV ↗</a>
+        <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge">Scholar</span>
+        <span class="hero-badge">Educator</span>
+        <span class="hero-badge">Speaker</span>
+        <span class="hero-badge">Anomaly Soul</span>
+        <span class="hero-badge">DJ</span>
+      </div>
     </div>
-    <div class="hero-badges">
-      <span class="hero-badge">Scholar</span>
-      <span class="hero-badge">Educator</span>
-      <span class="hero-badge">Speaker</span>
-      <span class="hero-badge">Anomaly Soul</span>
-      <span class="hero-badge">DJ</span>
+    <div>
+      <img src="https://drive.google.com/uc?export=view&id=11QU5PUHk-7xaVKk7MgACruTP70uv2QHN" alt="Dr. Alanna Harris" class="hero-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="hero-photo-placeholder" style="display:none;">AH</div>
     </div>
   </div>
 </section>
@@ -417,7 +440,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <p>I believe learning environments must affirm the full humanity of every student — their language, their culture, their body, their joy. My work sits at the intersection of <strong>Black feminist epistemology, literacy justice, and transformative teacher development</strong>.</p>
         <p>When I'm not in a classroom or writing a research paper, I'm behind the decks — because DJing and teaching are the same practice: reading the room, holding the energy, and knowing when to drop the beat.</p>
         <div class="about-actions">
-          <a href="#" class="btn btn-primary">Download CV ↗</a>
+          <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-primary">Download CV ↗</a>
           <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
         </div>
       </div>
@@ -844,7 +867,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
             <span class="contact-link-icon">in</span>
             LinkedIn Profile ↗
           </a>
-          <a class="contact-link" href="#">
+          <a class="contact-link" href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank">
             <span class="contact-link-icon">↓</span>
             Download CV ↗
           </a>
