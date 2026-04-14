@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Alanna Harris — Scholar · Educator · Speaker</title>
-<meta name="description" content="Dr. Alanna Harris, Ph.D. — Equity-centered educator, literacy leader, speaker, and qualitative researcher. Milwaukee, WI. Available for keynotes, workshops, and professional development.">
+<title>Dr. Alanna Harris: Scholar, Educator, Speaker</title>
+<meta name="description" content="Dr. Alanna Harris, Ph.D. Equity-centered educator, literacy leader, speaker, and qualitative researcher. Milwaukee, WI. Available for keynotes, workshops, and professional development.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -369,7 +369,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .nav-links { display: none; }
   .section-wrap { padding: 4.5rem 1.4rem; }
   #hero { padding: 0 1.4rem; }
-  .about-grid, .contact-inner, .speaking-layout, .anomaly-header { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-grid, .contact-inner, .speaking-layout, .anomaly-header, .dj-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .exp-item { grid-template-columns: 1fr; gap: .4rem; }
   .exp-meta { padding-right: 0; }
   .teaching-grid { grid-template-columns: 1fr; }
@@ -378,6 +378,47 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .hero-photo, .hero-photo-placeholder { width: 160px; height: 200px; }
 }
+
+/* ─── DJ ─── */
+#dj { background: var(--text); color: var(--bg); border-bottom: 1px solid #333; }
+#dj .section-label { color: var(--plum-light); }
+#dj .section-label::after { background: #333; }
+#dj .section-heading { color: #fff; }
+.dj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.dj-text p { color: rgba(250,250,248,.7); font-size: 1rem; line-height: 1.85; margin-bottom: 1.3rem; }
+.dj-text .about-actions { margin-top: 2rem; }
+.dj-facts { display: flex; flex-direction: column; gap: 1rem; }
+.dj-fact {
+  padding: 1.2rem 1.5rem; border: 1px solid #333; border-left: 3px solid var(--plum-light);
+  border-radius: 2px; background: rgba(255,255,255,.04);
+}
+.dj-fact h4 { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--plum-light); margin-bottom: .4rem; }
+.dj-fact p { font-size: .83rem; color: rgba(250,250,248,.55); line-height: 1.6; margin: 0; }
+.btn-outline-light { background: transparent; color: rgba(250,250,248,.8); border: 1.5px solid rgba(250,250,248,.25); }
+.btn-outline-light:hover { border-color: var(--plum-light); color: var(--plum-light); transform: translateY(-1px); }
+
+/* ─── MERCH ─── */
+#merch { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.merch-intro { font-size: .93rem; color: var(--text-mid); max-width: 600px; line-height: 1.8; margin-bottom: 3rem; }
+.merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
+.merch-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 3px; overflow: hidden; transition: all .25s;
+}
+.merch-card:hover { border-color: var(--plum-light); box-shadow: 0 6px 24px rgba(94,39,80,.1); transform: translateY(-3px); }
+.merch-img {
+  width: 100%; aspect-ratio: 1/1; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+  font-style: italic; color: var(--plum-light); letter-spacing: .06em;
+  border-bottom: 1px solid var(--border);
+}
+.merch-body { padding: 1.2rem 1.4rem; }
+.merch-name { font-size: .8rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+.merch-desc { font-size: .78rem; color: var(--text-dim); line-height: 1.6; margin-bottom: .8rem; }
+.merch-price { font-size: .72rem; font-weight: 600; letter-spacing: .08em; color: var(--plum); }
+.merch-cta { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.merch-note { font-size: .82rem; color: var(--text-dim); font-style: italic; }
 
 /* ─── REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -397,6 +438,8 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <li><a href="#teaching">PD</a></li>
     <li><a href="#awards">Credentials</a></li>
     <li><a href="#anomaly">Anomaly Soul</a></li>
+    <li><a href="#dj">DJ</a></li>
+    <li><a href="#merch">Merch</a></li>
     <li><a href="#contact" class="nav-cta">Book / Contact</a></li>
   </ul>
 </nav>
@@ -436,9 +479,9 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <div class="about-grid">
       <div class="about-text reveal">
         <h2 class="section-heading">Scholar.<br>Practitioner.<br>Anomaly.</h2>
-        <p>I am an equity-centered educator and qualitative researcher with over a decade of experience spanning K–12 classrooms, higher education, federal grant work, and national conference stages. My Ph.D. in Urban Education from UW-Milwaukee grounds my practice in <strong>culturally responsive literacy, healing-centered pedagogy, and critical mindfulness</strong>.</p>
-        <p>I believe learning environments must affirm the full humanity of every student — their language, their culture, their body, their joy. My work sits at the intersection of <strong>Black feminist epistemology, literacy justice, and transformative teacher development</strong>.</p>
-        <p>When I'm not in a classroom or writing a research paper, I'm behind the decks — because DJing and teaching are the same practice: reading the room, holding the energy, and knowing when to drop the beat.</p>
+        <p>Over a decade in K–12 classrooms, higher education, federal grant work, and national conference stages. My Ph.D. in Urban Education from UW-Milwaukee is the credential. The work is the proof. My practice centers culturally responsive literacy, healing-centered pedagogy, and critical mindfulness.</p>
+        <p>I believe learning environments must affirm the full humanity of every student: their language, their culture, their body, their joy. My scholarship lives at the intersection of Black feminist epistemology, literacy justice, and transformative teacher development. That's not a mission statement. That's the work.</p>
+        <p>When I'm not in a classroom or writing a research paper, I'm behind the decks. DJing and teaching are the same practice: reading the room, holding the energy, and knowing when to drop the beat.</p>
         <div class="about-actions">
           <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-primary">Download CV ↗</a>
           <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
@@ -590,7 +633,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <div class="section-wrap">
     <div class="section-label reveal">Speaking</div>
     <h2 class="section-heading reveal">On the Stage</h2>
-    <p class="section-subheading reveal">Available for keynotes, workshops, panels, and university guest lectures — on equity, literacy, healing-centered education, and the art of teaching.</p>
+    <p class="section-subheading reveal">Available for keynotes, workshops, panels, and university guest lectures. Topics span equity, literacy, healing-centered education, and the art of teaching.</p>
 
     <div class="speaking-layout">
       <div class="speaking-topics reveal">
@@ -605,19 +648,19 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="topic-card">
           <div class="topic-type">Keynote · Workshop</div>
           <div class="topic-title">Critical Mindfulness in the ELA Classroom</div>
-          <div class="topic-desc">Integrating critical mindfulness and healing-centered practices into English Language Arts instruction — grounded in doctoral research and certified practice.</div>
+          <div class="topic-desc">Integrating critical mindfulness and healing-centered practices into English Language Arts instruction. Grounded in doctoral research and certified practice.</div>
         </div>
 
         <div class="topic-card">
           <div class="topic-type">Keynote · Workshop · Guest Lecture</div>
           <div class="topic-title">Equity-Centered Literacy Leadership</div>
-          <div class="topic-desc">Building district-wide literacy systems that center Black and Brown students — where science of reading meets justice and both are non-negotiable.</div>
+          <div class="topic-desc">Building district-wide literacy systems that center Black and Brown students. Science of reading meets justice here, and both are non-negotiable.</div>
         </div>
 
         <div class="topic-card">
           <div class="topic-type">Workshop · Panel</div>
           <div class="topic-title">Healing-Centered Educator Wellness</div>
-          <div class="topic-desc">Sustainable educator practice rooted in somatic awareness, sound therapy, and joy — for individuals and whole school communities ready to shift the culture.</div>
+          <div class="topic-desc">Sustainable educator practice rooted in somatic awareness, sound therapy, and joy. For individuals and whole school communities ready to actually shift the culture.</div>
         </div>
 
         <div class="speaking-booking">
@@ -694,7 +737,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="teaching-card">
         <span class="teaching-icon">◈</span>
         <div class="teaching-title">Literacy Coaching &amp; MTSS</div>
-        <div class="teaching-desc">Building district-wide literacy infrastructure through tiered instruction, universal screeners, progress monitoring, and data-informed coaching cycles. Science of Reading meets equity — not either/or.</div>
+        <div class="teaching-desc">Building district-wide literacy infrastructure through tiered instruction, universal screeners, progress monitoring, and data-informed coaching cycles. Science of Reading meets equity. Not either/or.</div>
       </div>
       <div class="teaching-card">
         <span class="teaching-icon">◉</span>
@@ -804,33 +847,33 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <h2 class="section-heading reveal">Signature Programs</h2>
     <div class="anomaly-header reveal">
       <p class="anomaly-intro">
-        Anomaly Soul is the vessel for transformative learning outside the institution —
-        where scholarship meets spirit, and education becomes a practice of liberation.
+        Anomaly Soul is the vessel for transformative learning outside the institution.
+        Scholarship meets spirit here, and education becomes a practice of liberation.
       </p>
       <p class="anomaly-tagline">
-        These offerings are available as standalone workshops, multi-session intensives, or as part of school and community PD programming. Each one is designed to shift — not just inform.
+        These offerings are available as standalone workshops, multi-session intensives, or as part of school and community PD programming. Each one is designed to shift, not just inform.
       </p>
     </div>
     <div class="programs-grid">
       <div class="program-card reveal">
         <div class="program-num">01</div>
         <div class="program-name">Pedagogy of the Whole Self</div>
-        <div class="program-desc">A healing-centered professional development experience for educators ready to teach from their full humanity — body, spirit, history, and practice integrated into one.</div>
+        <div class="program-desc">A healing-centered professional development experience for educators ready to teach from their full humanity: body, spirit, history, and practice integrated into one.</div>
       </div>
       <div class="program-card reveal">
         <div class="program-num">02</div>
         <div class="program-name">DJ as Designer</div>
-        <div class="program-desc">A framework for teaching synthesis, reading the room, and composing meaning — using DJing as a methodology for creative and academic literacy.</div>
+        <div class="program-desc">A framework for teaching synthesis, reading the room, and composing meaning. DJing as a methodology for creative and academic literacy.</div>
       </div>
       <div class="program-card reveal">
         <div class="program-num">03</div>
         <div class="program-name">The Clout Detox</div>
-        <div class="program-desc">A critical inquiry into performative pedagogy and ragebait education culture — helping teachers reclaim their practice from the metrics of virality.</div>
+        <div class="program-desc">A critical inquiry into performative pedagogy and ragebait education culture. Helping teachers reclaim their practice from the metrics of virality.</div>
       </div>
       <div class="program-card reveal">
         <div class="program-num">04</div>
         <div class="program-name">Write to Heal / Write to Lead</div>
-        <div class="program-desc">Writing as a technology of transformation — for students and educators who are ready to use the page as a site of healing, resistance, and power.</div>
+        <div class="program-desc">Writing as a technology of transformation, for students and educators ready to use the page as a site of healing, resistance, and power.</div>
       </div>
       <div class="program-card reveal">
         <div class="program-num">05</div>
@@ -840,8 +883,92 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="program-card reveal">
         <div class="program-num">06</div>
         <div class="program-name">CliftonStrengths for Educators</div>
-        <div class="program-desc">Strengths-based coaching and team development for educators — discovering and deploying your natural genius in service of your students and community.</div>
+        <div class="program-desc">Strengths-based coaching and team development for educators. Discovering and deploying your natural genius in service of your students and community.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- DJ -->
+<section id="dj">
+  <div class="section-wrap">
+    <div class="section-label reveal">DJ Alanna</div>
+    <div class="dj-grid">
+      <div class="dj-text reveal">
+        <h2 class="section-heading">Behind<br>the Decks</h2>
+        <p>DJing is not a hobby. It's a practice. Reading the room, curating energy, creating space for people to feel something they didn't know they needed to feel. That's teaching. That's healing. That's exactly what I do.</p>
+        <p>I DJ events, celebrations, community gatherings, and educational spaces where music is part of the work. Hip-hop, R&B, neo-soul, old school, new school. Whatever the room needs.</p>
+        <p>Available for private events, school and district gatherings, conferences, and community celebrations. If you want the energy shifted, reach out.</p>
+        <div class="about-actions">
+          <a href="#contact" class="btn btn-primary">Book DJ Alanna</a>
+          <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline-light">Connect ↗</a>
+        </div>
+      </div>
+      <div class="dj-facts reveal">
+        <div class="dj-fact">
+          <h4>What I Play</h4>
+          <p>Hip-hop, R&B, neo-soul, old school, afrobeats, and everything in between. Built for celebration, community, and joy.</p>
+        </div>
+        <div class="dj-fact">
+          <h4>The Scholarly Side</h4>
+          <p>DJ as pedagogy is the heart of my research. Remix, synthesis, and reading the room are compositional skills. I've presented on this at NCTE 2024 and it's the foundation of the DJ as Designer program.</p>
+        </div>
+        <div class="dj-fact">
+          <h4>Available For</h4>
+          <p>Private events · School and district celebrations · Conferences and convenings · Community gatherings · Educational spaces</p>
+        </div>
+        <div class="dj-fact">
+          <h4>Book a Set</h4>
+          <p>Reach out through the contact form below. Include your event date, vibe, and what you need the room to feel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section id="merch">
+  <div class="section-wrap">
+    <div class="section-label reveal">Merch</div>
+    <h2 class="section-heading reveal">Wear the Work</h2>
+    <p class="merch-intro reveal">Anomaly Soul merch for educators, scholars, and people who refuse to be ordinary. Each piece is rooted in the mission.</p>
+    <div class="merch-grid reveal">
+      <div class="merch-card">
+        <div class="merch-img">Anomaly Soul</div>
+        <div class="merch-body">
+          <div class="merch-name">Anomaly Soul Tee</div>
+          <div class="merch-desc">Classic unisex tee. Because you've always been the anomaly in the room.</div>
+          <div class="merch-price">Coming Soon</div>
+        </div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-img">DJ as Pedagogy</div>
+        <div class="merch-body">
+          <div class="merch-name">DJ as Pedagogy Tee</div>
+          <div class="merch-desc">For the educators who know that reading the room is a skill.</div>
+          <div class="merch-price">Coming Soon</div>
+        </div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-img">Write to Heal</div>
+        <div class="merch-body">
+          <div class="merch-name">Write to Heal Tote</div>
+          <div class="merch-desc">Carry the work with you. Canvas tote for books, notebooks, and big ideas.</div>
+          <div class="merch-price">Coming Soon</div>
+        </div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-img">The Clout Detox</div>
+        <div class="merch-body">
+          <div class="merch-name">Clout Detox Mug</div>
+          <div class="merch-desc">Your morning reminder to log off and go teach. Ceramic, 15oz, dishwasher safe.</div>
+          <div class="merch-price">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+    <div class="merch-cta reveal">
+      <a href="#contact" class="btn btn-primary">Get Notified When Shop Opens</a>
+      <span class="merch-note">Merch shop launching soon. Drop your email in the contact form to be first.</span>
     </div>
   </div>
 </section>
@@ -853,7 +980,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <div class="contact-inner">
       <div class="reveal">
         <h2 class="section-heading">Let's<br>Connect</h2>
-        <p>Whether you're looking to book a keynote, bring PD to your district, collaborate on research, explore Anomaly Soul programming, or just want to be in community — I'd love to hear from you.</p>
+        <p>Whether you're looking to book a keynote, bring PD to your district, collaborate on research, explore Anomaly Soul programming, or just want to be in community, I'd love to hear from you.</p>
         <div class="contact-links">
           <a class="contact-link" href="mailto:harrisam03@gmail.com">
             <span class="contact-link-icon">✉</span>
@@ -913,6 +1040,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 <footer>
   <p>© 2026 <span class="footer-brand">Dr. Alanna Harris</span> · Anomaly Soul · Milwaukee, WI</p>
   <p>Ph.D. Urban Education · Literacy · Justice · Spirit</p>
+  <p style="font-size:.65rem; opacity:.5; margin-top:.6rem; text-align:center; width:100%;">In the spirit of transparency: this website was built with the assistance of AI. The words, the work, and the vision are mine.</p>
 </footer>
 
 <script>
