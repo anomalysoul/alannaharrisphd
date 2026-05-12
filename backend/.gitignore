@@ -1,0 +1,6 @@
+node_modules/
+.env
+.gmail-tokens.json
+uploads/*
+!uploads/.gitkeep
+*.log

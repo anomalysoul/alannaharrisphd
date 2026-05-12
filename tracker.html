@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Tracker — Dr. Alanna Harris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --plum:        #5E2750;
+  --plum-mid:    #8B3D7A;
+  --plum-light:  #C47FB0;
+  --plum-fade:   #f9f0f7;
+  --slate:       #3D5A80;
+  --slate-mid:   #5D7FA8;
+  --slate-light: #9BB8D4;
+  --slate-fade:  #edf2f8;
+  --gold:        #B07D2A;
+  --gold-light:  #D4A554;
+  --green:       #2a7a4b;
+  --green-fade:  #edf8f1;
+  --red:         #a0312a;
+  --red-fade:    #fdf0ef;
+  --amber:       #b07020;
+  --amber-fade:  #fdf6ec;
+  --bg:          #FAFAF8;
+  --bg2:         #F4F2EE;
+  --surface:     #FFFFFF;
+  --border:      #E2DDD6;
+  --border-mid:  #C8C0B5;
+  --text:        #1A1714;
+  --text-mid:    #4A4440;
+  --text-dim:    #7A726A;
+  --sidebar-w:   240px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* ── LOGIN ──────────────────────────────────────────────────────────── */
+#login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #fff 0%, var(--bg2) 100%);
+}
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2.8rem 2.8rem 2.4rem;
+  width: 360px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.08);
+}
+.login-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .3rem;
+}
+.login-logo span { color: var(--plum); }
+.login-subtitle {
+  font-size: .78rem;
+  color: var(--text-dim);
+  letter-spacing: .04em;
+  margin-bottom: 2rem;
+}
+.login-card input[type=password] {
+  width: 100%;
+  padding: .65rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  font-size: .9rem;
+  font-family: inherit;
+  color: var(--text);
+  margin-bottom: .8rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.login-card input[type=password]:focus { border-color: var(--plum); }
+.login-card button {
+  width: 100%;
+  padding: .7rem;
+  background: var(--plum);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+}
+.login-card button:hover { background: var(--plum-mid); }
+#login-error {
+  font-size: .8rem;
+  color: var(--red);
+  margin-top: .6rem;
+  min-height: 1.2rem;
+}
+
+/* ── APP SHELL ───────────────────────────────────────────────────────── */
+#app { display: none; height: 100vh; overflow: hidden; flex-direction: row; }
+#app.visible { display: flex; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────────────────── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--text);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem 0 1.2rem;
+  overflow-y: auto;
+}
+.sidebar-brand {
+  padding: 0 1.4rem 1.6rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.sidebar-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
+.sidebar-brand-name span { color: var(--plum-light); }
+.sidebar-brand-sub {
+  font-size: .68rem;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .06em;
+  margin-top: .3rem;
+}
+.sidebar-section-label {
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  padding: 1.2rem 1.4rem .4rem;
+}
+.sidebar-nav { list-style: none; padding: 0; }
+.sidebar-nav li a {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .58rem 1.4rem;
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  font-size: .8rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all .15s;
+}
+.sidebar-nav li a:hover { color: #fff; background: rgba(255,255,255,.06); }
+.sidebar-nav li a.active {
+  color: #fff;
+  border-left-color: var(--plum-light);
+  background: rgba(255,255,255,.08);
+}
+.sidebar-nav li a .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+.sidebar-spacer { flex: 1; }
+.gmail-badge {
+  margin: 1rem 1.4rem;
+  padding: .5rem .8rem;
+  border-radius: 4px;
+  font-size: .72rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.gmail-badge.connected { background: rgba(42,122,75,.25); color: #6fcf97; }
+.gmail-badge.disconnected { background: rgba(160,49,42,.25); color: #f28b82; cursor: pointer; }
+.gmail-badge.disconnected:hover { background: rgba(160,49,42,.4); }
+
+/* ── MAIN CONTENT ─────────────────────────────────────────────────────── */
+#main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.page { display: none; padding: 2rem 2.4rem; max-width: 1200px; width: 100%; }
+.page.active { display: block; }
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text);
+}
+.page-subtitle {
+  font-size: .8rem;
+  color: var(--text-dim);
+  margin-top: .3rem;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .55rem 1.1rem;
+  border-radius: 4px;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all .2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--plum); color: #fff; border-color: var(--plum); }
+.btn-primary:hover { background: var(--plum-mid); border-color: var(--plum-mid); }
+.btn-slate { background: var(--slate); color: #fff; border-color: var(--slate); }
+.btn-slate:hover { background: var(--slate-mid); }
+.btn-outline { background: transparent; color: var(--text-mid); border-color: var(--border-mid); }
+.btn-outline:hover { border-color: var(--plum); color: var(--plum); }
+.btn-danger { background: transparent; color: var(--red); border-color: var(--red); }
+.btn-danger:hover { background: var(--red); color: #fff; }
+.btn-sm { padding: .35rem .75rem; font-size: .68rem; }
+.btn-icon { padding: .4rem .6rem; font-size: .9rem; }
+
+/* ── STATS ROW ─────────────────────────────────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.2rem 1.4rem;
+}
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--plum);
+}
+.stat-label {
+  font-size: .7rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: .3rem;
+}
+
+/* ── CARDS / TABLES ─────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.card-header {
+  padding: .9rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  flex-wrap: wrap;
+}
+.card-title {
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+}
+th {
+  text-align: left;
+  padding: .6rem 1rem;
+  font-size: .65rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: .7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-mid);
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg); }
+.td-title { font-weight: 500; color: var(--text); }
+.table-actions { display: flex; gap: .4rem; justify-content: flex-end; }
+.empty-row td { text-align: center; color: var(--text-dim); padding: 2.5rem; font-style: italic; }
+
+/* ── BADGES ─────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: .18rem .65rem;
+  border-radius: 999px;
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.badge-saved     { background: var(--bg2); color: var(--text-dim); }
+.badge-applied   { background: var(--slate-fade); color: var(--slate); }
+.badge-interview { background: var(--amber-fade); color: var(--amber); }
+.badge-offer     { background: var(--green-fade); color: var(--green); }
+.badge-rejected  { background: var(--red-fade); color: var(--red); }
+.badge-withdrawn { background: var(--bg2); color: var(--text-dim); }
+.badge-followup  { background: var(--plum-fade); color: var(--plum); }
+.badge-active    { background: var(--green-fade); color: var(--green); }
+.badge-paused    { background: var(--amber-fade); color: var(--amber); }
+.badge-responded { background: var(--slate-fade); color: var(--slate); }
+
+/* ── MODAL ─────────────────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+.modal-backdrop.hidden { display: none; }
+.modal {
+  background: var(--surface);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+}
+.modal-header {
+  padding: 1.4rem 1.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--text-dim);
+  line-height: 1;
+  padding: .2rem;
+}
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 1.4rem 1.8rem; }
+.modal-footer {
+  padding: 1rem 1.8rem 1.4rem;
+  display: flex;
+  gap: .7rem;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border);
+}
+
+/* ── FORM ELEMENTS ─────────────────────────────────────────────────────── */
+.form-row { margin-bottom: 1.1rem; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .35rem;
+}
+input[type=text], input[type=email], input[type=url], input[type=date],
+select, textarea {
+  width: 100%;
+  padding: .6rem .85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  font-size: .85rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: border-color .2s;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--plum); }
+textarea { resize: vertical; min-height: 100px; }
+.hint { font-size: .72rem; color: var(--text-dim); margin-top: .3rem; }
+
+/* ── SEARCH ─────────────────────────────────────────────────────────── */
+.search-bar {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+.search-bar input[type=text] {
+  max-width: 280px;
+  padding: .5rem .85rem;
+}
+.search-bar select { max-width: 160px; padding: .5rem .85rem; }
+
+/* ── ALERT ─────────────────────────────────────────────────────────── */
+.alert {
+  padding: .75rem 1rem;
+  border-radius: 4px;
+  font-size: .82rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.alert-success { background: var(--green-fade); color: var(--green); border: 1px solid #c3e8d3; }
+.alert-error   { background: var(--red-fade); color: var(--red); border: 1px solid #f5c5c2; }
+.alert-info    { background: var(--slate-fade); color: var(--slate); border: 1px solid #cfe0f0; }
+.alert.hidden  { display: none; }
+
+/* ── MATERIALS GRID ─────────────────────────────────────────────────── */
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.material-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.material-card-icon { font-size: 1.8rem; }
+.material-card-name {
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--text);
+  word-break: break-word;
+}
+.material-card-meta { font-size: .7rem; color: var(--text-dim); }
+.material-card-actions { display: flex; gap: .4rem; margin-top: .3rem; }
+
+/* ── UPLOAD ZONE ─────────────────────────────────────────────────────── */
+.upload-zone {
+  border: 2px dashed var(--border-mid);
+  border-radius: 6px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  margin-bottom: 1.5rem;
+}
+.upload-zone:hover, .upload-zone.drag { border-color: var(--plum); background: var(--plum-fade); }
+.upload-zone p { color: var(--text-dim); font-size: .85rem; margin-top: .5rem; }
+#file-input { display: none; }
+
+/* ── DASHBOARD RECENT ─────────────────────────────────────────────────── */
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 900px) { .dash-grid { grid-template-columns: 1fr; } }
+
+/* ── SETTINGS ─────────────────────────────────────────────────────────── */
+.settings-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.settings-section h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── CHECKBOX LIST (materials selector in modal) ─────────────────────── */
+.check-list { max-height: 180px; overflow-y: auto; border: 1px solid var(--border); border-radius: 4px; padding: .4rem; }
+.check-item { display: flex; align-items: center; gap: .5rem; padding: .35rem .5rem; border-radius: 3px; cursor: pointer; }
+.check-item:hover { background: var(--bg2); }
+.check-item input[type=checkbox] { cursor: pointer; accent-color: var(--plum); }
+.check-item label { font-size: .82rem; color: var(--text-mid); cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; margin: 0; }
+
+/* ── LOADING ─────────────────────────────────────────────────────────── */
+.loading { text-align: center; padding: 2rem; color: var(--text-dim); font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- ──────────────────────────────── LOGIN ───────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Dr. Alanna <span>Harris</span></div>
+    <div class="login-subtitle">JOB &amp; PROFESSOR TRACKER</div>
+    <input type="password" id="login-pw" placeholder="Dashboard password" autocomplete="current-password">
+    <button onclick="doLogin()">Enter Dashboard</button>
+    <div id="login-error"></div>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── APP SHELL ───────────────────────────── -->
+<div id="app">
+
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">Dr. Alanna <span>Harris</span></div>
+      <div class="sidebar-brand-sub">APPLICATION TRACKER</div>
+    </div>
+
+    <div class="sidebar-section-label">Overview</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" onclick="showPage('dashboard')" class="active" id="nav-dashboard">
+        <span class="nav-icon">◈</span> Dashboard
+      </a></li>
+    </ul>
+
+    <div class="sidebar-section-label">Applications</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" onclick="showPage('applications')" id="nav-applications">
+        <span class="nav-icon">📋</span> Job Applications
+      </a></li>
+      <li><a href="#" onclick="showPage('professors')" id="nav-professors">
+        <span class="nav-icon">🎓</span> Professor Outreach
+      </a></li>
+    </ul>
+
+    <div class="sidebar-section-label">Resources</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" onclick="showPage('materials')" id="nav-materials">
+        <span class="nav-icon">📎</span> CV &amp; Materials
+      </a></li>
+      <li><a href="#" onclick="showPage('templates')" id="nav-templates">
+        <span class="nav-icon">✉</span> Email Templates
+      </a></li>
+      <li><a href="#" onclick="showPage('log')" id="nav-log">
+        <span class="nav-icon">📬</span> Email Log
+      </a></li>
+    </ul>
+
+    <div class="sidebar-section-label">System</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" onclick="showPage('settings')" id="nav-settings">
+        <span class="nav-icon">⚙</span> Settings
+      </a></li>
+      <li><a href="#" onclick="doLogout()">
+        <span class="nav-icon">↩</span> Sign Out
+      </a></li>
+    </ul>
+
+    <div class="sidebar-spacer"></div>
+    <div id="gmail-badge" class="gmail-badge disconnected" onclick="connectGmail()">
+      <span>●</span> <span id="gmail-badge-text">Gmail: Not Connected</span>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div id="main">
+
+    <!-- ── DASHBOARD ─────────────────────────────────────────────────── -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle">Your application overview</div>
+        </div>
+      </div>
+
+      <div id="dashboard-alert" class="alert hidden"></div>
+
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total Applications</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-applied">—</div><div class="stat-label">Applied</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-interview">—</div><div class="stat-label">Interviews</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-professors">—</div><div class="stat-label">Professors Tracked</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-outreach">—</div><div class="stat-label">Emails Sent</div></div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Recent Applications</span>
+            <button class="btn btn-primary btn-sm" onclick="showPage('applications')">View All</button>
+          </div>
+          <div id="dash-applications"><div class="loading">Loading…</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Professor Outreach Due</span>
+            <button class="btn btn-slate btn-sm" onclick="runBatch()">Send Batch Now</button>
+          </div>
+          <div id="dash-professors"><div class="loading">Loading…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── JOB APPLICATIONS ──────────────────────────────────────────── -->
+    <div class="page" id="page-applications">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Job Applications</div>
+          <div class="page-subtitle">Track and apply for faculty &amp; educator positions</div>
+        </div>
+        <button class="btn btn-primary" onclick="openAddApplication()">+ Add Position</button>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="app-search" placeholder="Search positions…" oninput="filterApplications()">
+        <select id="app-status-filter" onchange="filterApplications()">
+          <option value="">All Statuses</option>
+          <option>Saved</option>
+          <option>Applied</option>
+          <option>Follow-Up Due</option>
+          <option>Interview</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+          <option>Withdrawn</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Institution</th>
+              <th>Status</th>
+              <th>Deadline</th>
+              <th>Applied</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="app-table-body">
+            <tr class="empty-row"><td colspan="6">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── PROFESSOR OUTREACH ────────────────────────────────────────── -->
+    <div class="page" id="page-professors">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Professor Outreach</div>
+          <div class="page-subtitle">Weekly automated emails to prospective department contacts</div>
+        </div>
+        <div style="display:flex;gap:.6rem">
+          <button class="btn btn-slate" onclick="runBatch()">▶ Run Batch Now</button>
+          <button class="btn btn-primary" onclick="openAddProfessor()">+ Add Professor</button>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="prof-search" placeholder="Search professors…" oninput="filterProfessors()">
+        <select id="prof-status-filter" onchange="filterProfessors()">
+          <option value="">All</option>
+          <option>Active</option>
+          <option>Paused</option>
+          <option>Responded</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Institution / Dept</th>
+              <th>Field</th>
+              <th>Last Contact</th>
+              <th>Times Contacted</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="prof-table-body">
+            <tr class="empty-row"><td colspan="7">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── MATERIALS ─────────────────────────────────────────────────── -->
+    <div class="page" id="page-materials">
+      <div class="page-header">
+        <div>
+          <div class="page-title">CV &amp; Application Materials</div>
+          <div class="page-subtitle">Upload your CV, cover letter templates, teaching statement, and more</div>
+        </div>
+      </div>
+
+      <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+        <div style="font-size:2.5rem">📁</div>
+        <p><strong>Click to upload</strong> or drag and drop</p>
+        <p>PDF, DOCX, DOC, TXT, PNG, JPG — max 25 MB</p>
+      </div>
+      <input type="file" id="file-input" accept=".pdf,.docx,.doc,.txt,.png,.jpg,.jpeg" onchange="uploadFile(this)">
+
+      <div id="upload-alert" class="alert hidden"></div>
+      <div id="materials-grid" class="materials-grid"><div class="loading">Loading…</div></div>
+    </div>
+
+    <!-- ── TEMPLATES ─────────────────────────────────────────────────── -->
+    <div class="page" id="page-templates">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Email Templates</div>
+          <div class="page-subtitle">Customize your outreach and application email templates. Use <code>{{variableName}}</code> for dynamic fields.</div>
+        </div>
+      </div>
+      <div id="templates-list"><div class="loading">Loading…</div></div>
+    </div>
+
+    <!-- ── EMAIL LOG ──────────────────────────────────────────────────── -->
+    <div class="page" id="page-log">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Email Log</div>
+          <div class="page-subtitle">History of all sent application and outreach emails</div>
+        </div>
+      </div>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Recipient</th><th>Subject</th><th>Type</th><th>Result</th></tr>
+          </thead>
+          <tbody id="log-table-body">
+            <tr class="empty-row"><td colspan="5">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ───────────────────────────────────────────────────── -->
+    <div class="page" id="page-settings">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Settings</div>
+          <div class="page-subtitle">Configure Gmail, Google Sheets, and outreach schedule</div>
+        </div>
+      </div>
+
+      <div id="settings-alert" class="alert hidden"></div>
+
+      <div class="settings-section">
+        <h3>Gmail Connection</h3>
+        <p style="color:var(--text-mid);font-size:.85rem;margin-bottom:1rem" id="gmail-status-text">Checking…</p>
+        <div style="display:flex;gap:.7rem;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="connectGmail()" id="btn-connect-gmail">Connect Gmail</button>
+          <button class="btn btn-outline" onclick="testEmail()" id="btn-test-email">Send Test Email</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Weekly Outreach Schedule</h3>
+        <p style="color:var(--text-mid);font-size:.85rem;margin-bottom:1rem">
+          The scheduler automatically sends outreach emails to professors every week on the schedule configured in your <code>.env</code> file (<code>OUTREACH_CRON</code>). Default: <strong>Monday at 9:00 AM CT</strong>.
+        </p>
+        <p style="color:var(--text-mid);font-size:.85rem">
+          Professors are contacted no more than once every <strong id="interval-days">7</strong> days (<code>OUTREACH_INTERVAL_DAYS</code>). The batch is capped at <strong id="batch-size">10</strong> emails per run (<code>OUTREACH_BATCH_SIZE</code>).
+        </p>
+        <div style="margin-top:1rem">
+          <button class="btn btn-slate" onclick="runBatch()">▶ Run Outreach Batch Now</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Google Sheets</h3>
+        <p style="color:var(--text-mid);font-size:.85rem">
+          Data is stored in your Google Sheet configured via <code>GOOGLE_SHEETS_ID</code> in the <code>.env</code> file. The app manages four tabs: <strong>Applications</strong>, <strong>Professors</strong>, <strong>Email Log</strong>, and <strong>Templates</strong>.
+        </p>
+      </div>
+
+      <div class="settings-section">
+        <h3>Test Email</h3>
+        <div class="form-row">
+          <label>Send test to</label>
+          <input type="email" id="test-email-addr" placeholder="you@example.com">
+        </div>
+        <button class="btn btn-outline" onclick="testEmail()">Send Test Email</button>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ──────────────────────────── MODALS ──────────────────────────────── -->
+
+<!-- Add/Edit Application -->
+<div class="modal-backdrop hidden" id="modal-application">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-app-title">Add Position</div>
+      <button class="modal-close" onclick="closeModal('modal-application')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="app-id">
+      <div class="form-row-2">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Position Title *</label>
+          <input type="text" id="app-title" placeholder="Assistant Professor of Literacy">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Institution *</label>
+          <input type="text" id="app-institution" placeholder="University of Wisconsin">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:1rem">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Department</label>
+          <input type="text" id="app-department" placeholder="Education / English">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Location</label>
+          <input type="text" id="app-location" placeholder="Madison, WI">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:1rem">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Status</label>
+          <select id="app-status">
+            <option>Saved</option>
+            <option>Applied</option>
+            <option>Follow-Up Due</option>
+            <option>Interview</option>
+            <option>Offer</option>
+            <option>Rejected</option>
+            <option>Withdrawn</option>
+          </select>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Deadline</label>
+          <input type="date" id="app-deadline">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:1rem">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Contact Email</label>
+          <input type="email" id="app-contact-email" placeholder="search@univ.edu">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Follow-Up Date</label>
+          <input type="date" id="app-followup">
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:1rem">
+        <label>Job URL</label>
+        <input type="url" id="app-url" placeholder="https://…">
+      </div>
+      <div class="form-row">
+        <label>Notes</label>
+        <textarea id="app-notes" rows="3" placeholder="Anything worth remembering…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-application')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveApplication()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Apply for Job -->
+<div class="modal-backdrop hidden" id="modal-apply">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Apply for Position</div>
+      <button class="modal-close" onclick="closeModal('modal-apply')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="apply-app-id">
+      <div class="form-row">
+        <label>To (Contact Email) *</label>
+        <input type="email" id="apply-to" placeholder="search@university.edu">
+      </div>
+      <div class="form-row">
+        <label>Subject *</label>
+        <input type="text" id="apply-subject">
+      </div>
+      <div class="form-row">
+        <label>Email Body *</label>
+        <textarea id="apply-body" rows="14"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Attach Materials</label>
+        <div class="check-list" id="apply-attachments"></div>
+        <div class="hint">Check files to attach. Your CV is recommended.</div>
+      </div>
+      <div id="apply-alert" class="alert hidden"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-apply')">Cancel</button>
+      <button class="btn btn-primary" onclick="sendApplication()">Send Application</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit Professor -->
+<div class="modal-backdrop hidden" id="modal-professor">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-prof-title">Add Professor</div>
+      <button class="modal-close" onclick="closeModal('modal-professor')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="prof-id">
+      <div class="form-row-2">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Full Name *</label>
+          <input type="text" id="prof-name" placeholder="Dr. Jane Smith">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Title</label>
+          <input type="text" id="prof-title" placeholder="Associate Professor">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:1rem">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Institution *</label>
+          <input type="text" id="prof-institution" placeholder="University Name">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Department</label>
+          <input type="text" id="prof-department" placeholder="Education / English">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:1rem">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Email *</label>
+          <input type="email" id="prof-email" placeholder="professor@university.edu">
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Research Field</label>
+          <input type="text" id="prof-field" placeholder="Literacy, Writing, Teacher Ed">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:1rem">
+        <div class="form-row" style="margin-bottom:0">
+          <label>Status</label>
+          <select id="prof-status">
+            <option>Active</option>
+            <option>Paused</option>
+            <option>Responded</option>
+          </select>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>Next Scheduled</label>
+          <input type="date" id="prof-next-scheduled">
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:1rem">
+        <label>Notes</label>
+        <textarea id="prof-notes" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-professor')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveProfessor()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Email Professor -->
+<div class="modal-backdrop hidden" id="modal-email-professor">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Email Professor</div>
+      <button class="modal-close" onclick="closeModal('modal-email-professor')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="email-prof-id">
+      <div class="form-row">
+        <label>To</label>
+        <input type="email" id="email-prof-to" readonly>
+      </div>
+      <div class="form-row">
+        <label>Subject *</label>
+        <input type="text" id="email-prof-subject">
+      </div>
+      <div class="form-row">
+        <label>Email Body *</label>
+        <textarea id="email-prof-body" rows="14"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Attach Materials</label>
+        <div class="check-list" id="email-prof-attachments"></div>
+      </div>
+      <div id="email-prof-alert" class="alert hidden"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-email-professor')">Cancel</button>
+      <button class="btn btn-primary" onclick="sendProfessorEmail()">Send Email</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';  // same origin
+
+// ── Utility ──────────────────────────────────────────────────────────────────
+
+async function api(method, path, body) {
+  const opts = {
+    method,
+    credentials: 'include',
+    headers: body && !(body instanceof FormData) ? { 'Content-Type': 'application/json' } : {}
+  };
+  if (body && !(body instanceof FormData)) opts.body = JSON.stringify(body);
+  if (body instanceof FormData) opts.body = body;
+  const res = await fetch(API + path, opts);
+  if (res.status === 401) { showLogin(); return null; }
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+function fmt(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  if (isNaN(d)) return dateStr;
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function fmtSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function fileIcon(name) {
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  const m = { pdf: '📄', docx: '📝', doc: '📝', txt: '📃', png: '🖼', jpg: '🖼', jpeg: '🖼' };
+  return m[ext] || '📁';
+}
+
+function badgeClass(status) {
+  const map = {
+    'Saved': 'badge-saved', 'Applied': 'badge-applied',
+    'Follow-Up Due': 'badge-followup', 'Interview': 'badge-interview',
+    'Offer': 'badge-offer', 'Rejected': 'badge-rejected', 'Withdrawn': 'badge-withdrawn',
+    'Active': 'badge-active', 'Paused': 'badge-paused', 'Responded': 'badge-responded'
+  };
+  return map[status] || 'badge-saved';
+}
+
+function showAlert(elId, type, msg) {
+  const el = document.getElementById(elId);
+  el.className = `alert alert-${type}`;
+  el.textContent = msg;
+  if (type === 'success') setTimeout(() => el.classList.add('hidden'), 4000);
+}
+
+function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+// Close modal when clicking backdrop
+document.querySelectorAll('.modal-backdrop').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.add('hidden'); });
+});
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+
+async function doLogin() {
+  const pw = document.getElementById('login-pw').value;
+  try {
+    await api('POST', '/api/auth/login', { password: pw });
+    showApp();
+  } catch {
+    document.getElementById('login-error').textContent = 'Incorrect password.';
+  }
+}
+document.getElementById('login-pw').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+async function doLogout() {
+  await api('POST', '/api/auth/logout').catch(() => {});
+  showLogin();
+}
+
+function showLogin() {
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+async function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+  await checkAuthStatus();
+  loadDashboard();
+
+  // Handle redirect params from OAuth
+  const params = new URLSearchParams(location.search);
+  if (params.get('gmailConnected')) {
+    showAlert('settings-alert', 'success', 'Gmail connected successfully!');
+    showPage('settings');
+    history.replaceState({}, '', '/tracker');
+  }
+  if (params.get('gmailError')) {
+    showAlert('settings-alert', 'error', 'Gmail connection failed: ' + params.get('gmailError'));
+    showPage('settings');
+    history.replaceState({}, '', '/tracker');
+  }
+}
+
+async function checkAuthStatus() {
+  const status = await api('GET', '/api/auth/status').catch(() => null);
+  if (!status) return;
+  const badge = document.getElementById('gmail-badge');
+  const badgeText = document.getElementById('gmail-badge-text');
+  const statusText = document.getElementById('gmail-status-text');
+  if (status.gmailConnected) {
+    badge.className = 'gmail-badge connected';
+    badge.onclick = null;
+    badgeText.textContent = 'Gmail: Connected';
+    if (statusText) statusText.textContent = 'Gmail is connected. Your emails will be sent from your Google account.';
+  } else {
+    badge.className = 'gmail-badge disconnected';
+    badge.onclick = connectGmail;
+    badgeText.textContent = 'Gmail: Not Connected';
+    if (statusText) statusText.textContent = 'Gmail is not connected. Click "Connect Gmail" to authorize email sending.';
+  }
+}
+
+function connectGmail() {
+  window.location.href = '/api/auth/google';
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+
+const PAGE_LOADERS = {
+  dashboard: loadDashboard,
+  applications: loadApplications,
+  professors: loadProfessors,
+  materials: loadMaterials,
+  templates: loadTemplates,
+  log: loadEmailLog,
+  settings: () => checkAuthStatus()
+};
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name)?.classList.add('active');
+  document.getElementById('nav-' + name)?.classList.add('active');
+  PAGE_LOADERS[name]?.();
+  return false;
+}
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
+
+async function loadDashboard() {
+  const [apps, profs, log] = await Promise.all([
+    api('GET', '/api/applications').catch(() => []),
+    api('GET', '/api/professors').catch(() => []),
+    api('GET', '/api/emails/log').catch(() => [])
+  ]);
+
+  if (!apps || !profs || !log) return;
+
+  document.getElementById('stat-total').textContent = apps.length;
+  document.getElementById('stat-applied').textContent = apps.filter(a => ['Applied','Follow-Up Due','Interview','Offer'].includes(a.status)).length;
+  document.getElementById('stat-interview').textContent = apps.filter(a => a.status === 'Interview').length;
+  document.getElementById('stat-professors').textContent = profs.length;
+  document.getElementById('stat-outreach').textContent = log.length;
+
+  // Recent 5 applications
+  const recentApps = [...apps].sort((a,b) => b.dateAdded.localeCompare(a.dateAdded)).slice(0, 5);
+  const appContainer = document.getElementById('dash-applications');
+  if (recentApps.length === 0) {
+    appContainer.innerHTML = '<div class="loading">No applications yet.</div>';
+  } else {
+    appContainer.innerHTML = `<table><tbody>${recentApps.map(a => `
+      <tr>
+        <td><div class="td-title">${e(a.title)}</div><div style="font-size:.75rem;color:var(--text-dim)">${e(a.institution)}</div></td>
+        <td><span class="badge ${badgeClass(a.status)}">${e(a.status)}</span></td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+
+  // Professors due
+  const due = profs.filter(p => {
+    if (p.status !== 'Active' || !p.email) return false;
+    if (!p.lastContacted) return true;
+    const d = new Date(p.lastContacted);
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 7);
+    return d <= cutoff;
+  }).slice(0, 5);
+
+  const profContainer = document.getElementById('dash-professors');
+  if (due.length === 0) {
+    profContainer.innerHTML = '<div class="loading">No outreach due right now.</div>';
+  } else {
+    profContainer.innerHTML = `<table><tbody>${due.map(p => `
+      <tr>
+        <td><div class="td-title">${e(p.name)}</div><div style="font-size:.75rem;color:var(--text-dim)">${e(p.institution)}</div></td>
+        <td style="font-size:.75rem;color:var(--text-dim)">${p.lastContacted ? fmt(p.lastContacted) : 'Never'}</td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+}
+
+// ── Applications ─────────────────────────────────────────────────────────────
+
+let allApplications = [];
+
+async function loadApplications() {
+  allApplications = await api('GET', '/api/applications').catch(() => []) || [];
+  renderApplications(allApplications);
+}
+
+function filterApplications() {
+  const q = document.getElementById('app-search').value.toLowerCase();
+  const st = document.getElementById('app-status-filter').value;
+  renderApplications(allApplications.filter(a =>
+    (!q || (a.title + a.institution + a.department).toLowerCase().includes(q)) &&
+    (!st || a.status === st)
+  ));
+}
+
+function renderApplications(apps) {
+  const tbody = document.getElementById('app-table-body');
+  if (!apps.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No applications found.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = apps.map(a => `
+    <tr>
+      <td>
+        <div class="td-title">${e(a.title)}</div>
+        ${a.department ? `<div style="font-size:.75rem;color:var(--text-dim)">${e(a.department)}</div>` : ''}
+        ${a.jobUrl ? `<a href="${e(a.jobUrl)}" target="_blank" style="font-size:.72rem;color:var(--slate)">View Posting ↗</a>` : ''}
+      </td>
+      <td>${e(a.institution)}<br><span style="font-size:.75rem;color:var(--text-dim)">${e(a.location||'')}</span></td>
+      <td><span class="badge ${badgeClass(a.status)}">${e(a.status)}</span></td>
+      <td>${fmt(a.deadline)}</td>
+      <td>${fmt(a.dateApplied)}</td>
+      <td>
+        <div class="table-actions">
+          ${a.status === 'Saved' ? `<button class="btn btn-slate btn-sm" onclick="openApply('${a.id}')">Apply</button>` : ''}
+          <button class="btn btn-outline btn-sm" onclick="openEditApplication('${a.id}')">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteApp('${a.id}')">×</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function openAddApplication() {
+  document.getElementById('modal-app-title').textContent = 'Add Position';
+  document.getElementById('app-id').value = '';
+  ['title','institution','department','location','contact-email','url','notes'].forEach(f => document.getElementById('app-'+f).value = '');
+  document.getElementById('app-status').value = 'Saved';
+  document.getElementById('app-deadline').value = '';
+  document.getElementById('app-followup').value = '';
+  openModal('modal-application');
+}
+
+function openEditApplication(id) {
+  const a = allApplications.find(x => x.id === id);
+  if (!a) return;
+  document.getElementById('modal-app-title').textContent = 'Edit Position';
+  document.getElementById('app-id').value = a.id;
+  document.getElementById('app-title').value = a.title || '';
+  document.getElementById('app-institution').value = a.institution || '';
+  document.getElementById('app-department').value = a.department || '';
+  document.getElementById('app-location').value = a.location || '';
+  document.getElementById('app-contact-email').value = a.contactEmail || '';
+  document.getElementById('app-url').value = a.jobUrl || '';
+  document.getElementById('app-notes').value = a.notes || '';
+  document.getElementById('app-status').value = a.status || 'Saved';
+  document.getElementById('app-deadline').value = a.deadline || '';
+  document.getElementById('app-followup').value = a.followUpDate || '';
+  openModal('modal-application');
+}
+
+async function saveApplication() {
+  const id = document.getElementById('app-id').value;
+  const data = {
+    title: document.getElementById('app-title').value.trim(),
+    institution: document.getElementById('app-institution').value.trim(),
+    department: document.getElementById('app-department').value.trim(),
+    location: document.getElementById('app-location').value.trim(),
+    contactEmail: document.getElementById('app-contact-email').value.trim(),
+    jobUrl: document.getElementById('app-url').value.trim(),
+    notes: document.getElementById('app-notes').value.trim(),
+    status: document.getElementById('app-status').value,
+    deadline: document.getElementById('app-deadline').value,
+    followUpDate: document.getElementById('app-followup').value
+  };
+  if (!data.title || !data.institution) return alert('Position title and institution are required.');
+  try {
+    if (id) await api('PUT', `/api/applications/${id}`, data);
+    else await api('POST', '/api/applications', data);
+    closeModal('modal-application');
+    loadApplications();
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+async function deleteApp(id) {
+  if (!confirm('Delete this application?')) return;
+  await api('DELETE', `/api/applications/${id}`);
+  loadApplications();
+}
+
+// Apply modal
+async function openApply(id) {
+  document.getElementById('apply-app-id').value = id;
+  document.getElementById('apply-alert').className = 'alert hidden';
+
+  const a = allApplications.find(x => x.id === id);
+  if (a?.contactEmail) document.getElementById('apply-to').value = a.contactEmail;
+
+  // Load template
+  try {
+    const tmpl = await api('GET', `/api/applications/${id}/template?templateName=Job Application`);
+    if (tmpl) {
+      document.getElementById('apply-subject').value = tmpl.subject;
+      document.getElementById('apply-body').value = tmpl.body;
+    }
+  } catch {}
+
+  await populateMaterialsChecklist('apply-attachments');
+  openModal('modal-apply');
+}
+
+async function sendApplication() {
+  const id = document.getElementById('apply-app-id').value;
+  const to = document.getElementById('apply-to').value.trim();
+  const subject = document.getElementById('apply-subject').value.trim();
+  const body = document.getElementById('apply-body').value.trim();
+  const attachmentNames = [...document.querySelectorAll('#apply-attachments input:checked')].map(c => c.value);
+
+  if (!to || !subject || !body) return showAlert('apply-alert', 'error', 'To, subject, and body are all required.');
+
+  try {
+    await api('POST', `/api/applications/${id}/apply`, { to, subject, body, attachmentNames });
+    showAlert('apply-alert', 'success', 'Application sent successfully!');
+    setTimeout(() => { closeModal('modal-apply'); loadApplications(); }, 1500);
+  } catch (err) {
+    showAlert('apply-alert', 'error', 'Failed to send: ' + err.message);
+  }
+}
+
+// ── Professors ────────────────────────────────────────────────────────────────
+
+let allProfessors = [];
+
+async function loadProfessors() {
+  allProfessors = await api('GET', '/api/professors').catch(() => []) || [];
+  renderProfessors(allProfessors);
+}
+
+function filterProfessors() {
+  const q = document.getElementById('prof-search').value.toLowerCase();
+  const st = document.getElementById('prof-status-filter').value;
+  renderProfessors(allProfessors.filter(p =>
+    (!q || (p.name + p.institution + p.department + p.field).toLowerCase().includes(q)) &&
+    (!st || p.status === st)
+  ));
+}
+
+function renderProfessors(profs) {
+  const tbody = document.getElementById('prof-table-body');
+  if (!profs.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No professors found.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = profs.map(p => `
+    <tr>
+      <td>
+        <div class="td-title">${e(p.name)}</div>
+        <div style="font-size:.75rem;color:var(--text-dim)">${e(p.title||'')} · <a href="mailto:${e(p.email)}" style="color:var(--slate)">${e(p.email)}</a></div>
+      </td>
+      <td>${e(p.institution)}<br><span style="font-size:.75rem;color:var(--text-dim)">${e(p.department||'')}</span></td>
+      <td style="font-size:.8rem">${e(p.field||'—')}</td>
+      <td>${fmt(p.lastContacted)}</td>
+      <td style="text-align:center">${p.timesContacted||0}</td>
+      <td><span class="badge ${badgeClass(p.status)}">${e(p.status)}</span></td>
+      <td>
+        <div class="table-actions">
+          <button class="btn btn-slate btn-sm" onclick="openEmailProfessor('${p.id}')">Email</button>
+          <button class="btn btn-outline btn-sm" onclick="openEditProfessor('${p.id}')">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteProf('${p.id}')">×</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function openAddProfessor() {
+  document.getElementById('modal-prof-title').textContent = 'Add Professor';
+  document.getElementById('prof-id').value = '';
+  ['name','title','institution','department','email','field','notes'].forEach(f => document.getElementById('prof-'+f).value = '');
+  document.getElementById('prof-status').value = 'Active';
+  document.getElementById('prof-next-scheduled').value = new Date().toISOString().slice(0,10);
+  openModal('modal-professor');
+}
+
+function openEditProfessor(id) {
+  const p = allProfessors.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modal-prof-title').textContent = 'Edit Professor';
+  document.getElementById('prof-id').value = p.id;
+  document.getElementById('prof-name').value = p.name || '';
+  document.getElementById('prof-title').value = p.title || '';
+  document.getElementById('prof-institution').value = p.institution || '';
+  document.getElementById('prof-department').value = p.department || '';
+  document.getElementById('prof-email').value = p.email || '';
+  document.getElementById('prof-field').value = p.field || '';
+  document.getElementById('prof-notes').value = p.notes || '';
+  document.getElementById('prof-status').value = p.status || 'Active';
+  document.getElementById('prof-next-scheduled').value = p.nextScheduled || '';
+  openModal('modal-professor');
+}
+
+async function saveProfessor() {
+  const id = document.getElementById('prof-id').value;
+  const data = {
+    name: document.getElementById('prof-name').value.trim(),
+    title: document.getElementById('prof-title').value.trim(),
+    institution: document.getElementById('prof-institution').value.trim(),
+    department: document.getElementById('prof-department').value.trim(),
+    email: document.getElementById('prof-email').value.trim(),
+    field: document.getElementById('prof-field').value.trim(),
+    notes: document.getElementById('prof-notes').value.trim(),
+    status: document.getElementById('prof-status').value,
+    nextScheduled: document.getElementById('prof-next-scheduled').value
+  };
+  if (!data.name || !data.email) return alert('Name and email are required.');
+  try {
+    if (id) await api('PUT', `/api/professors/${id}`, data);
+    else await api('POST', '/api/professors', data);
+    closeModal('modal-professor');
+    loadProfessors();
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+async function deleteProf(id) {
+  if (!confirm('Remove this professor from outreach?')) return;
+  await api('DELETE', `/api/professors/${id}`);
+  loadProfessors();
+}
+
+async function openEmailProfessor(id) {
+  document.getElementById('email-prof-id').value = id;
+  document.getElementById('email-prof-alert').className = 'alert hidden';
+  const p = allProfessors.find(x => x.id === id);
+  if (p) document.getElementById('email-prof-to').value = p.email;
+
+  try {
+    const tmpl = await api('GET', `/api/professors/${id}/template`);
+    if (tmpl) {
+      document.getElementById('email-prof-subject').value = tmpl.subject;
+      document.getElementById('email-prof-body').value = tmpl.body;
+    }
+  } catch {}
+
+  await populateMaterialsChecklist('email-prof-attachments', true);
+  openModal('modal-email-professor');
+}
+
+async function sendProfessorEmail() {
+  const id = document.getElementById('email-prof-id').value;
+  const subject = document.getElementById('email-prof-subject').value.trim();
+  const body = document.getElementById('email-prof-body').value.trim();
+  const attachmentNames = [...document.querySelectorAll('#email-prof-attachments input:checked')].map(c => c.value);
+
+  if (!subject || !body) return showAlert('email-prof-alert', 'error', 'Subject and body are required.');
+
+  try {
+    await api('POST', `/api/professors/${id}/email`, { subject, body, attachmentNames });
+    showAlert('email-prof-alert', 'success', 'Email sent successfully!');
+    setTimeout(() => { closeModal('modal-email-professor'); loadProfessors(); }, 1500);
+  } catch (err) {
+    showAlert('email-prof-alert', 'error', 'Failed: ' + err.message);
+  }
+}
+
+async function runBatch() {
+  if (!confirm('Send outreach emails to all professors due now?')) return;
+  try {
+    await api('POST', '/api/professors/run-batch');
+    showAlert('dashboard-alert', 'success', 'Outreach batch started! Check the email log for results.');
+    showPage('dashboard');
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+// ── Materials ─────────────────────────────────────────────────────────────────
+
+async function loadMaterials() {
+  const files = await api('GET', '/api/materials').catch(() => []) || [];
+  const grid = document.getElementById('materials-grid');
+  if (!files.length) {
+    grid.innerHTML = '<p style="color:var(--text-dim);font-style:italic">No files uploaded yet.</p>';
+    return;
+  }
+  grid.innerHTML = files.map(f => `
+    <div class="material-card">
+      <div class="material-card-icon">${fileIcon(f.name)}</div>
+      <div class="material-card-name">${e(f.name)}</div>
+      <div class="material-card-meta">${fmtSize(f.size)} · ${fmt(f.modified)}</div>
+      <div class="material-card-actions">
+        <a href="${f.url}" target="_blank" class="btn btn-outline btn-sm">View</a>
+        <button class="btn btn-danger btn-sm" onclick="deleteMaterial('${encodeURIComponent(f.name)}')">×</button>
+      </div>
+    </div>`).join('');
+}
+
+async function uploadFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const fd = new FormData();
+  fd.append('file', file);
+  try {
+    await api('POST', '/api/materials/upload', fd);
+    showAlert('upload-alert', 'success', `"${file.name}" uploaded successfully.`);
+    input.value = '';
+    loadMaterials();
+  } catch (err) {
+    showAlert('upload-alert', 'error', 'Upload failed: ' + err.message);
+  }
+}
+
+async function deleteMaterial(encoded) {
+  if (!confirm('Delete this file?')) return;
+  await api('DELETE', `/api/materials/${encoded}`);
+  loadMaterials();
+}
+
+// Drag and drop
+const uploadZone = document.getElementById('upload-zone');
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  document.getElementById('file-input').files = dt.files;
+  uploadFile(document.getElementById('file-input'));
+});
+
+// Helper: populate a materials checkbox list
+async function populateMaterialsChecklist(containerId, checkCv = false) {
+  const files = await api('GET', '/api/materials').catch(() => []) || [];
+  const container = document.getElementById(containerId);
+  if (!files.length) {
+    container.innerHTML = '<div style="padding:.5rem;color:var(--text-dim);font-size:.8rem">No materials uploaded yet.</div>';
+    return;
+  }
+  container.innerHTML = files.map(f => {
+    const isCV = checkCv && /cv|resume|curriculum/i.test(f.name);
+    return `<div class="check-item">
+      <input type="checkbox" id="chk-${containerId}-${e(f.name)}" value="${e(f.name)}" ${isCV ? 'checked' : ''}>
+      <label for="chk-${containerId}-${e(f.name)}">${fileIcon(f.name)} ${e(f.name)} <span style="color:var(--text-dim)">(${fmtSize(f.size)})</span></label>
+    </div>`;
+  }).join('');
+}
+
+// ── Templates ─────────────────────────────────────────────────────────────────
+
+async function loadTemplates() {
+  const templates = await api('GET', '/api/emails/templates').catch(() => []) || [];
+  const container = document.getElementById('templates-list');
+  if (!templates.length) {
+    container.innerHTML = '<div class="loading">No templates found. Make sure Google Sheets is connected.</div>';
+    return;
+  }
+  container.innerHTML = templates.map(t => `
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span class="card-title">${e(t.name)}</span>
+        <button class="btn btn-primary btn-sm" onclick="saveTemplate('${e(t.name)}')">Save Changes</button>
+      </div>
+      <div style="padding:1.2rem 1.4rem">
+        <div class="form-row">
+          <label>Subject</label>
+          <input type="text" id="tmpl-subject-${e(t.name)}" value="${e(t.subject)}">
+        </div>
+        <div class="form-row">
+          <label>Body</label>
+          <textarea id="tmpl-body-${e(t.name)}" rows="12" style="font-size:.82rem">${e(t.body)}</textarea>
+        </div>
+        <div class="hint">Variables: {{professorName}} {{institution}} {{department}} {{field}} {{positionTitle}} {{dateApplied}} {{contactName}}</div>
+      </div>
+    </div>`).join('');
+}
+
+async function saveTemplate(name) {
+  const subject = document.getElementById(`tmpl-subject-${name}`).value.trim();
+  const body = document.getElementById(`tmpl-body-${name}`).value.trim();
+  try {
+    await api('PUT', `/api/emails/templates/${encodeURIComponent(name)}`, { subject, body });
+    alert('Template saved.');
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+// ── Email Log ─────────────────────────────────────────────────────────────────
+
+async function loadEmailLog() {
+  const log = await api('GET', '/api/emails/log').catch(() => []) || [];
+  const tbody = document.getElementById('log-table-body');
+  if (!log.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">No emails sent yet.</td></tr>';
+    return;
+  }
+  const typeColors = { Application: 'badge-applied', Outreach: 'badge-saved', 'Follow-up': 'badge-followup' };
+  tbody.innerHTML = log.map(l => `
+    <tr>
+      <td style="white-space:nowrap">${fmt(l.date)}</td>
+      <td>${e(l.recipientName||'')} <span style="color:var(--text-dim);font-size:.78rem">${e(l.recipientEmail)}</span></td>
+      <td style="font-size:.8rem">${e(l.subject)}</td>
+      <td><span class="badge ${typeColors[l.type]||'badge-saved'}">${e(l.type||'')}</span></td>
+      <td style="font-size:.8rem;color:${l.result==='Sent'?'var(--green)':'var(--red)'}">${e(l.result)}</td>
+    </tr>`).join('');
+}
+
+// ── Settings ──────────────────────────────────────────────────────────────────
+
+async function testEmail() {
+  const addr = document.getElementById('test-email-addr')?.value?.trim();
+  if (!addr) return showAlert('settings-alert', 'error', 'Enter an email address first.');
+  try {
+    await api('POST', '/api/emails/test', { to: addr });
+    showAlert('settings-alert', 'success', `Test email sent to ${addr}`);
+  } catch (err) {
+    showAlert('settings-alert', 'error', 'Failed: ' + err.message);
+  }
+}
+
+// ── HTML escape ───────────────────────────────────────────────────────────────
+function e(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+
+(async () => {
+  const status = await api('GET', '/api/auth/status').catch(() => null);
+  if (status?.loggedIn) {
+    showApp();
+  }
+})();
+</script>
+</body>
+</html>
