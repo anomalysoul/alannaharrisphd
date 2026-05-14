@@ -397,28 +397,31 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 .btn-outline-light { background: transparent; color: rgba(250,250,248,.8); border: 1.5px solid rgba(250,250,248,.25); }
 .btn-outline-light:hover { border-color: var(--plum-light); color: var(--plum-light); transform: translateY(-1px); }
 
-/* ─── MERCH ─── */
-#merch { background: var(--bg2); border-bottom: 1px solid var(--border); }
-.merch-intro { font-size: .93rem; color: var(--text-mid); max-width: 600px; line-height: 1.8; margin-bottom: 3rem; }
-.merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
-.merch-card {
+/* ─── TRANSFERABLE SKILLS ─── */
+#skills { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.skills-intro { font-size: .95rem; color: var(--text-mid); max-width: 640px; line-height: 1.85; margin-bottom: 3rem; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
+.skill-card {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: 3px; overflow: hidden; transition: all .25s;
+  padding: 1.6rem 1.8rem; border-radius: 3px; transition: all .25s;
+  border-top: 3px solid var(--plum-light);
 }
-.merch-card:hover { border-color: var(--plum-light); box-shadow: 0 6px 24px rgba(94,39,80,.1); transform: translateY(-3px); }
-.merch-img {
-  width: 100%; aspect-ratio: 1/1; background: var(--bg3);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
-  font-style: italic; color: var(--plum-light); letter-spacing: .06em;
-  border-bottom: 1px solid var(--border);
+.skill-card:hover { border-top-color: var(--plum); box-shadow: 0 6px 24px rgba(94,39,80,.09); transform: translateY(-2px); }
+.skill-title { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .65rem; }
+.skill-body { font-size: .88rem; color: var(--text-mid); line-height: 1.75; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+.skill-tag {
+  font-size: .62rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 999px;
+  background: var(--bg2); color: var(--text-dim); border: 1px solid var(--border);
 }
-.merch-body { padding: 1.2rem 1.4rem; }
-.merch-name { font-size: .8rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
-.merch-desc { font-size: .78rem; color: var(--text-dim); line-height: 1.6; margin-bottom: .8rem; }
-.merch-price { font-size: .72rem; font-weight: 600; letter-spacing: .08em; color: var(--plum); }
-.merch-cta { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-.merch-note { font-size: .82rem; color: var(--text-dim); font-style: italic; }
+.hire-banner {
+  background: var(--plum); color: #fff;
+  padding: 2rem 2.4rem; border-radius: 4px; margin-top: 2rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.hire-banner-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: .4rem; }
+.hire-banner-text p { font-size: .88rem; opacity: .85; line-height: 1.6; }
 
 /* ─── REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -438,9 +441,9 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <li><a href="#teaching">PD</a></li>
     <li><a href="#awards">Credentials</a></li>
     <li><a href="#anomaly">Anomaly Soul</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#dj">DJ</a></li>
-    <li><a href="#merch">Merch</a></li>
-    <li><a href="#contact" class="nav-cta">Book / Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
   </ul>
 </nav>
 
@@ -448,21 +451,21 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI</p>
+      <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI · Open to Opportunities</p>
       <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
-      <p class="hero-title">Equity-centered educator · Literacy leader · Speaker · Qualitative researcher.<br>Building joyful, rigorous, and affirming learning environments.</p>
+      <p class="hero-title">Educator, researcher, coach, and consultant with over a decade of real work in K–12, higher ed, and beyond. I know how to build things, lead people, and get results that actually matter.</p>
       <div class="hero-cta-row">
-        <a href="#speaking" class="btn btn-primary">Book a Talk</a>
-        <a href="#teaching" class="btn btn-slate">PD Offerings</a>
+        <a href="#contact" class="btn btn-primary">Hire Me</a>
+        <a href="#skills" class="btn btn-slate">What I Bring</a>
         <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-outline">Download CV ↗</a>
         <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
       <div class="hero-badges">
-        <span class="hero-badge">Scholar</span>
-        <span class="hero-badge">Educator</span>
-        <span class="hero-badge">Speaker</span>
-        <span class="hero-badge">Anomaly Soul</span>
-        <span class="hero-badge">DJ</span>
+        <span class="hero-badge">Open to Work</span>
+        <span class="hero-badge">Consulting</span>
+        <span class="hero-badge">Speaking</span>
+        <span class="hero-badge">Research</span>
+        <span class="hero-badge">Leadership</span>
       </div>
     </div>
     <div>
@@ -478,9 +481,9 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <div class="about-grid">
       <div class="about-text reveal">
         <h2 class="section-heading">Scholar.<br>Practitioner.<br>Anomaly.</h2>
-        <p>Over a decade in K–12 classrooms, higher education, federal grant work, and national conference stages. My Ph.D. in Urban Education from UW-Milwaukee is the credential. The work is the proof. My practice centers culturally responsive literacy, healing-centered pedagogy, and critical mindfulness.</p>
-        <p>I believe learning environments must affirm the full humanity of every student: their language, their culture, their body, their joy. My scholarship lives at the intersection of Black feminist epistemology, literacy justice, and transformative teacher development. That's not a mission statement. That's the work.</p>
-        <p>When I'm not in a classroom or writing a research paper, I'm behind the decks. DJing and teaching are the same practice: reading the room, holding the energy, and knowing when to drop the beat.</p>
+        <p>I've spent over a decade doing this work for real. K–12 classrooms, university lecture halls, federal grant projects, district coaching, national conferences. My Ph.D. in Urban Education from UW-Milwaukee gave me the language for what I was already doing. The work came first.</p>
+        <p>I know how to walk into a room full of skeptical teachers and leave with them actually wanting to change something. I know how to read data and turn it into a plan people will actually follow. I know how to write, present, coach, facilitate, and lead without losing the people I'm supposed to be serving.</p>
+        <p>And yes, I DJ. Because teaching and DJing are the same thing: read the room, hold the energy, know when to shift the vibe. I bring that same skill everywhere I go.</p>
         <div class="about-actions">
           <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-primary">Download CV ↗</a>
           <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
@@ -504,6 +507,87 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
           <p>King/Chávez Scholars Alumni · Peer reviewer, NJ English Journal · Youth mentor, Walnut Way · NWP Certified Instructor</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFERABLE SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-label reveal">Transferable Skills</div>
+    <h2 class="section-heading reveal">What I Bring<br>to Any Role</h2>
+    <p class="skills-intro reveal">My background is in education, but what I actually do translates well beyond any classroom. I've managed federal grants, led teams, designed programs from scratch, published research, and coached professionals at every level. Here's how that translates.</p>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Coaching and People Development</div>
+        <div class="skill-body">I've coached teachers, administrators, and graduate students one-on-one and in groups. I know how to help people identify what they're actually good at and build on it. CliftonStrengths certified, but more than that — I've done this work in real time with real people under pressure.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Coaching</span>
+          <span class="skill-tag">Mentorship</span>
+          <span class="skill-tag">CliftonStrengths</span>
+          <span class="skill-tag">L&D</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Curriculum and Instructional Design</div>
+        <div class="skill-body">Designed K–12 and higher ed curricula from the ground up. I know how adults and young people actually learn, what keeps them engaged, and how to build content that works in the real world and not just on paper. District-level frameworks, university courses, and everything between.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Instructional Design</span>
+          <span class="skill-tag">Curriculum Dev</span>
+          <span class="skill-tag">Adult Learning</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Qualitative Research and Data</div>
+        <div class="skill-body">IRB certified. Published. I collect data, analyze it, and turn it into something people can actually use. I've written peer-reviewed articles, a doctoral dissertation, and federal grant reports. I also know how to present findings to people who would never read a research paper.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Qualitative Research</span>
+          <span class="skill-tag">IRB Certified</span>
+          <span class="skill-tag">Academic Writing</span>
+          <span class="skill-tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Program and Project Management</div>
+        <div class="skill-body">Managed federal grant projects across 13 schools. Built literacy programs from proposal to implementation. I handle logistics, timelines, stakeholder communication, and course-correction when things go sideways — which they always do.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Grant Management</span>
+          <span class="skill-tag">Program Design</span>
+          <span class="skill-tag">Stakeholder Relations</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Facilitation and Public Speaking</div>
+        <div class="skill-body">NCTE, AERA, MLA, university symposia. I've presented at national conferences and run workshops for rooms full of skeptics. I know how to hold a space, manage a group, and keep people engaged even when the content is hard.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Keynote Speaking</span>
+          <span class="skill-tag">Workshop Facilitation</span>
+          <span class="skill-tag">Group Dynamics</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Equity and DEI Consulting</div>
+        <div class="skill-body">Not a training series. Actual consulting on how organizations can shift their culture, their curriculum, and their practices to be more equitable. I've done this at the district level. I know what works and what's performative.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">DEI Strategy</span>
+          <span class="skill-tag">Culture Change</span>
+          <span class="skill-tag">Anti-Racist Frameworks</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="hire-banner reveal">
+      <div class="hire-banner-text">
+        <h3>Currently Open to Opportunities</h3>
+        <p>Full-time, consulting, contract, and speaking roles. Education, L&D, DEI, curriculum, research, leadership. If the work matters, let's talk.</p>
+      </div>
+      <a href="#contact" class="btn btn-white">Get in Touch</a>
     </div>
   </div>
 </section>
@@ -723,10 +807,10 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 <!-- TEACHING & PD -->
 <section id="teaching">
   <div class="section-wrap">
-    <div class="section-label reveal">Professional Development</div>
-    <h2 class="section-heading reveal">PD Offerings</h2>
-    <p class="pd-intro reveal">Available for school districts, conferences, and professional organizations. Each offering can be tailored as a half-day session, full-day workshop, or multi-day series.</p>
-    <div class="pd-note reveal">Offered as workshops, coaching engagements, or embedded PD partnerships.</div>
+    <div class="section-label reveal">Services</div>
+    <h2 class="section-heading reveal">What I Do</h2>
+    <p class="pd-intro reveal">I work with school districts, universities, conferences, and organizations who need someone who can actually move people. Not just present at them. I consult, coach, facilitate, and embed into teams. The format depends on what you need.</p>
+    <div class="pd-note reveal">Available for full-time roles, consulting contracts, coaching engagements, and speaking.</div>
     <div class="teaching-grid reveal">
       <div class="teaching-card">
         <span class="teaching-icon">✦</span>
@@ -760,8 +844,8 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       </div>
     </div>
     <div class="pd-cta-row reveal">
-      <a href="#contact" class="btn btn-primary">Book a PD Session</a>
-      <span class="pd-cta-note">Available for school districts, conferences, and professional organizations</span>
+      <a href="#contact" class="btn btn-primary">Work With Me</a>
+      <span class="pd-cta-note">Available for full-time, contract, consulting, and speaking engagements</span>
     </div>
   </div>
 </section>
@@ -925,61 +1009,14 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   </div>
 </section>
 
-<!-- MERCH -->
-<section id="merch">
-  <div class="section-wrap">
-    <div class="section-label reveal">Merch</div>
-    <h2 class="section-heading reveal">Wear the Work</h2>
-    <p class="merch-intro reveal">Anomaly Soul merch for educators, scholars, and people who refuse to be ordinary. Each piece is rooted in the mission.</p>
-    <div class="merch-grid reveal">
-      <div class="merch-card">
-        <div class="merch-img">Anomaly Soul</div>
-        <div class="merch-body">
-          <div class="merch-name">Anomaly Soul Tee</div>
-          <div class="merch-desc">Classic unisex tee. Because you've always been the anomaly in the room.</div>
-          <div class="merch-price">Coming Soon</div>
-        </div>
-      </div>
-      <div class="merch-card">
-        <div class="merch-img">DJ as Pedagogy</div>
-        <div class="merch-body">
-          <div class="merch-name">DJ as Pedagogy Tee</div>
-          <div class="merch-desc">For the educators who know that reading the room is a skill.</div>
-          <div class="merch-price">Coming Soon</div>
-        </div>
-      </div>
-      <div class="merch-card">
-        <div class="merch-img">Write to Heal</div>
-        <div class="merch-body">
-          <div class="merch-name">Write to Heal Tote</div>
-          <div class="merch-desc">Carry the work with you. Canvas tote for books, notebooks, and big ideas.</div>
-          <div class="merch-price">Coming Soon</div>
-        </div>
-      </div>
-      <div class="merch-card">
-        <div class="merch-img">The Clout Detox</div>
-        <div class="merch-body">
-          <div class="merch-name">Clout Detox Mug</div>
-          <div class="merch-desc">Your morning reminder to log off and go teach. Ceramic, 15oz, dishwasher safe.</div>
-          <div class="merch-price">Coming Soon</div>
-        </div>
-      </div>
-    </div>
-    <div class="merch-cta reveal">
-      <a href="#contact" class="btn btn-primary">Get Notified When Shop Opens</a>
-      <span class="merch-note">Merch shop launching soon. Drop your email in the contact form to be first.</span>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-wrap">
     <div class="section-label reveal">Contact</div>
     <div class="contact-inner">
       <div class="reveal">
-        <h2 class="section-heading">Let's<br>Connect</h2>
-        <p>Whether you're looking to book a keynote, bring PD to your district, collaborate on research, explore Anomaly Soul programming, or just want to be in community, I'd love to hear from you.</p>
+        <h2 class="section-heading">Let's<br>Talk</h2>
+        <p>I'm open to full-time roles, consulting contracts, speaking engagements, and research collaborations. If you have something worth building, I want to hear about it. Reach out directly or use the form.</p>
         <div class="contact-links">
           <a class="contact-link" href="mailto:harrisam03@gmail.com">
             <span class="contact-link-icon">✉</span>
