@@ -313,19 +313,15 @@ section { position: relative; }
   font-size: .82rem; color: var(--text-dim); line-height: 1.8;
   border-left: 3px solid var(--plum-light); padding-left: 1.2rem;
 }
-.programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; }
-.program-card {
+.anomaly-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
+.anomaly-pillar {
   background: var(--bg); border: 1px solid var(--border);
-  padding: 2rem; border-radius: 3px; position: relative;
-  transition: all .3s;
+  border-top: 3px solid var(--plum-light);
+  padding: 2rem; border-radius: 3px;
 }
-.program-card:hover { border-color: var(--plum-light); box-shadow: 0 8px 30px rgba(94,39,80,.1); transform: translateY(-3px); }
-.program-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem; font-weight: 300; color: var(--plum-light); line-height: 1; margin-bottom: .6rem;
-}
-.program-name { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .8rem; }
-.program-desc { font-size: .88rem; font-style: italic; color: var(--text-mid); line-height: 1.8; font-family: 'Cormorant Garamond', serif; }
+.pillar-icon { font-size: 1.4rem; color: var(--plum-light); margin-bottom: .8rem; }
+.pillar-label { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--plum); margin-bottom: .8rem; }
+.pillar-text { font-size: .88rem; color: var(--text-mid); line-height: 1.8; }
 
 /* ─── CONTACT ─── */
 #contact { background: var(--bg2); }
@@ -369,7 +365,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .nav-links { display: none; }
   .section-wrap { padding: 4.5rem 1.4rem; }
   #hero { padding: 0 1.4rem; }
-  .about-grid, .contact-inner, .speaking-layout, .anomaly-header, .dj-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-grid, .contact-inner, .speaking-layout, .anomaly-header, .dj-grid, .anomaly-pillars { grid-template-columns: 1fr; gap: 2.5rem; }
   .exp-item { grid-template-columns: 1fr; gap: .4rem; }
   .exp-meta { padding-right: 0; }
   .teaching-grid { grid-template-columns: 1fr; }
@@ -945,40 +941,28 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         Scholarship meets spirit here, and education becomes a practice of liberation.
       </p>
       <p class="anomaly-tagline">
-        These offerings are available as standalone workshops, multi-session intensives, or as part of school and community PD programming. Each one is designed to shift, not just inform.
+        It's the brand, the vision, and the practice. Everything I do under Anomaly Soul is rooted in the same conviction: real transformation doesn't happen in spite of who you are. It happens because of it.
       </p>
     </div>
-    <div class="programs-grid">
-      <div class="program-card reveal">
-        <div class="program-num">01</div>
-        <div class="program-name">Pedagogy of the Whole Self</div>
-        <div class="program-desc">A healing-centered professional development experience for educators ready to teach from their full humanity: body, spirit, history, and practice integrated into one.</div>
+    <div class="anomaly-pillars reveal">
+      <div class="anomaly-pillar">
+        <div class="pillar-icon">◉</div>
+        <div class="pillar-label">Healing-Centered</div>
+        <div class="pillar-text">Education that integrates the whole person. Not just the student or the teacher, but the human being showing up every day.</div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">02</div>
-        <div class="program-name">DJ as Designer</div>
-        <div class="program-desc">A framework for teaching synthesis, reading the room, and composing meaning. DJing as a methodology for creative and academic literacy.</div>
+      <div class="anomaly-pillar">
+        <div class="pillar-icon">◈</div>
+        <div class="pillar-label">Culturally Grounded</div>
+        <div class="pillar-text">Rooted in Black feminist epistemology, culturally sustaining pedagogy, and the deep knowledge communities already carry.</div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">03</div>
-        <div class="program-name">The Clout Detox</div>
-        <div class="program-desc">A critical inquiry into performative pedagogy and ragebait education culture. Helping teachers reclaim their practice from the metrics of virality.</div>
+      <div class="anomaly-pillar">
+        <div class="pillar-icon">⬡</div>
+        <div class="pillar-label">Liberation-Focused</div>
+        <div class="pillar-text">The goal isn't compliance or performance. The goal is freedom. Freedom to learn, to teach, to exist fully in educational spaces.</div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">04</div>
-        <div class="program-name">Write to Heal / Write to Lead</div>
-        <div class="program-desc">Writing as a technology of transformation, for students and educators ready to use the page as a site of healing, resistance, and power.</div>
-      </div>
-      <div class="program-card reveal">
-        <div class="program-num">05</div>
-        <div class="program-name">Curriculum as Cultural Work</div>
-        <div class="program-desc">A deep-dive into curriculum design grounded in Black feminist epistemology, culturally sustaining pedagogy, and justice-centered learning outcomes.</div>
-      </div>
-      <div class="program-card reveal">
-        <div class="program-num">06</div>
-        <div class="program-name">CliftonStrengths for Educators</div>
-        <div class="program-desc">Strengths-based coaching and team development for educators. Discovering and deploying your natural genius in service of your students and community.</div>
-      </div>
+    </div>
+    <div class="pd-cta-row reveal" style="margin-top:2.5rem;">
+      <a href="#contact" class="btn btn-primary">Connect with Anomaly Soul</a>
     </div>
   </div>
 </section>
