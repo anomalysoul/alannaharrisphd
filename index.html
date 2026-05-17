@@ -323,6 +323,43 @@ section { position: relative; }
 .pillar-label { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--plum); margin-bottom: .8rem; }
 .pillar-text { font-size: .88rem; color: var(--text-mid); line-height: 1.8; }
 
+/* ─── OFFERINGS ─── */
+#offerings { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.offerings-intro { max-width: 640px; color: var(--text-mid); font-size: .95rem; line-height: 1.85; margin-bottom: 3rem; }
+.offerings-category { margin-bottom: 3.5rem; }
+.offerings-category-label {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+  color: var(--plum); border-bottom: 2px solid var(--plum-light);
+  padding-bottom: .5rem; margin-bottom: 1.5rem; display: inline-block;
+}
+.offerings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.2rem; }
+.offering-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--plum-light);
+  padding: 1.6rem; border-radius: 3px;
+  display: flex; flex-direction: column; gap: .6rem;
+  transition: box-shadow .25s, transform .25s;
+}
+.offering-card:hover { box-shadow: 0 8px 28px rgba(94,39,80,.11); transform: translateY(-2px); }
+.offering-card.dj-offer { border-top-color: var(--slate); }
+.offering-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; color: var(--text); line-height: 1.3;
+}
+.offering-for {
+  font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-dim);
+}
+.offering-desc { font-size: .87rem; color: var(--text-mid); line-height: 1.75; flex: 1; }
+.offering-price {
+  display: inline-block; margin-top: .4rem;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--plum); font-size: .78rem; font-weight: 700;
+  letter-spacing: .04em; padding: .3rem .75rem; border-radius: 20px;
+  align-self: flex-start;
+}
+.offering-price.dj-price { color: var(--slate); }
+
 /* ─── CONTACT ─── */
 #contact { background: var(--bg2); }
 .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -435,6 +472,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <li><a href="#publications">Research</a></li>
     <li><a href="#speaking">Speaking</a></li>
     <li><a href="#teaching">PD</a></li>
+    <li><a href="#offerings">Offerings</a></li>
     <li><a href="#awards">Credentials</a></li>
     <li><a href="#anomaly">Anomaly Soul</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -853,6 +891,108 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <div class="pd-cta-row reveal">
       <a href="#contact" class="btn btn-primary">Work With Me</a>
       <span class="pd-cta-note">Available for full-time, contract, consulting, and speaking engagements</span>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section id="offerings">
+  <div class="section-wrap">
+    <div class="section-label reveal">Offerings</div>
+    <h2 class="section-heading reveal">Services &amp; Digital Products</h2>
+    <p class="offerings-intro reveal">Here's exactly what I offer, what it costs, and who it's for. No vague packages. No "DM for pricing." If something fits your need, reach out and let's make it happen.</p>
+
+    <!-- 1:1 Services -->
+    <div class="offerings-category">
+      <div class="offerings-category-label reveal">1:1 Coaching &amp; Review</div>
+      <div class="offerings-grid">
+        <div class="offering-card reveal">
+          <div class="offering-title">CliftonStrengths Coaching for Educators</div>
+          <div class="offering-for">For: Mid-career teachers, coaches, doctoral students</div>
+          <div class="offering-desc">90-minute strengths discovery session plus a written action plan tailored to your specific teaching or leadership context. You get the assessment, my ed-specific lens, and a clear path forward.</div>
+          <span class="offering-price">$175 - $275</span>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Application Materials Review</div>
+          <div class="offering-for">For: ABDs, recent EdD/PhDs, postdoc applicants</div>
+          <div class="offering-desc">Cover letter and CV audit with annotated edits plus a 30-minute debrief call. I've drafted tailored letters across sectors and survived this market. I know what gets read and what doesn't.</div>
+          <span class="offering-price">$150 - $250</span>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Voxer Coaching for New Instructional Coaches</div>
+          <div class="offering-for">For: First-year coaches in literacy/ELA, Title I and urban districts</div>
+          <div class="offering-desc">Async voice-note coaching Monday through Friday plus one live call per month. Real-time problem solving without the scheduling chaos. You message when things come up. I respond within 24 hours, every time.</div>
+          <span class="offering-price">$200 - $300 / month</span>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Dissertation &amp; Manuscript Coaching</div>
+          <div class="offering-for">For: ABDs in education, especially women of color doing qualitative work</div>
+          <div class="offering-desc">Four-session "Blueprint + First Chapter Unstuck" package. I finished a phenomenological dissertation and know the emotional architecture, not just the methods. Includes a free 25-minute consult before you commit.</div>
+          <span class="offering-price">$600 - $900 / 4 sessions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group & Organizational -->
+    <div class="offerings-category">
+      <div class="offerings-category-label reveal">Group &amp; Organizational Work</div>
+      <div class="offerings-grid">
+        <div class="offering-card reveal">
+          <div class="offering-title">CliftonStrengths Half-Day Workshop</div>
+          <div class="offering-for">For: PD coordinators, charter networks, instructional leadership teams</div>
+          <div class="offering-desc">Three-hour virtual or in-person session for teacher teams. Strengths PD usually skips the classroom context. Mine doesn't. Leave with a shared language and a concrete action plan your team actually uses.</div>
+          <span class="offering-price">$1,500 - $3,500 / session</span>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Grant Proposal Review</div>
+          <div class="offering-for">For: Small nonprofits applying to DPI, DOL, and foundation grants</div>
+          <div class="offering-desc">Two-hour proposal audit with written feedback and a logic model alignment check. My ACCESS Project credentials (DOE-funded, 13 schools) mean I know what reviewers are looking for and what sinks proposals.</div>
+          <span class="offering-price">$400 - $600 / proposal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Digital Products -->
+    <div class="offerings-category">
+      <div class="offerings-category-label reveal">Digital Products</div>
+      <div class="offerings-grid">
+        <div class="offering-card reveal">
+          <div class="offering-title">Digital Phonics Intervention Micro-Toolkit</div>
+          <div class="offering-for">For: K-2 teachers, intervention specialists, homeschool parents</div>
+          <div class="offering-desc">PDF plus Canva-editable templates covering vowel teams, Marva Collins-inspired cards, and a mini rubric. LETRS and HD Word-aligned. Classroom-ready the day you buy it. Available on Payhip and the Anomaly Soul site.</div>
+          <span class="offering-price">$19 - $37</span>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Write to Heal / Write to Lead Digital Workbook</div>
+          <div class="offering-for">For: Educators, women in leadership, doctoral students mid-burnout</div>
+          <div class="offering-desc">Self-paced PDF workbook plus three short prompt videos. Six deep prompts grounded in healing-centered framing, literacy expertise, and lived experience. For people who need the page to be a place of power, not performance.</div>
+          <span class="offering-price">$37 - $67</span>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Anomaly Soul on Substack</div>
+          <div class="offering-for">For: Educators and scholar-practitioners burnt out on performative culture</div>
+          <div class="offering-desc">Free public essays plus a paid tier with audio essays, writing prompts, and DJ-mix companion tracks. The Clout Industrial Complex is real. This is the antidote. Nobody else is doing this format in education.</div>
+          <span class="offering-price">$7 / mo &nbsp;·&nbsp; $70 / yr</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DJ -->
+    <div class="offerings-category">
+      <div class="offerings-category-label reveal">DJ &amp; Event Work</div>
+      <div class="offerings-grid">
+        <div class="offering-card dj-offer reveal">
+          <div class="offering-title">DJ Alanna: Cocktail Hours, Brand Activations &amp; Micro-Events</div>
+          <div class="offering-for">For: Small venues, nonprofit fundraisers, 30-50 person private events in MKE/Chicago</div>
+          <div class="offering-desc">Two-hour curated set built around your event's vibe. House, tech house, ghetto tech, neo-soul, hip-hop, R&B. Whatever the room needs. Good DJs at this scale book out fast. If you want the energy shifted, reach out early.</div>
+          <span class="offering-price dj-price">$300 - $600 / event</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pd-cta-row reveal">
+      <a href="#contact" class="btn btn-primary">Inquire About Any Offering</a>
+      <span class="pd-cta-note">Not sure which fits? Reach out and we'll figure it out together.</span>
     </div>
   </div>
 </section>
