@@ -323,6 +323,104 @@ section { position: relative; }
 .pillar-label { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--plum); margin-bottom: .8rem; }
 .pillar-text { font-size: .88rem; color: var(--text-mid); line-height: 1.8; }
 
+/* ─── PITCH SLIDESHOW ─── */
+#pitch { background: var(--text); padding: 5rem 0; }
+#pitch .section-label { color: rgba(255,255,255,.5); }
+#pitch .section-heading { color: #fff; }
+.pitch-deck {
+  position: relative; width: 100%; max-width: 860px; margin: 2.5rem auto 0;
+  background: #1e1510; border-radius: 6px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.pitch-slides { position: relative; min-height: 420px; }
+.pitch-slide {
+  position: absolute; inset: 0;
+  padding: 3.5rem 4rem;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .55s ease;
+}
+.pitch-slide.active { opacity: 1; pointer-events: auto; position: relative; }
+.slide-eyebrow {
+  font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--plum-light); margin-bottom: 1rem;
+}
+.slide-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 1rem;
+}
+.slide-headline em { color: var(--plum-light); font-style: italic; }
+.slide-body { font-size: .92rem; color: rgba(255,255,255,.72); line-height: 1.85; max-width: 560px; }
+.slide-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.2rem;
+}
+.stat-block { display: flex; flex-direction: column; gap: .3rem; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 700; color: var(--plum-light); line-height: 1;
+}
+.stat-label { font-size: .72rem; color: rgba(255,255,255,.55); letter-spacing: .05em; line-height: 1.4; }
+.slide-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+.slide-pillar {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-top: 2px solid var(--plum-light);
+  padding: 1.4rem; border-radius: 3px;
+}
+.slide-pillar-title { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--plum-light); margin-bottom: .5rem; }
+.slide-pillar-body { font-size: .82rem; color: rgba(255,255,255,.65); line-height: 1.7; }
+.slide-roles { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+.slide-role-tag {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.8); font-size: .78rem; padding: .4rem .9rem; border-radius: 20px;
+}
+.slide-recognitions { display: flex; flex-direction: column; gap: .9rem; margin-top: 1.2rem; }
+.slide-rec {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding-bottom: .9rem; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.slide-rec-star { color: var(--plum-light); font-size: 1rem; margin-top: .1rem; flex-shrink: 0; }
+.slide-rec-title { font-size: .88rem; color: rgba(255,255,255,.85); font-weight: 600; }
+.slide-rec-detail { font-size: .78rem; color: rgba(255,255,255,.45); margin-top: .15rem; }
+.slide-recent { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.2rem; }
+.slide-recent-item {
+  background: rgba(255,255,255,.05); border-left: 3px solid var(--plum-light);
+  padding: 1rem 1.2rem;
+}
+.slide-recent-org { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--plum-light); margin-bottom: .3rem; }
+.slide-recent-desc { font-size: .83rem; color: rgba(255,255,255,.7); line-height: 1.65; }
+.slide-cta { margin-top: 1.8rem; }
+.slide-cta .btn { display: inline-block; }
+.slide-num {
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .9rem; color: rgba(255,255,255,.25); letter-spacing: .05em;
+}
+.pitch-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem; background: rgba(0,0,0,.2); border-top: 1px solid rgba(255,255,255,.06);
+}
+.pitch-dots { display: flex; gap: .5rem; }
+.pitch-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.2); cursor: pointer;
+  transition: background .25s, transform .25s;
+  border: none; padding: 0;
+}
+.pitch-dot.active { background: var(--plum-light); transform: scale(1.3); }
+.pitch-arrows { display: flex; gap: .5rem; }
+.pitch-arrow {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.7); font-size: 1rem; width: 36px; height: 36px;
+  border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.pitch-arrow:hover { background: var(--plum); border-color: var(--plum); color: #fff; }
+.pitch-progress {
+  height: 2px; background: var(--plum); width: 0%;
+  transition: width linear; position: absolute; top: 0; left: 0;
+}
+
 /* ─── OFFERINGS ─── */
 #offerings { background: var(--bg2); border-bottom: 1px solid var(--border); }
 .offerings-intro { max-width: 640px; color: var(--text-mid); font-size: .95rem; line-height: 1.85; margin-bottom: 3rem; }
@@ -410,6 +508,10 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .hero-cta-row { flex-direction: column; align-items: flex-start; }
   .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .hero-photo, .hero-photo-placeholder { width: 160px; height: 200px; }
+  .pitch-slide { padding: 2.2rem 1.6rem; }
+  .slide-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .slide-pillars { grid-template-columns: 1fr; gap: 1rem; }
+  .slide-recent { grid-template-columns: 1fr; gap: .8rem; }
 }
 
 /* ─── DJ ─── */
@@ -468,6 +570,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <a class="nav-logo" href="#hero">Dr. Alanna <span>Harris</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#pitch">Why Me</a></li>
     <li><a href="#experience">CV</a></li>
     <li><a href="#publications">Research</a></li>
     <li><a href="#speaking">Speaking</a></li>
@@ -623,6 +726,175 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       </div>
       <a href="#contact" class="btn btn-white">Get in Touch</a>
     </div>
+  </div>
+</section>
+
+<!-- PITCH DECK -->
+<section id="pitch">
+  <div class="section-wrap">
+    <div class="section-label reveal">The Case</div>
+    <h2 class="section-heading reveal">Why Work With Me</h2>
+
+    <div class="pitch-deck reveal">
+      <div class="pitch-slides">
+
+        <!-- Slide 1: Opening -->
+        <div class="pitch-slide active">
+          <div class="pitch-progress" id="progress-bar"></div>
+          <div class="slide-num">01 / 07</div>
+          <div class="slide-eyebrow">The Case for Dr. Alanna Harris</div>
+          <h2 class="slide-headline">A decade of real work.<br><em>A record of real results.</em></h2>
+          <p class="slide-body">Not just a PhD. Not just a teacher. Someone who builds systems, moves people, and makes education actually work. I bring research-level thinking to day-one classroom realities. That combination is rare. Here's the evidence.</p>
+        </div>
+
+        <!-- Slide 2: The Numbers -->
+        <div class="pitch-slide">
+          <div class="slide-num">02 / 07</div>
+          <div class="slide-eyebrow">Impact at a Glance</div>
+          <h2 class="slide-headline">The numbers<br><em>speak first.</em></h2>
+          <div class="slide-stats">
+            <div class="stat-block">
+              <span class="stat-num">10+</span>
+              <span class="stat-label">Years in K-12, higher ed &amp; community orgs</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-num">13</span>
+              <span class="stat-label">Schools reached through DOE-funded ACCESS Grant</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-num">6</span>
+              <span class="stat-label">National conference presentations (NCTE, AERA, MLA, CQIE)</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-num">5+</span>
+              <span class="stat-label">Districts and institutions served across K-12 and higher ed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: What You Get -->
+        <div class="pitch-slide">
+          <div class="slide-num">03 / 07</div>
+          <div class="slide-eyebrow">The Differentiators</div>
+          <h2 class="slide-headline">What you get<br><em>that you won't find elsewhere.</em></h2>
+          <div class="slide-pillars">
+            <div class="slide-pillar">
+              <div class="slide-pillar-title">Research Meets Practice</div>
+              <div class="slide-pillar-body">PhD-level thinking applied to day-one classroom reality. I don't just study education. I do it. Both matter. Neither gets dropped.</div>
+            </div>
+            <div class="slide-pillar">
+              <div class="slide-pillar-title">Rigorous and Healing-Centered</div>
+              <div class="slide-pillar-body">LETRS-certified AND mindfulness-trained. Science of Reading AND healing-centered engagement. Not either/or. The work requires both.</div>
+            </div>
+            <div class="slide-pillar">
+              <div class="slide-pillar-title">Culture as Foundation</div>
+              <div class="slide-pillar-body">Black feminist epistemology and culturally sustaining pedagogy aren't additions to my framework. They are the framework. That's the difference.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: The Range -->
+        <div class="pitch-slide">
+          <div class="slide-num">04 / 07</div>
+          <div class="slide-eyebrow">The Range</div>
+          <h2 class="slide-headline">I don't just<br><em>do one thing.</em></h2>
+          <p class="slide-body">That range means I understand your context before I walk in the room. I've sat at every table: the classroom, the university lecture hall, the district office, the hospital, the community org, the conference stage.</p>
+          <div class="slide-roles">
+            <span class="slide-role-tag">K-12 Classroom Teacher</span>
+            <span class="slide-role-tag">University Lecturer</span>
+            <span class="slide-role-tag">Instructional Literacy Coach</span>
+            <span class="slide-role-tag">Community Health Educator</span>
+            <span class="slide-role-tag">Educational Consultant</span>
+            <span class="slide-role-tag">Clinical Supervisor</span>
+            <span class="slide-role-tag">Qualitative Researcher</span>
+            <span class="slide-role-tag">Conference Presenter</span>
+            <span class="slide-role-tag">CliftonStrengths Facilitator</span>
+          </div>
+        </div>
+
+        <!-- Slide 5: Recognition -->
+        <div class="pitch-slide">
+          <div class="slide-num">05 / 07</div>
+          <div class="slide-eyebrow">Recognition</div>
+          <h2 class="slide-headline">The work has<br><em>been seen.</em></h2>
+          <div class="slide-recognitions">
+            <div class="slide-rec">
+              <span class="slide-rec-star">★</span>
+              <div>
+                <div class="slide-rec-title">NCTE Professional Dyads &amp; Culturally Relevant Teaching Award</div>
+                <div class="slide-rec-detail">National Council of Teachers of English · 2023</div>
+              </div>
+            </div>
+            <div class="slide-rec">
+              <span class="slide-rec-star">★</span>
+              <div>
+                <div class="slide-rec-title">King/Chávez Scholar</div>
+                <div class="slide-rec-detail">University of Wisconsin-Whitewater · 2013</div>
+              </div>
+            </div>
+            <div class="slide-rec">
+              <span class="slide-rec-star">◈</span>
+              <div>
+                <div class="slide-rec-title">DOE ACCESS Grant Consultant</div>
+                <div class="slide-rec-detail">US Department of Education · 13 schools · 2018 - 2020</div>
+              </div>
+            </div>
+            <div class="slide-rec">
+              <span class="slide-rec-star">◈</span>
+              <div>
+                <div class="slide-rec-title">NCTE 2024 Featured Presenter</div>
+                <div class="slide-rec-detail">Writing Across America: DJ Presentation · November 2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Recent Work -->
+        <div class="pitch-slide">
+          <div class="slide-num">06 / 07</div>
+          <div class="slide-eyebrow">Recent Work</div>
+          <h2 class="slide-headline">What I've been<br><em>building right now.</em></h2>
+          <div class="slide-recent">
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">Brown Deer School District</div>
+              <div class="slide-recent-desc">Instructional Literacy Coach building district-wide literacy infrastructure. Science of Reading implementation, coaching cycles, data-informed instruction.</div>
+            </div>
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">Children's Hospital</div>
+              <div class="slide-recent-desc">Community Health Educator reaching families in clinical settings. Education doesn't stop at the school door. Sometimes it starts in a hospital.</div>
+            </div>
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">NCTE 2024</div>
+              <div class="slide-recent-desc">Presented DJ as Pedagogy research to a national audience. Building the scholarly argument for remix, synthesis, and reading the room as compositional methods.</div>
+            </div>
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">Marquette University</div>
+              <div class="slide-recent-desc">9th Grade English Instructor preparing a new generation of students and teacher candidates. University rigor. Real classroom conditions.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="pitch-slide">
+          <div class="slide-num">07 / 07</div>
+          <div class="slide-eyebrow">The Bottom Line</div>
+          <h2 class="slide-headline">Here's the simple version:<br><em>I'm available.</em></h2>
+          <p class="slide-body">Open to full-time roles, consulting contracts, coaching engagements, speaking, and research collaboration. If the work is serious and the mission is real, I want to be in the room. Let's build something.</p>
+          <div class="slide-cta">
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+          </div>
+        </div>
+
+      </div><!-- /pitch-slides -->
+
+      <div class="pitch-controls">
+        <div class="pitch-dots" id="pitch-dots"></div>
+        <div class="pitch-arrows">
+          <button class="pitch-arrow" id="pitch-prev" aria-label="Previous slide">&#8592;</button>
+          <button class="pitch-arrow" id="pitch-next" aria-label="Next slide">&#8594;</button>
+        </div>
+      </div>
+    </div><!-- /pitch-deck -->
   </div>
 </section>
 
@@ -1222,6 +1494,86 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Pitch slideshow
+(function() {
+  const slides = Array.from(document.querySelectorAll('.pitch-slide'));
+  const dotsContainer = document.getElementById('pitch-dots');
+  const prevBtn = document.getElementById('pitch-prev');
+  const nextBtn = document.getElementById('pitch-next');
+  const progressBar = document.getElementById('progress-bar');
+  if (!slides.length) return;
+
+  let current = 0;
+  let autoTimer = null;
+  let progressTimer = null;
+  const INTERVAL = 6000;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'pitch-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(d);
+  });
+
+  function updateDots() {
+    dotsContainer.querySelectorAll('.pitch-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function startProgress() {
+    if (progressBar) {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          progressBar.style.transition = 'width ' + INTERVAL + 'ms linear';
+          progressBar.style.width = '100%';
+        });
+      });
+    }
+  }
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    updateDots();
+    clearInterval(autoTimer);
+    startProgress();
+    autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // Keyboard nav when slideshow is in view
+  document.addEventListener('keydown', e => {
+    const deck = document.querySelector('.pitch-deck');
+    if (!deck) return;
+    const rect = deck.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  // Pause auto-advance on hover
+  const deck = document.querySelector('.pitch-deck');
+  if (deck) {
+    deck.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    deck.addEventListener('mouseleave', () => {
+      autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+    });
+  }
+
+  // Start
+  startProgress();
+  autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+})();
 </script>
 </body>
 </html>
