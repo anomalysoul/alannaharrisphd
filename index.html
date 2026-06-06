@@ -9,24 +9,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --plum:         #5E2750;
-  --plum-mid:     #8B3D7A;
-  --plum-light:   #C47FB0;
-  --slate:        #3D5A80;
-  --slate-mid:    #5D7FA8;
-  --slate-light:  #9BB8D4;
-  --gold:         #B07D2A;
-  --gold-light:   #D4A554;
-  --bg:           #FAFAF8;
-  --bg2:          #F4F2EE;
-  --bg3:          #EDE9E3;
+  --plum:         #3A1A6E;
+  --plum-mid:     #6535A8;
+  --plum-light:   #A87ED4;
+  --slate:        #1B3560;
+  --slate-mid:    #3B5A8A;
+  --slate-light:  #7B9BC0;
+  --gold:         #C49A2E;
+  --gold-light:   #E5C76E;
+  --bg:           #FAFAF9;
+  --bg2:          #F3F0FC;
+  --bg3:          #EAE4F8;
   --surface:      #FFFFFF;
-  --border:       #E2DDD6;
-  --border-mid:   #C8C0B5;
-  --text:         #1A1714;
-  --text-mid:     #4A4440;
-  --text-dim:     #7A726A;
-  --text-label:   #9A9088;
+  --border:       #D4CAF0;
+  --border-mid:   #BAB0DC;
+  --text:         #0E0818;
+  --text-mid:     #342858;
+  --text-dim:     #7264A0;
+  --text-label:   #9A8EC0;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,7 +47,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.1rem 3rem;
-  background: rgba(250, 250, 248, 0.94);
+  background: rgba(250, 250, 249, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -75,7 +75,7 @@ nav {
 #hero {
   min-height: 100vh; display: flex; flex-direction: column;
   justify-content: center; padding: 0 3rem;
-  background: linear-gradient(160deg, #fff 0%, var(--bg2) 60%, var(--bg3) 100%);
+  background: linear-gradient(145deg, #fff 0%, #F5F1FF 35%, #EDE4FF 65%, #E2D6F8 100%);
   border-bottom: 1px solid var(--border);
 }
 .hero-inner {
@@ -83,9 +83,20 @@ nav {
   display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center;
 }
 .hero-text { max-width: 700px; }
+.hero-photo-wrap {
+  position: relative; display: inline-block;
+}
+.hero-photo-wrap::before {
+  content: '';
+  position: absolute; inset: -8px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--plum-light) 50%, var(--plum) 100%);
+  z-index: 0; opacity: .35;
+}
 .hero-photo {
   width: 280px; height: 340px; object-fit: cover; object-position: center top;
-  border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,.12); display: block;
+  border-radius: 4px; box-shadow: 0 16px 48px rgba(58,26,110,.25);
+  display: block; position: relative; z-index: 1;
 }
 .hero-photo-placeholder {
   width: 280px; height: 340px; border-radius: 4px;
@@ -95,8 +106,8 @@ nav {
   color: var(--plum-light); font-style: italic;
 }
 .hero-eyebrow {
-  font-size: .72rem; letter-spacing: .28em; font-weight: 500;
-  text-transform: uppercase; color: var(--plum); margin-bottom: 1.8rem;
+  font-size: .72rem; letter-spacing: .22em; font-weight: 500;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem;
   opacity: 0; animation: riseIn .9s ease .15s forwards;
 }
 .hero-name {
@@ -127,7 +138,7 @@ nav {
 .btn-primary {
   background: var(--plum); color: #fff; border: 1.5px solid var(--plum);
 }
-.btn-primary:hover { background: var(--plum-mid); border-color: var(--plum-mid); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(94,39,80,.2); }
+.btn-primary:hover { background: var(--plum-mid); border-color: var(--plum-mid); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(58,26,110,.3); }
 .btn-outline {
   background: transparent; color: var(--text-mid); border: 1.5px solid var(--border-mid);
 }
@@ -158,7 +169,9 @@ section { position: relative; }
   display: flex; align-items: center; gap: 1rem;
 }
 .section-label::after {
-  content: ''; flex: 1; height: 1px; background: var(--border); max-width: 120px;
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  max-width: 120px;
 }
 .section-heading {
   font-family: 'Cormorant Garamond', serif;
@@ -235,6 +248,47 @@ section { position: relative; }
   font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
   padding: .25rem .75rem; border-radius: 999px;
   background: rgba(176,125,42,.1); color: var(--gold); border: 1px solid rgba(176,125,42,.25);
+}
+
+/* ─── FEATURED VENUES ─── */
+#featured { background: var(--text); overflow: hidden; }
+.featured-inner { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+.featured-eyebrow {
+  font-size: .65rem; letter-spacing: .28em; font-weight: 600; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.featured-eyebrow::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  max-width: 120px; opacity: .5;
+}
+.featured-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600;
+  color: #fff; line-height: 1.15; margin-bottom: 3.5rem;
+}
+.featured-heading em { color: var(--gold-light); font-style: italic; }
+.featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.06); border-radius: 6px; overflow: hidden; margin-bottom: 3.5rem; }
+.featured-cell {
+  padding: 2rem 1.8rem;
+  background: rgba(255,255,255,.02);
+  transition: background .25s;
+}
+.featured-cell:hover { background: rgba(196,154,46,.07); }
+.featured-abbr {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: .5rem;
+}
+.featured-name { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.55); margin-bottom: .3rem; }
+.featured-year { font-size: .72rem; color: rgba(255,255,255,.3); letter-spacing: .05em; }
+.featured-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 2.5rem 0; }
+.featured-affiliations { display: flex; flex-wrap: wrap; gap: .7rem; }
+.featured-affil {
+  font-size: .72rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  padding: .4rem 1rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.04);
 }
 
 /* ─── SPEAKING ─── */
@@ -322,6 +376,19 @@ section { position: relative; }
 .pillar-icon { font-size: 1.4rem; color: var(--plum-light); margin-bottom: .8rem; }
 .pillar-label { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--plum); margin-bottom: .8rem; }
 .pillar-text { font-size: .88rem; color: var(--text-mid); line-height: 1.8; }
+
+/* ─── SPEAKING GALLERY ─── */
+.speaking-gallery {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem;
+}
+.gallery-photo {
+  aspect-ratio: 4/3; object-fit: cover; border-radius: 4px;
+  width: 100%; display: block;
+  box-shadow: 0 6px 24px rgba(58,26,110,.15);
+  transition: transform .3s, box-shadow .3s;
+}
+.gallery-photo:hover { transform: scale(1.02); box-shadow: 0 12px 40px rgba(58,26,110,.25); }
+.gallery-photo.tall { grid-row: span 2; aspect-ratio: unset; height: 100%; }
 
 /* ─── PITCH SLIDESHOW ─── */
 #pitch { background: var(--text); padding: 5rem 0; }
@@ -512,6 +579,8 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .slide-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .slide-pillars { grid-template-columns: 1fr; gap: 1rem; }
   .slide-recent { grid-template-columns: 1fr; gap: .8rem; }
+  .featured-grid { grid-template-columns: 1fr; }
+  .featured-inner { padding: 4rem 1.4rem; }
 }
 
 /* ─── DJ ─── */
@@ -573,6 +642,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <li><a href="#pitch">Why Me</a></li>
     <li><a href="#experience">CV</a></li>
     <li><a href="#publications">Research</a></li>
+    <li><a href="#featured">Featured At</a></li>
     <li><a href="#speaking">Speaking</a></li>
     <li><a href="#teaching">PD</a></li>
     <li><a href="#offerings">Offerings</a></li>
@@ -588,7 +658,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI · Open to Opportunities</p>
+      <p class="hero-eyebrow">★ &nbsp;Ph.D. Urban Education · Milwaukee, WI · Open to Opportunities</p>
       <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
       <p class="hero-title">Educator, researcher, coach, and consultant with over a decade of real work in K–12, higher ed, and beyond. I know how to build things, lead people, and get results that actually matter.</p>
       <div class="hero-cta-row">
@@ -605,7 +675,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <span class="hero-badge">Leadership</span>
       </div>
     </div>
-    <div>
+    <div class="hero-photo-wrap">
       <img src="1000001038679683 Small.jpeg" alt="Dr. Alanna Harris" class="hero-photo">
     </div>
   </div>
@@ -1024,6 +1094,58 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="pub-title">Critical Mindfulness in the English Language Arts Classroom</div>
         <div class="pub-citation">Harris, A. Doctoral Dissertation. University of Wisconsin–Milwaukee.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED VENUES -->
+<section id="featured">
+  <div class="featured-inner">
+    <div class="featured-eyebrow reveal">Conference Presentations</div>
+    <h2 class="featured-heading reveal">Presented at the<br><em>rooms that matter.</em></h2>
+
+    <div class="featured-grid reveal">
+      <div class="featured-cell">
+        <div class="featured-abbr">NCTE</div>
+        <div class="featured-name">National Council of Teachers of English</div>
+        <div class="featured-year">2019 · 2024</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">AERA</div>
+        <div class="featured-name">American Educational Research Association</div>
+        <div class="featured-year">2019</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">MLA</div>
+        <div class="featured-name">Modern Language Association International Symposium</div>
+        <div class="featured-year">2019</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">CQIE</div>
+        <div class="featured-name">Critical Questions in Education</div>
+        <div class="featured-year">2022</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">UWM</div>
+        <div class="featured-name">Black Feminist Symposium · UW-Milwaukee</div>
+        <div class="featured-year">2020</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">DOE</div>
+        <div class="featured-name">US Department of Education · ACCESS Grant</div>
+        <div class="featured-year">2018 – 2020</div>
+      </div>
+    </div>
+
+    <hr class="featured-divider">
+
+    <div class="featured-affiliations reveal">
+      <span class="featured-affil">University of Wisconsin-Milwaukee</span>
+      <span class="featured-affil">Marquette University</span>
+      <span class="featured-affil">Alverno College</span>
+      <span class="featured-affil">Universal Hip Hop Museum</span>
+      <span class="featured-affil">Brown Deer School District</span>
+      <span class="featured-affil">Children's Hospital of Wisconsin</span>
     </div>
   </div>
 </section>
