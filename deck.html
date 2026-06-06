@@ -13,8 +13,8 @@
    ============================================================ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 100%; height: 100%; overflow: hidden; }
-body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
+html, body { width: 100%; height: 100%; }
+body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; overflow: hidden; }
 
 :root {
   --bg:       #0A0520;
@@ -51,25 +51,30 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
 
 /* ===== SLIDE SYSTEM ===== */
 #deck { position: fixed; inset: 0; }
+
+/* Each slide scrolls itself so content never clips */
 .slide {
   position: absolute; inset: 0;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  padding: 3rem 4rem 2.5rem;
+  overflow-y: auto; overflow-x: hidden;
   opacity: 0; pointer-events: none;
-  transition: opacity .6s ease, transform .6s ease;
-  transform: translateX(50px);
+  transition: opacity .55s ease, transform .55s ease;
+  transform: translateX(40px);
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.15) transparent;
 }
+.slide::-webkit-scrollbar { width: 3px; }
+.slide::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px; }
 .slide.active { opacity: 1; pointer-events: auto; transform: translateX(0); z-index: 2; }
-.slide.exit   { opacity: 0; transform: translateX(-50px); }
-.slide-content {
-  position: relative; z-index: 1; width: 100%; max-width: 1060px;
-  overflow-y: auto; max-height: calc(100% - 2rem);
-  padding-right: .25rem;
-  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.18) transparent;
+.slide.exit   { opacity: 0; transform: translateX(-40px); }
+
+/* Flex centering wrapper -- sits above .wave-bg */
+.slide-inner {
+  position: relative; z-index: 1;
+  min-height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 3.5rem 4rem 4rem;
 }
-.slide-content::-webkit-scrollbar { width: 4px; }
-.slide-content::-webkit-scrollbar-track { background: transparent; }
-.slide-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 2px; }
+.slide-content { width: 100%; max-width: 1040px; }
 
 /* ===== TYPOGRAPHY ===== */
 .eyebrow {
@@ -238,6 +243,63 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
 .arr:disabled { opacity: .25; cursor: default; }
 .key-hint { position: fixed; bottom: 1.9rem; left: 2rem; font-size: .6rem; color: var(--dimmer); letter-spacing: .08em; z-index: 100; }
 
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .slide-inner { padding: 2.5rem 1.8rem 5rem; }
+
+  .display { font-size: clamp(2.8rem, 11vw, 5rem); }
+  .headline { font-size: clamp(1.6rem, 5.5vw, 2.6rem); }
+  .large-body { font-size: clamp(1.05rem, 3.5vw, 1.5rem); }
+
+  /* Stack all card grids to single column */
+  .cards { grid-template-columns: 1fr !important; }
+  .rec-grid { grid-template-columns: 1fr !important; }
+  .charts-grid { grid-template-columns: 1fr !important; gap: 1.2rem; }
+
+  /* Stats keep 2-col but shrink numbers */
+  .stats-grid { gap: .8rem 1rem; }
+  .stat-num { font-size: clamp(2.4rem, 9vw, 3.8rem); }
+
+  /* Timeline goes vertical */
+  .timeline { flex-direction: column; gap: 1.8rem; padding-top: 0; margin-top: 1rem; }
+  .timeline::before { top: 0; bottom: 0; left: 6px; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--purple), var(--teal)); }
+  .tl-item { padding-right: 0; padding-left: 2rem; }
+  .tl-dot { top: 0; left: 0; }
+
+  /* Charts resize */
+  .bar-chart { height: 80px; }
+  .donut-svg { width: 90px; height: 90px; }
+
+  /* Nav */
+  .key-hint { display: none; }
+  #slide-num { top: .8rem; right: 1rem; }
+  .arrows { bottom: 1.2rem; right: 1rem; }
+  .arr { width: 36px; height: 36px; font-size: .85rem; }
+  .dots { bottom: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+  .slide-inner { padding: 2rem 1.2rem 5rem; }
+
+  .display { font-size: clamp(2.2rem, 12vw, 3.5rem); }
+  .headline { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .large-body { font-size: clamp(1rem, 4vw, 1.3rem); }
+
+  .card-title { font-size: .88rem; }
+  .card-body { font-size: .74rem; }
+
+  /* Contacts stack nicer */
+  .contact-item { font-size: .9rem; }
+
+  /* Stat numbers */
+  .stat-num { font-size: clamp(2rem, 10vw, 3rem); }
+  .stat-label { font-size: .6rem; }
+
+  /* Hide nav dots on very small screens to save space */
+  .dots { display: none; }
+  .arrows { right: .75rem; }
+}
+
 </style>
 </head>
 <body>
@@ -251,10 +313,12 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
   <!-- 1: Title -->
   <div class="slide active" data-i="0">
     <div class="wave-bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
-    <div class="slide-content" style="text-align:center;">
-      <div class="eyebrow" style="color:var(--gold); letter-spacing:.4em;">Anomaly Soul</div>
-      <h1 class="display" style="margin-top:1rem;">Alanna<br><em>Harris,</em><br><span class="tl">Ph.D.</span></h1>
-      <p style="margin-top:1.8rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,2.2vw,1.6rem); color:var(--dim);">Literacy Scholar-Practitioner</p>
+    <div class="slide-inner">
+      <div class="slide-content" style="text-align:center;">
+        <div class="eyebrow" style="color:var(--gold); letter-spacing:.4em;">Anomaly Soul</div>
+        <h1 class="display" style="margin-top:1rem;">Alanna<br><em>Harris,</em><br><span class="tl">Ph.D.</span></h1>
+        <p style="margin-top:1.8rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,2.2vw,1.6rem); color:var(--dim);">Literacy Scholar-Practitioner</p>
+      </div>
     </div>
   </div>
 
@@ -264,49 +328,53 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
       <div class="orb o1" style="background:radial-gradient(circle,#0B6B63 0%,transparent 68%)"></div>
       <div class="orb o2" style="background:radial-gradient(circle,#5B2DA0 0%,transparent 68%)"></div>
     </div>
-    <div class="slide-content">
-      <div class="eyebrow">The Throughline</div>
-      <p class="large-body" style="max-width:820px;">
-        Literacy, equity, and critically grounded practice that moves between research and the real classroom. The scholarship is alive in the work. The work informs the scholarship. That loop is the point.
-      </p>
+    <div class="slide-inner">
+      <div class="slide-content">
+        <div class="eyebrow">The Throughline</div>
+        <p class="large-body" style="max-width:820px;">
+          Literacy, equity, and critically grounded practice that moves between research and the real classroom. The scholarship is alive in the work. The work informs the scholarship. That loop is the point.
+        </p>
+      </div>
     </div>
   </div>
 
   <!-- 3: Scholarship -->
   <div class="slide" data-i="2">
     <div class="wave-bg"><div class="orb o1"></div><div class="orb o3"></div></div>
-    <div class="slide-content">
-      <div class="eyebrow">Scholarship</div>
-      <h2 class="headline">The Research</h2>
-      <div class="cards" style="grid-template-columns:repeat(2,1fr); margin-top:1rem;">
-        <div class="card">
-          <div class="card-label">Dissertation, 2024</div>
-          <div class="card-title">Critical Mindfulness in the Secondary ELA Classroom</div>
-          <div class="card-body">Ph.D., Urban Education (Curriculum and Instruction) · University of Wisconsin-Milwaukee</div>
+    <div class="slide-inner">
+      <div class="slide-content">
+        <div class="eyebrow">Scholarship</div>
+        <h2 class="headline">The Research</h2>
+        <div class="cards" style="grid-template-columns:repeat(2,1fr); margin-top:1rem;">
+          <div class="card">
+            <div class="card-label">Dissertation, 2024</div>
+            <div class="card-title">Critical Mindfulness in the Secondary ELA Classroom</div>
+            <div class="card-body">Ph.D., Urban Education (Curriculum and Instruction) · University of Wisconsin-Milwaukee</div>
+          </div>
+          <div class="card tc">
+            <div class="card-label">Published, 2024</div>
+            <div class="card-title">Joy and Pain: Strategies for Transformative Learning in the ELA Curriculum</div>
+            <div class="card-body">New Jersey English Journal, Vol. 13(8)</div>
+          </div>
+          <div class="card tc">
+            <div class="card-label">Forthcoming, 2026</div>
+            <div class="card-title">Mindfulness in Practice: Teachers as Agents of Healing and Growth</div>
+            <div class="card-body">Routledge IFTE Volume 6: International Perspectives on the Teaching of English to Generate Hope</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Co-authored, 2023</div>
+            <div class="card-title">Sociohistorical Evolution of the Language of Culturally-Based Pedagogy</div>
+            <div class="card-body">Pasternak et al. · Journal of Urban Education</div>
+          </div>
         </div>
-        <div class="card tc">
-          <div class="card-label">Published, 2024</div>
-          <div class="card-title">Joy and Pain: Strategies for Transformative Learning in the ELA Curriculum</div>
-          <div class="card-body">New Jersey English Journal, Vol. 13(8)</div>
+        <div class="ftags">
+          <span class="ftag p">Culturally Sustaining Pedagogy</span>
+          <span class="ftag t">Raciolinguistic Ideologies</span>
+          <span class="ftag p">Black Feminist Thought</span>
+          <span class="ftag t">Critical Mindfulness</span>
+          <span class="ftag">Phenomenological Inquiry</span>
+          <span class="ftag">Mixed Methods</span>
         </div>
-        <div class="card tc">
-          <div class="card-label">Forthcoming, 2026</div>
-          <div class="card-title">Mindfulness in Practice: Teachers as Agents of Healing and Growth</div>
-          <div class="card-body">Routledge IFTE Volume 6: International Perspectives on the Teaching of English to Generate Hope</div>
-        </div>
-        <div class="card">
-          <div class="card-label">Co-authored, 2023</div>
-          <div class="card-title">Sociohistorical Evolution of the Language of Culturally-Based Pedagogy</div>
-          <div class="card-body">Pasternak et al. · Journal of Urban Education</div>
-        </div>
-      </div>
-      <div class="ftags">
-        <span class="ftag p">Culturally Sustaining Pedagogy</span>
-        <span class="ftag t">Raciolinguistic Ideologies</span>
-        <span class="ftag p">Black Feminist Thought</span>
-        <span class="ftag t">Critical Mindfulness</span>
-        <span class="ftag">Phenomenological Inquiry</span>
-        <span class="ftag">Mixed Methods</span>
       </div>
     </div>
   </div>
@@ -317,24 +385,26 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
       <div class="orb o2"></div>
       <div class="orb o3" style="background:radial-gradient(circle,#0B6B63 0%,transparent 68%)"></div>
     </div>
-    <div class="slide-content">
-      <div class="eyebrow">Practice and Leadership</div>
-      <h2 class="headline">Where the Work Lives</h2>
-      <div class="cards" style="grid-template-columns:repeat(3,1fr); margin-top:1rem;">
-        <div class="card">
-          <div class="card-label">Literacy Coaching</div>
-          <div class="card-title">Science of Reading, MTSS, and Act 20</div>
-          <div class="card-body">25+ professional learning sessions. myView Literacy, PRP framework, Wisconsin Act 20 compliance. Direct technical assistance for K-5 teachers and building leadership.</div>
-        </div>
-        <div class="card tc">
-          <div class="card-label">Curriculum and PD Design</div>
-          <div class="card-title">Writing Rubrics, Theory of Change, and District Resources</div>
-          <div class="card-body">DOK-preserving assessment tools, rubric audit instruments, standards alignment guides, and I Can statements for district-wide adoption.</div>
-        </div>
-        <div class="card">
-          <div class="card-label">The Learning Exchange</div>
-          <div class="card-title">Current Leadership</div>
-          <div class="card-body">Bringing research-to-practice expertise, coaching infrastructure, and equity-centered frameworks to support educator and organizational development.</div>
+    <div class="slide-inner">
+      <div class="slide-content">
+        <div class="eyebrow">Practice and Leadership</div>
+        <h2 class="headline">Where the Work Lives</h2>
+        <div class="cards" style="grid-template-columns:repeat(3,1fr); margin-top:1rem;">
+          <div class="card">
+            <div class="card-label">Literacy Coaching</div>
+            <div class="card-title">Science of Reading, MTSS, and Act 20</div>
+            <div class="card-body">25+ professional learning sessions. myView Literacy, PRP framework, Wisconsin Act 20 compliance. Direct technical assistance for K-5 teachers and building leadership.</div>
+          </div>
+          <div class="card tc">
+            <div class="card-label">Curriculum and PD Design</div>
+            <div class="card-title">Writing Rubrics, Theory of Change, and District Resources</div>
+            <div class="card-body">DOK-preserving assessment tools, rubric audit instruments, standards alignment guides, and I Can statements for district-wide adoption.</div>
+          </div>
+          <div class="card">
+            <div class="card-label">The Learning Exchange</div>
+            <div class="card-title">Current Leadership</div>
+            <div class="card-body">Bringing research-to-practice expertise, coaching infrastructure, and equity-centered frameworks to support educator and organizational development.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -346,29 +416,31 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
       <div class="orb o-gold"></div>
       <div class="orb o2"></div>
     </div>
-    <div class="slide-content">
-      <div class="eyebrow">Recognition</div>
-      <h2 class="headline">The Work Has<br>Been Seen</h2>
-      <div class="rec-grid">
-        <div class="rec-card">
-          <div class="rec-star" style="color:var(--gold);">★</div>
-          <div class="rec-title">NCTE Cultivating New Voices Fellowship</div>
-          <div class="rec-detail">National Council of Teachers of English · 2026 to 2028</div>
-        </div>
-        <div class="rec-card">
-          <div class="rec-star" style="color:var(--gold);">★</div>
-          <div class="rec-title">Professional Dyads and Culturally Relevant Teaching Award</div>
-          <div class="rec-detail">National Council of Teachers of English · 2021</div>
-        </div>
-        <div class="rec-card">
-          <div class="rec-star" style="color:var(--p-bright);">◈</div>
-          <div class="rec-title">Accepted: NCTE 2026 Annual Convention</div>
-          <div class="rec-detail">National Council of Teachers of English</div>
-        </div>
-        <div class="rec-card">
-          <div class="rec-star" style="color:var(--p-bright);">◈</div>
-          <div class="rec-title">King Chavez Scholar</div>
-          <div class="rec-detail">University of Wisconsin-Whitewater · 2013</div>
+    <div class="slide-inner">
+      <div class="slide-content">
+        <div class="eyebrow">Recognition</div>
+        <h2 class="headline">The Work Has<br>Been Seen</h2>
+        <div class="rec-grid">
+          <div class="rec-card">
+            <div class="rec-star" style="color:var(--gold);">&#9733;</div>
+            <div class="rec-title">NCTE Cultivating New Voices Fellowship</div>
+            <div class="rec-detail">National Council of Teachers of English · 2026 to 2028</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-star" style="color:var(--gold);">&#9733;</div>
+            <div class="rec-title">Professional Dyads and Culturally Relevant Teaching Award</div>
+            <div class="rec-detail">National Council of Teachers of English · 2021</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-star" style="color:var(--p-bright);">&#10792;</div>
+            <div class="rec-title">Accepted: NCTE 2026 Annual Convention</div>
+            <div class="rec-detail">National Council of Teachers of English</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-star" style="color:var(--p-bright);">&#10792;</div>
+            <div class="rec-title">King Chavez Scholar</div>
+            <div class="rec-detail">University of Wisconsin-Whitewater · 2013</div>
+          </div>
         </div>
       </div>
     </div>
@@ -377,25 +449,27 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
   <!-- 6: Numbers -->
   <div class="slide" data-i="5" id="stats-slide">
     <div class="wave-bg"><div class="orb o1"></div><div class="orb o2"></div></div>
-    <div class="slide-content" style="text-align:center;">
-      <div class="eyebrow">Reach, by the Numbers</div>
-      <h2 class="headline">The Impact</h2>
-      <div class="stats-grid" style="max-width:740px; margin:2rem auto 0;">
-        <div class="stat-block">
-          <div class="stat-num" id="sn-years">0</div>
-          <div class="stat-label">Years in Education</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num" id="sn-teachers" style="color:var(--p-bright);">0</div>
-          <div class="stat-label">Teachers Coached</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num" id="sn-students">0</div>
-          <div class="stat-label">Students Reached</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num" id="sn-pres" style="color:var(--p-bright);">0</div>
-          <div class="stat-label">Presentations Delivered</div>
+    <div class="slide-inner">
+      <div class="slide-content" style="text-align:center;">
+        <div class="eyebrow">Reach, by the Numbers</div>
+        <h2 class="headline">The Impact</h2>
+        <div class="stats-grid" style="max-width:740px; margin:2rem auto 0;">
+          <div class="stat-block">
+            <div class="stat-num" id="sn-years">0</div>
+            <div class="stat-label">Years in Education</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num" id="sn-teachers" style="color:var(--p-bright);">0</div>
+            <div class="stat-label">Teachers Coached</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num" id="sn-students">0</div>
+            <div class="stat-label">Students Reached</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num" id="sn-pres" style="color:var(--p-bright);">0</div>
+            <div class="stat-label">Presentations Delivered</div>
+          </div>
         </div>
       </div>
     </div>
@@ -404,34 +478,36 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
   <!-- 7: Charts -->
   <div class="slide" data-i="6" id="charts-slide">
     <div class="wave-bg"><div class="orb o3"></div><div class="orb o2"></div></div>
-    <div class="slide-content">
-      <div class="eyebrow">Scholarship in Motion</div>
-      <h2 class="headline" style="margin-bottom:.3rem;">By the Charts</h2>
-      <div class="charts-grid">
+    <div class="slide-inner">
+      <div class="slide-content">
+        <div class="eyebrow">Scholarship in Motion</div>
+        <h2 class="headline" style="margin-bottom:.3rem;">By the Charts</h2>
+        <div class="charts-grid">
 
-        <div>
-          <div class="chart-label">Presentations by Venue</div>
-          <div class="bar-chart" id="bar-chart"></div>
+          <div>
+            <div class="chart-label">Presentations by Venue</div>
+            <div class="bar-chart" id="bar-chart"></div>
+          </div>
+
+          <div>
+            <div class="chart-label">Publishing Pipeline</div>
+            <svg class="line-svg" id="line-svg" viewBox="0 0 280 150" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2DD4BF"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div>
+            <div class="chart-label">How the Work Spans</div>
+            <svg class="donut-svg" id="donut-svg" viewBox="0 0 140 140"></svg>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+
         </div>
-
-        <div>
-          <div class="chart-label">Publishing Pipeline</div>
-          <svg class="line-svg" id="line-svg" viewBox="0 0 280 150" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#2DD4BF"/>
-                <stop offset="100%" stop-color="transparent"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
-        <div>
-          <div class="chart-label">How the Work Spans</div>
-          <svg class="donut-svg" id="donut-svg" viewBox="0 0 140 140"></svg>
-          <div class="donut-legend" id="donut-legend"></div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -442,27 +518,29 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
       <div class="orb o1" style="background:radial-gradient(circle,#0B6B63 0%,transparent 68%)"></div>
       <div class="orb o2"></div>
     </div>
-    <div class="slide-content">
-      <div class="eyebrow">What's Next</div>
-      <h2 class="headline">The Road Ahead</h2>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-year">Publishing</div>
-          <div class="tl-title">Routledge Chapter (2026) and Beyond</div>
-          <div class="tl-body">IFTE Volume 6 forthcoming. Building toward 20 plus peer-reviewed articles. MLA Annual Convention accepted for 2027.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot" style="border-color:var(--p-light)"></div>
-          <div class="tl-year">Fellowship</div>
-          <div class="tl-title">NCTE Cultivating New Voices (2026 to 2028)</div>
-          <div class="tl-body">Developing emerging scholarship at the intersection of literacy, race, and teacher education. NCTE Annual Convention 2026 accepted.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot" style="border-color:var(--gold)"></div>
-          <div class="tl-year">Platform</div>
-          <div class="tl-title">Anomaly Soul</div>
-          <div class="tl-body">The connecting thread: scholarship, coaching, curriculum, and community. Substack and beyond.</div>
+    <div class="slide-inner">
+      <div class="slide-content">
+        <div class="eyebrow">What's Next</div>
+        <h2 class="headline">The Road Ahead</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">Publishing</div>
+            <div class="tl-title">Routledge Chapter (2026) and Beyond</div>
+            <div class="tl-body">IFTE Volume 6 forthcoming. Building toward 20 plus peer-reviewed articles. MLA Annual Convention accepted for 2027.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="border-color:var(--p-light)"></div>
+            <div class="tl-year">Fellowship</div>
+            <div class="tl-title">NCTE Cultivating New Voices (2026 to 2028)</div>
+            <div class="tl-body">Developing emerging scholarship at the intersection of literacy, race, and teacher education. NCTE Annual Convention 2026 accepted.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="border-color:var(--gold)"></div>
+            <div class="tl-year">Platform</div>
+            <div class="tl-title">Anomaly Soul</div>
+            <div class="tl-body">The connecting thread: scholarship, coaching, curriculum, and community. Substack and beyond.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -471,17 +549,19 @@ body { font-family: 'Inter', sans-serif; background: #0A0520; color: #fff; }
   <!-- 9: Contact -->
   <div class="slide" data-i="8">
     <div class="wave-bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
-    <div class="slide-content contact-wrap">
-      <div class="eyebrow">Get in Touch</div>
-      <h2 class="headline">Alanna Harris, Ph.D.</h2>
-      <div class="contact-divider"></div>
-      <div class="contact-list">
-        <div class="contact-item">Milwaukee, Wisconsin</div>
-        <div class="contact-item">(414) 336-6636</div>
-        <div class="contact-item"><a href="mailto:harrisam03@gmail.com">harrisam03@gmail.com</a></div>
-        <div class="contact-item"><a href="https://anomalysoul.github.io/alannaharrisphd" target="_blank">anomalysoul.github.io/alannaharrisphd</a></div>
+    <div class="slide-inner">
+      <div class="slide-content contact-wrap">
+        <div class="eyebrow">Get in Touch</div>
+        <h2 class="headline">Alanna Harris, Ph.D.</h2>
+        <div class="contact-divider"></div>
+        <div class="contact-list">
+          <div class="contact-item">Milwaukee, Wisconsin</div>
+          <div class="contact-item">(414) 336-6636</div>
+          <div class="contact-item"><a href="mailto:harrisam03@gmail.com">harrisam03@gmail.com</a></div>
+          <div class="contact-item"><a href="https://anomalysoul.github.io/alannaharrisphd" target="_blank">anomalysoul.github.io/alannaharrisphd</a></div>
+        </div>
+        <div class="anomaly-tag">Anomaly Soul</div>
       </div>
-      <div class="anomaly-tag">Anomaly Soul</div>
     </div>
   </div>
 
@@ -565,6 +645,8 @@ function goTo(n) {
   const prev = cur;
   cur = n;
   setTimeout(() => slides[prev].classList.remove('exit'), 650);
+  /* Reset scroll position on the new slide */
+  slides[cur].scrollTop = 0;
   slides[cur].classList.add('active');
   dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === cur));
   numEl.textContent = String(cur + 1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
@@ -581,6 +663,15 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(cur + 1);
   if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(cur - 1);
 });
+
+/* Swipe support for mobile */
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(dx) > 50) { dx < 0 ? goTo(cur + 1) : goTo(cur - 1); }
+});
+
 goTo(0);
 
 
