@@ -185,6 +185,25 @@ section { position: relative; }
   margin-bottom: 3.5rem;
 }
 
+/* ─── DECK EMBED ─── */
+#deck-section { background: #0A0520; border-bottom: 1px solid #1a0a35; }
+.deck-embed-wrap { width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.55); }
+.deck-embed-wrap iframe { width: 100%; height: 580px; border: none; display: block; }
+.deck-fullscreen-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .8rem 1.2rem;
+  background: rgba(255,255,255,.04); border-top: 1px solid rgba(255,255,255,.07);
+}
+.deck-fullscreen-bar span { font-size: .68rem; letter-spacing: .1em; color: rgba(255,255,255,.3); text-transform: uppercase; }
+.deck-fullscreen-btn {
+  font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  color: #2DD4BF; text-decoration: none; transition: color .2s;
+}
+.deck-fullscreen-btn:hover { color: #fff; }
+#deck-section .section-label { color: rgba(255,255,255,.45); }
+#deck-section .section-label::after { background: linear-gradient(90deg, #C49A2E, transparent); opacity: .6; }
+#deck-section .section-heading { color: #fff; }
+
 /* ─── ABOUT ─── */
 #about { background: var(--surface); border-bottom: 1px solid var(--border); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -640,6 +659,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <a class="nav-logo" href="#hero">Dr. Alanna <span>Harris</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#deck-section">Deck</a></li>
     <li><a href="#experience">CV</a></li>
     <li><a href="#featured">Featured At</a></li>
     <li><a href="#speaking">Speaking</a></li>
@@ -957,6 +977,21 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
       </div>
     </div><!-- /pitch-deck -->
+  </div>
+</section>
+
+<!-- PRESENTATION DECK -->
+<section id="deck-section">
+  <div class="section-wrap">
+    <div class="section-label reveal">Presentation Deck</div>
+    <h2 class="section-heading reveal">The Full Story</h2>
+    <div class="deck-embed-wrap reveal">
+      <iframe src="deck.html" title="Alanna Harris Ph.D. Presentation Deck" allowfullscreen></iframe>
+      <div class="deck-fullscreen-bar">
+        <span>Use arrow keys inside the deck to navigate</span>
+        <a href="deck.html" target="_blank" class="deck-fullscreen-btn">Open Full Screen ↗</a>
+      </div>
+    </div>
   </div>
 </section>
 
