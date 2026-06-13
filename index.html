@@ -185,9 +185,22 @@ nav {
   opacity: 0; animation: riseIn .9s ease .5s forwards;
   letter-spacing: .01em;
 }
+.hero-philosophy {
+  font-family: 'Outfit', sans-serif; font-weight: 300; font-size: .98rem; line-height: 1.85;
+  color: var(--text-mid); margin-top: 1.4rem; max-width: 580px;
+  opacity: 0; animation: riseIn .9s ease .6s forwards;
+}
 .hero-cta-row {
   display: flex; gap: .9rem; margin-top: 2.5rem; flex-wrap: wrap;
   opacity: 0; animation: riseIn .9s ease .7s forwards;
+}
+.hero-invite {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .68rem; letter-spacing: .2em; font-weight: 600; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid var(--border-mid); border-radius: 999px;
+  padding: .5rem 1.2rem; margin-top: 1.6rem;
+  background: var(--surface); backdrop-filter: blur(10px); box-shadow: var(--glow-teal);
+  opacity: 0; animation: riseIn .9s ease 1.05s forwards;
 }
 .btn {
   font-family: 'Outfit', sans-serif;
@@ -463,6 +476,7 @@ section { position: relative; }
   font-size: .82rem; color: var(--text-dim); line-height: 1.8;
   border-left: 3px solid var(--purple-300); padding-left: 1.2rem;
 }
+.anomaly-tagline-full { max-width: 760px; margin: 0 0 3rem; }
 .anomaly-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
 .anomaly-pillar {
   background: var(--surface); border: 1px solid var(--border);
@@ -616,7 +630,12 @@ section { position: relative; }
   font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
   color: var(--text-dim);
 }
-.offering-desc { font-size: .87rem; color: var(--text-mid); line-height: 1.75; flex: 1; }
+.offering-desc { font-size: .87rem; color: var(--text-mid); line-height: 1.75; }
+.offering-meta {
+  font-size: .8rem; color: var(--text-dim); line-height: 1.7;
+  border-top: 1px solid var(--border); padding-top: .6rem;
+}
+.offering-meta strong { color: var(--cyan); font-weight: 600; }
 
 /* ─── CONTACT ─── */
 #contact { background: transparent; }
@@ -754,6 +773,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <p class="hero-eyebrow">★ &nbsp;Ph.D. Urban Education · Milwaukee, WI · Open to Opportunities</p>
       <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
       <p class="hero-title">Remixing Knowledge. Cultivating Possibility. Building Futures.</p>
+      <p class="hero-philosophy">Not every conversation belongs in every room. I work selectively, with people who recognize what they need and are willing to be precise about it. I read what you're carrying, find the gap between where you are and where you're building toward, and give you only what matters.</p>
       <div class="hero-cta-row">
         <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-outline">Download CV ↗</a>
         <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
@@ -764,6 +784,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <span class="hero-badge">Research</span>
         <span class="hero-badge">Leadership</span>
       </div>
+      <div class="hero-invite">Limited Availability · Invite Only</div>
     </div>
     <div class="hero-photo-wrap">
       <img src="1000001038679683 Small.jpeg" alt="Dr. Alanna Harris" class="hero-photo">
@@ -781,6 +802,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <p>I've spent over a decade doing this work for real. K–12 classrooms, university lecture halls, federal grant projects, district coaching, national conferences. My Ph.D. in Urban Education from UW-Milwaukee gave me the language for what I was already doing. The work came first.</p>
         <p>I know how to walk into a room full of skeptical teachers and leave with them actually wanting to change something. I know how to read data and turn it into a plan people will actually follow. I know how to write, present, coach, facilitate, and lead without losing the people I'm supposed to be serving.</p>
         <p>And yes, I DJ. Because teaching and DJing are the same thing: read the room, hold the energy, know when to shift the vibe. I bring that same skill everywhere I go.</p>
+        <p>I use Human Design as a framework for how I show up. As a 6/2 Projector, my work is to see systems and people with precision, and to wait for invitation before I offer what I see. I work selectively because my energy is built for depth, not volume. This shapes how I take clients, how I teach, and what I will and won't do.</p>
         <div class="about-actions">
           <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-primary">Download CV ↗</a>
           <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
@@ -1377,48 +1399,32 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <div class="section-wrap">
     <div class="section-label reveal">Offerings</div>
     <h2 class="section-heading reveal">Services</h2>
-    <p class="offerings-intro reveal">Here's what I offer and who it's for.</p>
+    <p class="offerings-intro reveal">Three offerings. Each one assumes you know what you need.</p>
 
-    <!-- 1:1 Services -->
+    <!-- Working By Invitation -->
     <div class="offerings-category">
-      <div class="offerings-category-label reveal">1:1 Coaching &amp; Review</div>
+      <div class="offerings-category-label reveal">Working by Invitation</div>
       <div class="offerings-grid">
         <div class="offering-card reveal">
-          <div class="offering-title">CliftonStrengths Coaching for Educators</div>
-          <div class="offering-for">For: Mid-career teachers, coaches, doctoral students</div>
-          <div class="offering-desc">90-minute strengths discovery session plus a written action plan tailored to your specific teaching or leadership context. You get the assessment, my ed-specific lens, and a clear path forward.</div>
+          <div class="offering-title">Cover Letter &amp; CV Audit</div>
+          <div class="offering-for">For: PhD candidates, postdocs, faculty applicants, fellowship seekers, people pivoting roles and needing language for it</div>
+          <div class="offering-desc">Precision editing for fellowship applications, faculty searches, and funded roles. Your materials are probably doing too much, trying to say everything because you haven't yet decided what matters most. I read for clarity, not volume, and bring your argument to the surface.</div>
+          <div class="offering-meta"><strong>What happens:</strong> Send materials plus a one-paragraph description of where you're applying and why. I read everything. One 90-minute session. You get markup and a half-page of strategic notes, then decide what to change.</div>
+          <div class="offering-meta"><strong>Availability:</strong> Two slots per quarter, booked on a rolling basis.</div>
         </div>
         <div class="offering-card reveal">
-          <div class="offering-title">Application Materials Review</div>
-          <div class="offering-for">For: ABDs, recent EdD/PhDs, postdoc applicants</div>
-          <div class="offering-desc">Cover letter and CV audit with annotated edits plus a 30-minute debrief call. I've drafted tailored letters across sectors and survived this market. I know what gets read and what doesn't.</div>
+          <div class="offering-title">CliftonStrengths Coaching for Educators &amp; Changemakers</div>
+          <div class="offering-for">For: Teachers, coaches, administrators, nonprofit leaders, anyone leading from a place of exhaustion and wondering if there's another way</div>
+          <div class="offering-desc">Learn to lead from your actual wiring, not the job description's. CliftonStrengths shows you what you're built for. Teachers who know their strengths stop performing strengths they don't have. Leaders who understand their wiring stop burning out trying to be well-rounded.</div>
+          <div class="offering-meta"><strong>What happens:</strong> Take the CliftonStrengths assessment (if you haven't already). Three sessions over six weeks, each building on the last, focused on what your top 5 mean in your actual classroom, team, or system.</div>
+          <div class="offering-meta"><strong>Availability:</strong> Three ongoing spots. I take on one new person per month, rolling.</div>
         </div>
         <div class="offering-card reveal">
-          <div class="offering-title">Voxer Coaching for New Instructional Coaches</div>
-          <div class="offering-for">For: First-year coaches in literacy/ELA, Title I and urban districts</div>
-          <div class="offering-desc">Async voice-note coaching Monday through Friday plus one live call per month. Real-time problem solving without the scheduling chaos. You message when things come up. I respond within 24 hours, every time.</div>
-        </div>
-        <div class="offering-card reveal">
-          <div class="offering-title">Dissertation &amp; Manuscript Coaching</div>
-          <div class="offering-for">For: ABDs in education, especially women of color doing qualitative work</div>
-          <div class="offering-desc">Four-session "Blueprint + First Chapter Unstuck" package. I finished a phenomenological dissertation and know the emotional architecture, not just the methods. Includes a free 25-minute consult before you commit.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Group & Organizational -->
-    <div class="offerings-category">
-      <div class="offerings-category-label reveal">Group &amp; Organizational Work</div>
-      <div class="offerings-grid">
-        <div class="offering-card reveal">
-          <div class="offering-title">CliftonStrengths Half-Day Workshop</div>
-          <div class="offering-for">For: PD coordinators, charter networks, instructional leadership teams</div>
-          <div class="offering-desc">Three-hour virtual or in-person session for teacher teams. Strengths PD usually skips the classroom context. Mine doesn't. Leave with a shared language and a concrete action plan your team actually uses.</div>
-        </div>
-        <div class="offering-card reveal">
-          <div class="offering-title">Grant Proposal Review</div>
-          <div class="offering-for">For: Small nonprofits applying to DPI, DOL, and foundation grants</div>
-          <div class="offering-desc">Two-hour proposal audit with written feedback and a logic model alignment check. My ACCESS Project credentials (DOE-funded, 13 schools) mean I know what reviewers are looking for and what sinks proposals.</div>
+          <div class="offering-title">Grant Review &amp; Strategy</div>
+          <div class="offering-for">For: Educators writing their first grant, practitioners with a project and partial language, people resubmitting after feedback</div>
+          <div class="offering-desc">Close reading of your project against funder language. I read your proposal the way a program officer does: where's the problem statement, is the logic chain tight, does the budget narrative prove the project works. I don't write grants. I help you see what's already true in your proposal and where it needs sharpening.</div>
+          <div class="offering-meta"><strong>What happens:</strong> Send the full grant draft plus a brief note on the funder and the ask. One 2-hour session with specific moves: what to reorder, what claims need evidence, what to lead with. You get marked-up pages and a one-page strategic read.</div>
+          <div class="offering-meta"><strong>Availability:</strong> One per quarter, taken in the weeks between writing projects so I can give it real attention.</div>
         </div>
       </div>
     </div>
@@ -1525,6 +1531,9 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         It's the brand, the vision, and the practice. Everything I do under Anomaly Soul is rooted in the same conviction: real transformation doesn't happen in spite of who you are. It happens because of it.
       </p>
     </div>
+    <p class="anomaly-tagline anomaly-tagline-full reveal">
+      An anomaly is something that deviates from the norm. Growing up, I fit into varied groups except one: the Black girls. I stood at the edge of the circle, outside the game. Later I learned the circle had made a place for me anyway, the turner, the one who keeps the rhythm. That position at the boundary became my scholarship and my life. Anomaly Soul is the part of you that doesn't fit the mold, that reads a room differently, that keeps the beat steady when everyone else is jumping.
+    </p>
     <div class="anomaly-pillars reveal">
       <div class="anomaly-pillar">
         <div class="pillar-icon">◉</div>
@@ -1589,6 +1598,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="reveal">
         <h2 class="section-heading">Let's<br>Talk</h2>
         <p>I'm open to full-time roles, consulting contracts, speaking engagements, and research collaborations. If you have something worth building, I want to hear about it. Reach out directly or use the form.</p>
+        <p>When you reach out, tell me: what you're building, applying for, or writing; why it matters, in one paragraph; and what you think you need. I respond to invitations that fit. Response time is typically one week.</p>
         <div class="contact-links">
           <a class="contact-link" href="mailto:harrisam03@gmail.com">
             <span class="contact-link-icon">✉</span>
@@ -1646,8 +1656,8 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 <span class="footer-brand">Dr. Alanna Harris</span> · Anomaly Soul · Milwaukee, WI</p>
-  <p>Ph.D. Urban Education · Literacy · Justice · Spirit</p>
+  <p>© 2026 <span class="footer-brand">Dr. Alanna Harris</span> · Anomaly Soul · Milwaukee, WI · 414.336.6536</p>
+  <p>Working by Invitation · Precision Over Volume · Soul-Led</p>
   <p style="font-size:.65rem; opacity:.5; margin-top:.6rem; text-align:center; width:100%;">In the spirit of transparency: this website was built with the assistance of AI. The words, the work, and the vision are mine.</p>
 </footer>
 
