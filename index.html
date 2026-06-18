@@ -3,30 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Alanna Harris — Scholar · Educator · Speaker</title>
-<meta name="description" content="Dr. Alanna Harris, Ph.D. — Equity-centered educator, literacy leader, speaker, and qualitative researcher. Milwaukee, WI. Available for keynotes, workshops, and professional development.">
+<title>Dr. Alanna Harris: Scholar, Educator, Speaker</title>
+<meta name="description" content="Dr. Alanna Harris, Ph.D. Equity-centered educator, literacy leader, speaker, and qualitative researcher. Milwaukee, WI. Available for keynotes, workshops, and professional development.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --plum:         #5E2750;
-  --plum-mid:     #8B3D7A;
-  --plum-light:   #C47FB0;
-  --slate:        #3D5A80;
-  --slate-mid:    #5D7FA8;
-  --slate-light:  #9BB8D4;
-  --gold:         #B07D2A;
-  --gold-light:   #D4A554;
-  --bg:           #FAFAF8;
-  --bg2:          #F4F2EE;
-  --bg3:          #EDE9E3;
-  --surface:      #FFFFFF;
-  --border:       #E2DDD6;
-  --border-mid:   #C8C0B5;
-  --text:         #1A1714;
-  --text-mid:     #4A4440;
-  --text-dim:     #7A726A;
-  --text-label:   #9A9088;
+  --void:        #08040f;
+  --ink:         #0d0620;
+  --purple-900:  #1a0b38;
+  --purple-700:  #3a1670;
+  --purple-500:  #6b2bc4;
+  --purple-300:  #a574ff;
+  --violet-glow: #8b4dff;
+  --teal:        #2ec5c8;
+  --cyan:        #76f0de;
+
+  /* mapped onto component variable names used throughout this file */
+  --plum:         var(--purple-500);
+  --plum-mid:     var(--violet-glow);
+  --plum-light:   var(--purple-300);
+  --slate:        var(--teal);
+  --slate-mid:    #3ddbd9;
+  --slate-light:  var(--cyan);
+  --gold:         var(--cyan);
+  --gold-light:   #9ff7ea;
+
+  --bg:           var(--void);
+  --bg2:          var(--ink);
+  --bg3:          var(--purple-900);
+  --surface:      rgba(40, 18, 78, 0.38);
+  --border:       rgba(165, 116, 255, 0.22);
+  --border-mid:   rgba(165, 116, 255, 0.42);
+
+  --text:         #ece6fb;
+  --text-mid:     #cabfe8;
+  --text-dim:     #9c8fc4;
+  --text-label:   #7a6ea3;
+
+  --radius:       20px;
+  --glow-purple:  0 0 40px rgba(139, 77, 255, .45);
+  --glow-teal:    0 0 30px rgba(118, 240, 222, .35);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,12 +52,41 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
+  background: var(--void);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 16px;
   line-height: 1.7;
   overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ─── ANIMATED PSYCHEDELIC BACKGROUND ─── */
+body::before {
+  content: "";
+  position: fixed; inset: -30%;
+  z-index: -2;
+  background:
+    radial-gradient(40% 38% at 22% 28%, rgba(107,43,196,.5), transparent 60%),
+    radial-gradient(42% 40% at 78% 22%, rgba(58,22,112,.55), transparent 62%),
+    radial-gradient(46% 44% at 70% 78%, rgba(46,197,200,.16), transparent 60%),
+    radial-gradient(50% 48% at 28% 80%, rgba(139,77,255,.36), transparent 64%),
+    var(--ink);
+  filter: blur(8px) saturate(125%);
+  animation: drift 28s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+  50%  { transform: translate3d(2%,-2%,0) scale(1.07) rotate(3deg); }
+  100% { transform: translate3d(-2%,1%,0) scale(1.04) rotate(-2deg); }
+}
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  z-index: -1; pointer-events: none;
+  opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ─── NAV ─── */
@@ -47,156 +94,226 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.1rem 3rem;
-  background: rgba(250, 250, 248, 0.94);
-  backdrop-filter: blur(12px);
+  background: rgba(8, 4, 15, 0.55);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
 .nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem; font-weight: 600; letter-spacing: .02em;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1rem; font-weight: 600; letter-spacing: .02em;
   color: var(--text); text-decoration: none;
 }
-.nav-logo span { color: var(--plum); }
+.nav-logo span { color: var(--cyan); }
 .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 .nav-links a {
   font-size: .78rem; letter-spacing: .06em; font-weight: 500;
   text-transform: uppercase; color: var(--text-dim); text-decoration: none;
   transition: color .2s;
 }
-.nav-links a:hover { color: var(--plum); }
+.nav-links a:hover { color: var(--cyan); }
 .nav-cta {
-  background: var(--plum); color: #fff !important;
-  padding: .45rem 1.2rem; border-radius: 3px;
-  transition: background .2s !important;
+  background: linear-gradient(100deg, var(--cyan), var(--purple-300)) !important;
+  color: #0a0418 !important;
+  padding: .5rem 1.3rem; border-radius: 100px; font-weight: 600;
+  box-shadow: var(--glow-teal);
+  transition: transform .25s, box-shadow .25s !important;
 }
-.nav-cta:hover { background: var(--plum-mid) !important; color: #fff !important; }
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(118,240,222,.55); }
 
 /* ─── HERO ─── */
 #hero {
   min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: center; padding: 0 3rem;
-  background: linear-gradient(160deg, #fff 0%, var(--bg2) 60%, var(--bg3) 100%);
+  justify-content: center; padding: 0 3rem; position: relative;
   border-bottom: 1px solid var(--border);
 }
 .hero-inner {
-  max-width: 1100px; width: 100%; padding-top: 5rem;
+  max-width: 1100px; width: 100%; padding-top: 5rem; position: relative; z-index: 1;
   display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center;
 }
-.hero-text { max-width: 700px; }
+.halo {
+  position: absolute; right: -8%; top: -6%; width: min(46vw, 520px); aspect-ratio: 1;
+  background: radial-gradient(circle at 50%, rgba(139,77,255,.45), transparent 62%);
+  filter: blur(50px); z-index: 0; pointer-events: none;
+  animation: pulse 7s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{ transform: scale(1); opacity:.75 } 50%{ transform: scale(1.12); opacity:1 } }
+.hero-text { max-width: 680px; position: relative; z-index: 1; }
+.hero-photo-wrap {
+  position: relative; display: inline-block; z-index: 1;
+}
+.hero-photo-wrap::before {
+  content: '';
+  position: absolute; inset: -10px;
+  border-radius: calc(var(--radius) + 6px);
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple-300) 50%, var(--violet-glow) 100%);
+  z-index: 0; opacity: .55; filter: blur(2px);
+}
 .hero-photo {
   width: 280px; height: 340px; object-fit: cover; object-position: center top;
-  border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,.12); display: block;
+  border-radius: var(--radius); box-shadow: 0 20px 60px rgba(107,43,196,.4);
+  display: block; position: relative; z-index: 1;
+  border: 1px solid var(--border);
 }
 .hero-photo-placeholder {
-  width: 280px; height: 340px; border-radius: 4px;
-  background: var(--bg3); border: 2px dashed var(--border-mid);
+  width: 280px; height: 340px; border-radius: var(--radius);
+  background: var(--surface); border: 2px dashed var(--border-mid);
+  backdrop-filter: blur(16px);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif; font-size: 3rem;
-  color: var(--plum-light); font-style: italic;
+  font-family: 'Unbounded', sans-serif; font-size: 2rem;
+  color: var(--purple-300);
 }
 .hero-eyebrow {
-  font-size: .72rem; letter-spacing: .28em; font-weight: 500;
-  text-transform: uppercase; color: var(--plum); margin-bottom: 1.8rem;
+  font-size: .72rem; letter-spacing: .32em; font-weight: 500;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 1.8rem;
   opacity: 0; animation: riseIn .9s ease .15s forwards;
 }
 .hero-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.2rem, 8vw, 7rem); font-weight: 600;
-  line-height: .95; letter-spacing: -.02em; color: var(--text);
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2.6rem, 7vw, 5.6rem); font-weight: 800;
+  line-height: 1.04; letter-spacing: -.02em; color: var(--text);
   opacity: 0; animation: riseIn .9s ease .3s forwards;
 }
 .hero-name em {
-  font-style: italic; font-weight: 300; color: var(--plum);
+  font-style: normal; font-weight: 400;
+  background: linear-gradient(108deg, var(--purple-300) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .hero-title {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--text-mid);
-  margin-top: 1.6rem; line-height: 1.6; max-width: 600px;
+  font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 300;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem); color: var(--text-dim);
+  margin-top: 1.6rem; line-height: 1.6; max-width: 640px;
   opacity: 0; animation: riseIn .9s ease .5s forwards;
+  letter-spacing: .01em;
+}
+.hero-philosophy {
+  font-family: 'Outfit', sans-serif; font-weight: 300; font-size: .98rem; line-height: 1.85;
+  color: var(--text-mid); margin-top: 1.4rem; max-width: 580px;
+  opacity: 0; animation: riseIn .9s ease .6s forwards;
 }
 .hero-cta-row {
   display: flex; gap: .9rem; margin-top: 2.5rem; flex-wrap: wrap;
   opacity: 0; animation: riseIn .9s ease .7s forwards;
 }
+.hero-invite {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .68rem; letter-spacing: .2em; font-weight: 600; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid var(--border-mid); border-radius: 999px;
+  padding: .5rem 1.2rem; margin-top: 1.6rem;
+  background: var(--surface); backdrop-filter: blur(10px); box-shadow: var(--glow-teal);
+  opacity: 0; animation: riseIn .9s ease 1.05s forwards;
+}
 .btn {
-  font-size: .72rem; letter-spacing: .1em; font-weight: 600;
-  text-transform: uppercase; padding: .75rem 1.8rem; text-decoration: none;
-  border-radius: 3px; transition: all .25s; cursor: pointer; display: inline-block;
-  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+  font-size: .85rem; letter-spacing: .03em; font-weight: 600;
+  padding: .85rem 2rem; text-decoration: none;
+  border-radius: 100px; transition: all .25s; cursor: pointer; display: inline-block;
+  white-space: nowrap; border: none; position: relative; overflow: hidden;
 }
 .btn-primary {
-  background: var(--plum); color: #fff; border: 1.5px solid var(--plum);
+  color: #0a0418;
+  background: linear-gradient(100deg, var(--cyan), var(--purple-300));
+  box-shadow: var(--glow-teal);
 }
-.btn-primary:hover { background: var(--plum-mid); border-color: var(--plum-mid); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(94,39,80,.2); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 48px rgba(118,240,222,.6); }
 .btn-outline {
-  background: transparent; color: var(--text-mid); border: 1.5px solid var(--border-mid);
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border-mid); backdrop-filter: blur(6px);
 }
-.btn-outline:hover { border-color: var(--plum); color: var(--plum); transform: translateY(-1px); }
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: var(--glow-purple); transform: translateY(-2px); }
 .btn-slate {
-  background: var(--slate); color: #fff; border: 1.5px solid var(--slate);
+  color: #062a2b;
+  background: linear-gradient(100deg, var(--teal), var(--cyan));
+  box-shadow: 0 0 24px rgba(46,197,200,.35);
 }
-.btn-slate:hover { background: var(--slate-mid); border-color: var(--slate-mid); transform: translateY(-1px); }
+.btn-slate:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(46,197,200,.5); }
 
 .hero-badges {
   display: flex; gap: .6rem; margin-top: 2rem; flex-wrap: wrap;
   opacity: 0; animation: riseIn .9s ease .9s forwards;
 }
 .hero-badge {
-  font-size: .65rem; letter-spacing: .1em; font-weight: 500; text-transform: uppercase;
-  padding: .3rem .85rem; border-radius: 999px;
-  border: 1px solid var(--border); color: var(--text-dim); background: var(--surface);
+  font-size: .65rem; letter-spacing: .12em; font-weight: 500; text-transform: uppercase;
+  padding: .35rem .9rem; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--text-dim);
+  background: var(--surface); backdrop-filter: blur(10px);
 }
 
 @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ─── SECTION SHARED ─── */
 section { position: relative; }
-.section-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+.section-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; position: relative; z-index: 1; }
 .section-label {
-  font-size: .65rem; letter-spacing: .28em; font-weight: 600;
-  text-transform: uppercase; color: var(--plum); margin-bottom: 1rem;
+  font-size: .7rem; letter-spacing: .32em; font-weight: 600;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;
   display: flex; align-items: center; gap: 1rem;
 }
 .section-label::after {
-  content: ''; flex: 1; height: 1px; background: var(--border); max-width: 120px;
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--purple-300), transparent);
+  max-width: 120px;
 }
 .section-heading {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 600;
-  line-height: 1.05; letter-spacing: -.01em; color: var(--text); margin-bottom: 1.2rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600;
+  line-height: 1.12; letter-spacing: -.01em; color: var(--text); margin-bottom: 1.2rem;
 }
 .section-subheading {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 1.15rem; color: var(--text-mid); max-width: 620px; line-height: 1.7;
+  font-family: 'Outfit', sans-serif; font-weight: 300;
+  font-size: 1.05rem; color: var(--text-dim); max-width: 620px; line-height: 1.75;
   margin-bottom: 3.5rem;
 }
+.gradient-text {
+  background: linear-gradient(108deg, var(--purple-300) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ─── DECK EMBED ─── */
+#deck-section { background: rgba(26,11,56,.32); border-bottom: 1px solid var(--border); backdrop-filter: blur(6px); }
+.deck-embed-wrap { width: 100%; border-radius: var(--radius); overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.55); border: 1px solid var(--border); }
+.deck-embed-wrap iframe { width: 100%; height: 580px; border: none; display: block; }
+.deck-fullscreen-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .8rem 1.2rem;
+  background: rgba(255,255,255,.04); border-top: 1px solid rgba(255,255,255,.07);
+}
+.deck-fullscreen-bar span { font-size: .68rem; letter-spacing: .1em; color: rgba(255,255,255,.3); text-transform: uppercase; }
+.deck-fullscreen-btn {
+  font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  color: var(--cyan); text-decoration: none; transition: color .2s;
+}
+.deck-fullscreen-btn:hover { color: #fff; }
+#deck-section .section-label { color: var(--cyan); opacity: .8; }
+#deck-section .section-label::after { background: linear-gradient(90deg, var(--purple-300), transparent); opacity: .6; }
+#deck-section .section-heading { color: #fff; }
 
 /* ─── ABOUT ─── */
-#about { background: var(--surface); border-bottom: 1px solid var(--border); }
+#about { background: transparent; border-bottom: 1px solid var(--border); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .about-text p {
-  color: var(--text-mid); font-size: 1rem; margin-bottom: 1.3rem; line-height: 1.85;
+  color: var(--text-dim); font-size: 1rem; margin-bottom: 1.3rem; line-height: 1.85;
 }
 .about-text strong { color: var(--text); }
 .about-actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2rem; }
 .competency-list { display: flex; flex-direction: column; gap: .75rem; }
 .competency-item {
-  padding: 1.1rem 1.4rem;
+  padding: 1.2rem 1.5rem;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--plum-light);
-  background: var(--bg);
-  border-radius: 2px;
-  transition: border-color .25s, background .25s;
+  border-left: 3px solid var(--purple-300);
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius);
+  transition: border-color .3s, box-shadow .3s, transform .3s;
 }
-.competency-item:hover { border-color: var(--border-mid); border-left-color: var(--plum); background: #fff; }
+.competency-item:hover { border-color: var(--purple-300); box-shadow: var(--glow-purple); transform: translateY(-3px); }
 .competency-item h4 {
   font-size: .7rem; font-weight: 600; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--plum); margin-bottom: .4rem;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: .4rem;
 }
 .competency-item p { font-size: .83rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
 
 /* ─── EXPERIENCE ─── */
-#experience { background: var(--bg2); border-bottom: 1px solid var(--border); }
+#experience { background: transparent; border-bottom: 1px solid var(--border); }
 .exp-timeline { display: flex; flex-direction: column; }
 .exp-item {
   display: grid; grid-template-columns: 200px 1fr;
@@ -205,53 +322,96 @@ section { position: relative; }
   transition: background .2s;
 }
 .exp-item:last-child { border-bottom: none; }
-.exp-item:hover { background: rgba(94,39,80,.03); }
+.exp-item:hover { background: rgba(165,116,255,.05); }
 .exp-meta { padding-right: 2rem; }
-.exp-years { font-size: .68rem; font-weight: 600; color: var(--slate); letter-spacing: .08em; text-transform: uppercase; }
+.exp-years { font-size: .68rem; font-weight: 600; color: var(--teal); letter-spacing: .08em; text-transform: uppercase; }
 .exp-org { font-size: .75rem; font-weight: 500; color: var(--text-dim); margin-top: .3rem; line-height: 1.4; }
 .exp-role { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
 .exp-desc {
-  font-size: .88rem; color: var(--text-mid); line-height: 1.75;
+  font-size: .88rem; color: var(--text-dim); line-height: 1.75;
   max-height: 0; overflow: hidden;
   transition: max-height .5s ease, opacity .4s; opacity: 0;
 }
 .exp-item:hover .exp-desc { max-height: 300px; opacity: 1; }
 
 /* ─── PUBLICATIONS ─── */
-#publications { background: var(--surface); border-bottom: 1px solid var(--border); }
+#publications { background: transparent; border-bottom: 1px solid var(--border); }
 .pub-grid { display: flex; flex-direction: column; gap: 1.2rem; }
 .pub-card {
-  background: var(--bg); border: 1px solid var(--border);
-  padding: 1.8rem 2rem; border-radius: 3px; position: relative; overflow: hidden;
-  transition: border-color .3s, box-shadow .3s;
+  background: var(--surface); border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  padding: 1.8rem 2rem; border-radius: var(--radius); position: relative; overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
   border-left: 3px solid transparent;
 }
-.pub-card:hover { border-left-color: var(--plum); border-color: var(--border-mid); box-shadow: 0 4px 20px rgba(0,0,0,.06); }
-.pub-type { font-size: .62rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--slate); margin-bottom: .6rem; }
-.pub-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
+.pub-card:hover { border-left-color: var(--cyan); border-color: var(--border-mid); box-shadow: var(--glow-purple); transform: translateY(-3px); }
+.pub-type { font-size: .62rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: .6rem; }
+.pub-title { font-family: 'Unbounded', sans-serif; font-weight: 500; font-size: 1.05rem; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
 .pub-citation { font-size: .82rem; color: var(--text-dim); line-height: 1.6; }
 .pub-badge {
   position: absolute; top: 1.2rem; right: 1.2rem;
   font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
   padding: .25rem .75rem; border-radius: 999px;
-  background: rgba(176,125,42,.1); color: var(--gold); border: 1px solid rgba(176,125,42,.25);
+  background: rgba(118,240,222,.1); color: var(--cyan); border: 1px solid rgba(118,240,222,.3);
+}
+
+/* ─── FEATURED VENUES ─── */
+#featured { background: rgba(26,11,56,.4); backdrop-filter: blur(6px); overflow: hidden; border-bottom: 1px solid var(--border); }
+.featured-inner { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; position: relative; z-index: 1; }
+.featured-eyebrow {
+  font-size: .7rem; letter-spacing: .32em; font-weight: 600; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.featured-eyebrow::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  max-width: 120px; opacity: .5;
+}
+.featured-heading {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem); font-weight: 600;
+  color: #fff; line-height: 1.2; margin-bottom: 3.5rem;
+}
+.featured-heading em { color: var(--cyan); font-style: normal; }
+.featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.06); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 3.5rem; }
+.featured-cell {
+  padding: 2rem 1.8rem;
+  background: rgba(255,255,255,.02);
+  transition: background .25s;
+}
+.featured-cell:hover { background: rgba(118,240,222,.07); }
+.featured-abbr {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.6rem; font-weight: 700; color: var(--cyan); line-height: 1; margin-bottom: .5rem;
+}
+.featured-name { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.55); margin-bottom: .3rem; }
+.featured-year { font-size: .72rem; color: rgba(255,255,255,.3); letter-spacing: .05em; }
+.featured-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+.featured-affiliations { display: flex; flex-wrap: wrap; gap: .7rem; }
+.featured-affil {
+  font-size: .72rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  padding: .4rem 1rem; border-radius: 999px;
+  border: 1px solid var(--border); color: rgba(255,255,255,.6);
+  background: rgba(255,255,255,.04);
 }
 
 /* ─── SPEAKING ─── */
-#speaking { background: var(--bg2); border-bottom: 1px solid var(--border); }
+#speaking { background: transparent; border-bottom: 1px solid var(--border); }
 .speaking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .speaking-topics { display: flex; flex-direction: column; gap: 1rem; }
 .topic-card {
   background: var(--surface); border: 1px solid var(--border);
-  padding: 1.5rem 1.8rem; border-radius: 3px;
-  transition: all .25s; cursor: default;
+  backdrop-filter: blur(16px);
+  padding: 1.5rem 1.8rem; border-radius: var(--radius);
+  transition: all .3s; cursor: default;
 }
-.topic-card:hover { border-color: var(--plum-light); box-shadow: 0 4px 16px rgba(94,39,80,.08); transform: translateY(-2px); }
+.topic-card:hover { border-color: var(--purple-300); box-shadow: var(--glow-purple); transform: translateY(-3px); }
 .topic-type {
   font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--plum); margin-bottom: .5rem;
+  color: var(--cyan); margin-bottom: .5rem;
 }
-.topic-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
+.topic-title { font-family: 'Unbounded', sans-serif; font-weight: 500; font-size: 1.02rem; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
 .topic-desc { font-size: .83rem; color: var(--text-dim); line-height: 1.7; }
 .speaking-past { }
 .pres-list { display: flex; flex-direction: column; }
@@ -260,75 +420,224 @@ section { position: relative; }
   padding: 1.1rem 0; border-bottom: 1px solid var(--border); align-items: baseline;
 }
 .pres-item:last-child { border-bottom: none; }
-.pres-year { font-size: .65rem; font-weight: 600; color: var(--slate); letter-spacing: .06em; text-transform: uppercase; }
-.pres-title { font-size: .93rem; color: var(--text); margin-bottom: .2rem; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.pres-year { font-size: .65rem; font-weight: 600; color: var(--teal); letter-spacing: .06em; text-transform: uppercase; }
+.pres-title { font-size: .93rem; color: var(--text); margin-bottom: .2rem; font-style: normal; font-family: 'Unbounded', sans-serif; font-weight: 500; }
 .pres-venue { font-size: .75rem; color: var(--text-dim); }
 .speaking-booking {
-  background: var(--plum); color: #fff;
-  padding: 2rem 2.2rem; border-radius: 4px; margin-top: 2.5rem;
+  background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
+  color: #fff; box-shadow: var(--glow-purple); border: 1px solid var(--border);
+  padding: 2rem 2.2rem; border-radius: var(--radius); margin-top: 2.5rem;
 }
-.speaking-booking h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: .6rem; }
+.speaking-booking h3 { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 600; margin-bottom: .6rem; }
 .speaking-booking p { font-size: .88rem; opacity: .88; line-height: 1.7; margin-bottom: 1.2rem; }
-.btn-white { background: #fff; color: var(--plum); border: 1.5px solid #fff; }
-.btn-white:hover { background: var(--bg2); border-color: var(--bg2); transform: translateY(-1px); }
+.btn-white { background: #fff; color: var(--purple-700); border: none; }
+.btn-white:hover { background: var(--cyan); color: #0a0418; transform: translateY(-2px); }
 
 /* ─── TEACHING / PD ─── */
-#teaching { background: var(--surface); border-bottom: 1px solid var(--border); }
-.pd-intro { font-size: .93rem; color: var(--text-mid); max-width: 700px; line-height: 1.8; margin-bottom: 3rem; }
+#teaching { background: transparent; border-bottom: 1px solid var(--border); }
+.pd-intro { font-size: .93rem; color: var(--text-dim); max-width: 700px; line-height: 1.8; margin-bottom: 3rem; }
 .pd-note { font-size: .78rem; color: var(--text-dim); font-style: italic; margin-bottom: 2rem; }
 .teaching-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
 .teaching-card {
-  background: var(--bg); border: 1px solid var(--border);
-  padding: 1.8rem; border-radius: 3px;
-  transition: all .25s;
+  background: var(--surface); border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  padding: 1.8rem; border-radius: var(--radius);
+  transition: all .3s;
 }
-.teaching-card:hover { border-color: var(--plum-light); box-shadow: 0 4px 16px rgba(94,39,80,.08); transform: translateY(-2px); }
-.teaching-icon { font-size: 1.4rem; margin-bottom: .85rem; display: block; }
-.teaching-title { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .65rem; }
-.teaching-desc { font-size: .86rem; color: var(--text-mid); line-height: 1.75; }
+.teaching-card:hover { border-color: var(--purple-300); box-shadow: var(--glow-purple); transform: translateY(-3px); }
+.teaching-icon { font-size: 1.4rem; margin-bottom: .85rem; display: block; color: var(--cyan); }
+.teaching-title { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: .65rem; }
+.teaching-desc { font-size: .86rem; color: var(--text-dim); line-height: 1.75; }
 .pd-cta-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .pd-cta-note { font-size: .82rem; color: var(--text-dim); font-style: italic; }
 
 /* ─── AWARDS ─── */
-#awards { background: var(--bg2); border-bottom: 1px solid var(--border); }
+#awards { background: transparent; border-bottom: 1px solid var(--border); }
 .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
 .award-cell {
   padding: 1.5rem 1.8rem; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 3px; display: flex; gap: 1rem; align-items: flex-start;
-  transition: all .25s;
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius); display: flex; gap: 1rem; align-items: flex-start;
+  transition: all .3s;
 }
-.award-cell:hover { border-color: rgba(176,125,42,.4); box-shadow: 0 4px 16px rgba(176,125,42,.08); }
-.award-star { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: .15rem; }
+.award-cell:hover { border-color: var(--cyan); box-shadow: var(--glow-teal); transform: translateY(-2px); }
+.award-star { color: var(--cyan); font-size: 1rem; flex-shrink: 0; margin-top: .15rem; }
 .award-name { font-size: .8rem; font-weight: 600; color: var(--text); margin-bottom: .25rem; line-height: 1.4; }
 .award-detail { font-size: .78rem; color: var(--text-dim); line-height: 1.55; }
 
 /* ─── ANOMALY SOUL ─── */
-#anomaly { background: var(--surface); border-bottom: 1px solid var(--border); }
+#anomaly { background: transparent; border-bottom: 1px solid var(--border); }
 .anomaly-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3.5rem; align-items: end; }
 .anomaly-intro {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-  font-style: italic; color: var(--text-mid); line-height: 1.85;
+  font-family: 'Outfit', sans-serif; font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 300; color: var(--text-mid); line-height: 1.85;
 }
 .anomaly-tagline {
   font-size: .82rem; color: var(--text-dim); line-height: 1.8;
-  border-left: 3px solid var(--plum-light); padding-left: 1.2rem;
+  border-left: 3px solid var(--purple-300); padding-left: 1.2rem;
 }
-.programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; }
-.program-card {
-  background: var(--bg); border: 1px solid var(--border);
-  padding: 2rem; border-radius: 3px; position: relative;
-  transition: all .3s;
+.anomaly-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
+.anomaly-pillar {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--cyan);
+  backdrop-filter: blur(16px);
+  padding: 2rem; border-radius: var(--radius);
+  transition: transform .3s, box-shadow .3s;
 }
-.program-card:hover { border-color: var(--plum-light); box-shadow: 0 8px 30px rgba(94,39,80,.1); transform: translateY(-3px); }
-.program-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem; font-weight: 300; color: var(--plum-light); line-height: 1; margin-bottom: .6rem;
+.anomaly-pillar:hover { transform: translateY(-3px); box-shadow: var(--glow-teal); }
+.pillar-icon { font-size: 1.4rem; color: var(--cyan); margin-bottom: .8rem; }
+.pillar-label { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--cyan); margin-bottom: .8rem; }
+.pillar-text { font-size: .88rem; color: var(--text-dim); line-height: 1.8; }
+
+/* ─── SPEAKING GALLERY ─── */
+.speaking-gallery {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem;
 }
-.program-name { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .8rem; }
-.program-desc { font-size: .88rem; font-style: italic; color: var(--text-mid); line-height: 1.8; font-family: 'Cormorant Garamond', serif; }
+.gallery-photo {
+  aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius);
+  width: 100%; display: block; border: 1px solid var(--border);
+  box-shadow: 0 12px 36px rgba(107,43,196,.3);
+  transition: transform .3s, box-shadow .3s;
+}
+.gallery-photo:hover { transform: scale(1.02); box-shadow: var(--glow-purple); }
+.gallery-photo.tall { grid-row: span 2; aspect-ratio: unset; height: 100%; }
+
+/* ─── PITCH SLIDESHOW ─── */
+#pitch { background: rgba(26,11,56,.4); backdrop-filter: blur(6px); padding: 5rem 0; }
+#pitch .section-label { color: var(--cyan); }
+#pitch .section-heading { color: #fff; }
+.pitch-deck {
+  position: relative; width: 100%; max-width: 860px; margin: 2.5rem auto 0;
+  background: var(--ink); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.pitch-slides { position: relative; min-height: 420px; }
+.pitch-slide {
+  position: absolute; inset: 0;
+  padding: 3.5rem 4rem;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .55s ease;
+}
+.pitch-slide.active { opacity: 1; pointer-events: auto; position: relative; }
+.slide-eyebrow {
+  font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1rem;
+}
+.slide-headline {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  font-weight: 600; color: #fff; line-height: 1.25; margin-bottom: 1rem;
+}
+.slide-headline em { color: var(--cyan); font-style: normal; }
+.slide-body { font-size: .92rem; color: rgba(255,255,255,.72); line-height: 1.85; max-width: 560px; }
+.slide-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.2rem;
+}
+.stat-block { display: flex; flex-direction: column; gap: .3rem; }
+.stat-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2.4rem; font-weight: 700; color: var(--cyan); line-height: 1;
+}
+.stat-label { font-size: .72rem; color: rgba(255,255,255,.55); letter-spacing: .05em; line-height: 1.4; }
+.slide-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+.slide-pillar {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-top: 2px solid var(--cyan);
+  padding: 1.4rem; border-radius: 12px;
+}
+.slide-pillar-title { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: .5rem; }
+.slide-pillar-body { font-size: .82rem; color: rgba(255,255,255,.65); line-height: 1.7; }
+.slide-roles { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+.slide-role-tag {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.8); font-size: .78rem; padding: .4rem .9rem; border-radius: 20px;
+}
+.slide-recognitions { display: flex; flex-direction: column; gap: .9rem; margin-top: 1.2rem; }
+.slide-rec {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding-bottom: .9rem; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.slide-rec-star { color: var(--cyan); font-size: 1rem; margin-top: .1rem; flex-shrink: 0; }
+.slide-rec-title { font-size: .88rem; color: rgba(255,255,255,.85); font-weight: 600; }
+.slide-rec-detail { font-size: .78rem; color: rgba(255,255,255,.45); margin-top: .15rem; }
+.slide-recent { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.2rem; }
+.slide-recent-item {
+  background: rgba(255,255,255,.05); border-left: 3px solid var(--cyan);
+  padding: 1rem 1.2rem;
+}
+.slide-recent-org { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: .3rem; }
+.slide-recent-desc { font-size: .83rem; color: rgba(255,255,255,.7); line-height: 1.65; }
+.slide-cta { margin-top: 1.8rem; }
+.slide-cta .btn { display: inline-block; }
+.slide-num {
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: .8rem; color: rgba(255,255,255,.25); letter-spacing: .05em;
+}
+.pitch-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem; background: rgba(0,0,0,.2); border-top: 1px solid rgba(255,255,255,.06);
+}
+.pitch-dots { display: flex; gap: .5rem; }
+.pitch-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.2); cursor: pointer;
+  transition: background .25s, transform .25s;
+  border: none; padding: 0;
+}
+.pitch-dot.active { background: var(--cyan); transform: scale(1.3); }
+.pitch-arrows { display: flex; gap: .5rem; }
+.pitch-arrow {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.7); font-size: 1rem; width: 36px; height: 36px;
+  border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.pitch-arrow:hover { background: var(--purple-500); border-color: var(--purple-500); color: #fff; }
+.pitch-progress {
+  height: 2px; background: linear-gradient(90deg, var(--purple-300), var(--cyan)); width: 0%;
+  transition: width linear; position: absolute; top: 0; left: 0;
+}
+
+/* ─── OFFERINGS ─── */
+#offerings { background: transparent; border-bottom: 1px solid var(--border); }
+.offerings-intro { max-width: 640px; color: var(--text-mid); font-size: .95rem; line-height: 1.85; margin-bottom: 3rem; }
+.offerings-category { margin-bottom: 3.5rem; }
+.offerings-category-label {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+  color: var(--cyan); border-bottom: 2px solid var(--purple-300);
+  padding-bottom: .5rem; margin-bottom: 1.5rem; display: inline-block;
+}
+.offerings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.2rem; }
+.offering-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--purple-300);
+  padding: 1.6rem; border-radius: var(--radius);
+  backdrop-filter: blur(16px);
+  display: flex; flex-direction: column; gap: .6rem;
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+}
+.offering-card:hover { box-shadow: var(--glow-purple); transform: translateY(-3px); border-color: var(--border-mid); }
+.offering-card.dj-offer { border-top-color: var(--teal); }
+.offering-card.dj-offer:hover { box-shadow: var(--glow-teal); }
+.offering-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.3;
+}
+.offering-for {
+  font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-dim);
+}
+.offering-desc { font-size: .87rem; color: var(--text-mid); line-height: 1.75; }
+.offering-meta {
+  font-size: .8rem; color: var(--text-dim); line-height: 1.7;
+  border-top: 1px solid var(--border); padding-top: .6rem;
+}
+.offering-meta strong { color: var(--cyan); font-weight: 600; }
 
 /* ─── CONTACT ─── */
-#contact { background: var(--bg2); }
+#contact { background: transparent; }
 .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .contact-text p { color: var(--text-mid); font-size: .95rem; line-height: 1.85; margin-bottom: 1.3rem; }
 .contact-links { display: flex; flex-direction: column; gap: .8rem; margin-top: 1.8rem; }
@@ -338,8 +647,8 @@ section { position: relative; }
   color: var(--text-mid); text-decoration: none; transition: color .2s;
   padding: .7rem 0; border-bottom: 1px solid var(--border);
 }
-.contact-link:hover { color: var(--plum); }
-.contact-link-icon { width: 20px; text-align: center; color: var(--plum-mid); flex-shrink: 0; }
+.contact-link:hover { color: var(--cyan); }
+.contact-link-icon { width: 20px; text-align: center; color: var(--violet-glow); flex-shrink: 0; }
 .form-group { margin-bottom: 1.3rem; }
 .form-group label {
   font-size: .65rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
@@ -347,21 +656,23 @@ section { position: relative; }
 }
 .form-group input, .form-group textarea, .form-group select {
   width: 100%; background: var(--surface); border: 1px solid var(--border);
-  color: var(--text); font-family: 'Inter', sans-serif; font-size: .9rem;
-  padding: .75rem 1rem; border-radius: 3px; transition: border-color .2s; outline: none;
+  color: var(--text); font-family: 'Outfit', sans-serif; font-size: .9rem;
+  padding: .75rem 1rem; border-radius: 12px; transition: border-color .2s; outline: none;
+  backdrop-filter: blur(12px);
   appearance: none;
 }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--plum); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--purple-300); }
 .form-group textarea { min-height: 110px; resize: vertical; }
-.form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A726A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B3A8D4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
 
 /* ─── FOOTER ─── */
 footer {
-  background: var(--text); color: rgba(250,250,248,.6);
+  background: var(--ink); color: var(--text-dim);
+  border-top: 1px solid var(--border);
   padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center;
 }
 footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
-.footer-brand { color: var(--plum-light); }
+.footer-brand { color: var(--cyan); }
 
 /* ─── MOBILE ─── */
 @media (max-width: 768px) {
@@ -369,7 +680,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .nav-links { display: none; }
   .section-wrap { padding: 4.5rem 1.4rem; }
   #hero { padding: 0 1.4rem; }
-  .about-grid, .contact-inner, .speaking-layout, .anomaly-header { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-grid, .contact-inner, .speaking-layout, .anomaly-header, .dj-grid, .anomaly-pillars { grid-template-columns: 1fr; gap: 2.5rem; }
   .exp-item { grid-template-columns: 1fr; gap: .4rem; }
   .exp-meta { padding-right: 0; }
   .teaching-grid { grid-template-columns: 1fr; }
@@ -377,7 +688,58 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .hero-cta-row { flex-direction: column; align-items: flex-start; }
   .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .hero-photo, .hero-photo-placeholder { width: 160px; height: 200px; }
+  .pitch-slide { padding: 2.2rem 1.6rem; }
+  .slide-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .slide-pillars { grid-template-columns: 1fr; gap: 1rem; }
+  .slide-recent { grid-template-columns: 1fr; gap: .8rem; }
+  .featured-grid { grid-template-columns: 1fr; }
+  .featured-inner { padding: 4rem 1.4rem; }
 }
+
+/* ─── DJ ─── */
+#dj { background: var(--ink); color: var(--text); border-bottom: 1px solid var(--border); }
+#dj .section-label { color: var(--cyan); }
+#dj .section-label::after { background: var(--border); }
+#dj .section-heading { color: var(--text); }
+.dj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.dj-text p { color: var(--text-mid); font-size: 1rem; line-height: 1.85; margin-bottom: 1.3rem; }
+.dj-text .about-actions { margin-top: 2rem; }
+.dj-facts { display: flex; flex-direction: column; gap: 1rem; }
+.dj-fact {
+  padding: 1.2rem 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--purple-300);
+  border-radius: 12px; background: var(--surface); backdrop-filter: blur(14px);
+}
+.dj-fact h4 { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--purple-300); margin-bottom: .4rem; }
+.dj-fact p { font-size: .83rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
+.btn-outline-light { background: transparent; color: var(--text-mid); border: 1.5px solid var(--border-mid); }
+.btn-outline-light:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-1px); }
+
+/* ─── TRANSFERABLE SKILLS ─── */
+#skills { background: transparent; border-bottom: 1px solid var(--border); }
+.skills-intro { font-size: .95rem; color: var(--text-mid); max-width: 640px; line-height: 1.85; margin-bottom: 3rem; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
+.skill-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.6rem 1.8rem; border-radius: var(--radius); transition: all .25s;
+  border-top: 3px solid var(--purple-300); backdrop-filter: blur(16px);
+}
+.skill-card:hover { border-top-color: var(--cyan); box-shadow: var(--glow-purple); transform: translateY(-3px); }
+.skill-title { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: .65rem; }
+.skill-body { font-size: .88rem; color: var(--text-mid); line-height: 1.75; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+.skill-tag {
+  font-size: .62rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 999px;
+  background: var(--bg2); color: var(--text-dim); border: 1px solid var(--border);
+}
+.hire-banner {
+  background: linear-gradient(120deg, var(--purple-700), var(--violet-glow)); color: #fff;
+  box-shadow: var(--glow-purple);
+  padding: 2rem 2.4rem; border-radius: var(--radius); margin-top: 2rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.hire-banner-text h3 { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 600; margin-bottom: .4rem; }
+.hire-banner-text p { font-size: .88rem; opacity: .85; line-height: 1.6; }
 
 /* ─── REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -391,40 +753,40 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <a class="nav-logo" href="#hero">Dr. Alanna <span>Harris</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#deck-section">Deck</a></li>
     <li><a href="#experience">CV</a></li>
-    <li><a href="#publications">Research</a></li>
+    <li><a href="#featured">Featured At</a></li>
     <li><a href="#speaking">Speaking</a></li>
-    <li><a href="#teaching">PD</a></li>
-    <li><a href="#awards">Credentials</a></li>
+    <li><a href="#offerings">Offerings</a></li>
     <li><a href="#anomaly">Anomaly Soul</a></li>
-    <li><a href="#contact" class="nav-cta">Book / Contact</a></li>
+    <li><a href="#dj">DJ</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
+  <div class="halo"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-eyebrow">Ph.D. Urban Education · Milwaukee, WI</p>
+      <p class="hero-eyebrow">★ &nbsp;Ph.D. Urban Education · Milwaukee, WI · Open to Opportunities</p>
       <h1 class="hero-name">Dr.<br>Alanna<br><em>Harris</em></h1>
-      <p class="hero-title">Equity-centered educator · Literacy leader · Speaker · Qualitative researcher.<br>Building joyful, rigorous, and affirming learning environments.</p>
+      <p class="hero-title">Remixing Knowledge. Cultivating Possibility. Building Futures.</p>
+      <p class="hero-philosophy">Not every conversation belongs in every room. I work selectively, with people who recognize what they need and are willing to be precise about it. I read what you're carrying, find the gap between where you are and where you're building toward, and give you only what matters.</p>
       <div class="hero-cta-row">
-        <a href="#speaking" class="btn btn-primary">Book a Talk</a>
-        <a href="#teaching" class="btn btn-slate">PD Offerings</a>
         <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-outline">Download CV ↗</a>
         <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
       <div class="hero-badges">
-        <span class="hero-badge">Scholar</span>
-        <span class="hero-badge">Educator</span>
-        <span class="hero-badge">Speaker</span>
-        <span class="hero-badge">Anomaly Soul</span>
-        <span class="hero-badge">DJ</span>
+        <span class="hero-badge">Consulting</span>
+        <span class="hero-badge">Speaking</span>
+        <span class="hero-badge">Research</span>
+        <span class="hero-badge">Leadership</span>
       </div>
+      <div class="hero-invite">Limited Availability · Invite Only</div>
     </div>
-    <div>
-      <img src="https://drive.google.com/uc?export=view&id=11QU5PUHk-7xaVKk7MgACruTP70uv2QHN" alt="Dr. Alanna Harris" class="hero-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="hero-photo-placeholder" style="display:none;">AH</div>
+    <div class="hero-photo-wrap">
+      <img src="1000001038679683 Small.jpeg" alt="Dr. Alanna Harris" class="hero-photo">
     </div>
   </div>
 </section>
@@ -436,9 +798,10 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <div class="about-grid">
       <div class="about-text reveal">
         <h2 class="section-heading">Scholar.<br>Practitioner.<br>Anomaly.</h2>
-        <p>I am an equity-centered educator and qualitative researcher with over a decade of experience spanning K–12 classrooms, higher education, federal grant work, and national conference stages. My Ph.D. in Urban Education from UW-Milwaukee grounds my practice in <strong>culturally responsive literacy, healing-centered pedagogy, and critical mindfulness</strong>.</p>
-        <p>I believe learning environments must affirm the full humanity of every student — their language, their culture, their body, their joy. My work sits at the intersection of <strong>Black feminist epistemology, literacy justice, and transformative teacher development</strong>.</p>
-        <p>When I'm not in a classroom or writing a research paper, I'm behind the decks — because DJing and teaching are the same practice: reading the room, holding the energy, and knowing when to drop the beat.</p>
+        <p>I've spent over a decade doing this work for real. K–12 classrooms, university lecture halls, federal grant projects, district coaching, national conferences. My Ph.D. in Urban Education from UW-Milwaukee gave me the language for what I was already doing. The work came first.</p>
+        <p>I know how to walk into a room full of skeptical teachers and leave with them actually wanting to change something. I know how to read data and turn it into a plan people will actually follow. I know how to write, present, coach, facilitate, and lead without losing the people I'm supposed to be serving.</p>
+        <p>And yes, I DJ. Because teaching and DJing are the same thing: read the room, hold the energy, know when to shift the vibe. I bring that same skill everywhere I go.</p>
+        <p>I use Human Design as a framework for how I show up. As a 6/2 Projector, my work is to see systems and people with precision, and to wait for invitation before I offer what I see. I work selectively because my energy is built for depth, not volume. This shapes how I take clients, how I teach, and what I will and won't do.</p>
         <div class="about-actions">
           <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-primary">Download CV ↗</a>
           <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
@@ -466,6 +829,270 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   </div>
 </section>
 
+<!-- _REMOVED: TRANSFERABLE SKILLS & PITCH DECK -->
+<section id="skills" style="display:none">
+  <div class="section-wrap">
+    <div class="section-label reveal">Transferable Skills</div>
+    <h2 class="section-heading reveal">What I Bring<br>to Any Role</h2>
+    <p class="skills-intro reveal">My background is in education, but what I actually do translates well beyond any classroom. I've managed federal grants, led teams, designed programs from scratch, published research, and coached professionals at every level. Here's how that translates.</p>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Coaching and People Development</div>
+        <div class="skill-body">I've coached teachers, administrators, and graduate students one-on-one and in groups. I know how to help people identify what they're actually good at and build on it. CliftonStrengths certified, but more than that — I've done this work in real time with real people under pressure.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Coaching</span>
+          <span class="skill-tag">Mentorship</span>
+          <span class="skill-tag">CliftonStrengths</span>
+          <span class="skill-tag">L&D</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Curriculum and Instructional Design</div>
+        <div class="skill-body">Designed K–12 and higher ed curricula from the ground up. I know how adults and young people actually learn, what keeps them engaged, and how to build content that works in the real world and not just on paper. District-level frameworks, university courses, and everything between.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Instructional Design</span>
+          <span class="skill-tag">Curriculum Dev</span>
+          <span class="skill-tag">Adult Learning</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Qualitative Research and Data</div>
+        <div class="skill-body">IRB certified. Published. I collect data, analyze it, and turn it into something people can actually use. I've written peer-reviewed articles, a doctoral dissertation, and federal grant reports. I also know how to present findings to people who would never read a research paper.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Qualitative Research</span>
+          <span class="skill-tag">IRB Certified</span>
+          <span class="skill-tag">Academic Writing</span>
+          <span class="skill-tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Program and Project Management</div>
+        <div class="skill-body">Managed federal grant projects across 13 schools. Built literacy programs from proposal to implementation. I handle logistics, timelines, stakeholder communication, and course-correction when things go sideways — which they always do.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Grant Management</span>
+          <span class="skill-tag">Program Design</span>
+          <span class="skill-tag">Stakeholder Relations</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Facilitation and Public Speaking</div>
+        <div class="skill-body">NCTE, AERA, MLA, university symposia. I've presented at national conferences and run workshops for rooms full of skeptics. I know how to hold a space, manage a group, and keep people engaged even when the content is hard.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Keynote Speaking</span>
+          <span class="skill-tag">Workshop Facilitation</span>
+          <span class="skill-tag">Group Dynamics</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-title">Equity and DEI Consulting</div>
+        <div class="skill-body">Not a training series. Actual consulting on how organizations can shift their culture, their curriculum, and their practices to be more equitable. I've done this at the district level. I know what works and what's performative.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">DEI Strategy</span>
+          <span class="skill-tag">Culture Change</span>
+          <span class="skill-tag">Anti-Racist Frameworks</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="hire-banner reveal">
+      <div class="hire-banner-text">
+        <h3>Currently Open to Opportunities</h3>
+        <p>Full-time, consulting, contract, and speaking roles. Education, L&D, DEI, curriculum, research, leadership. If the work matters, let's talk.</p>
+      </div>
+      <a href="#contact" class="btn btn-white">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="pitch" style="display:none">
+  <div class="section-wrap">
+    <div class="section-label reveal">The Case</div>
+    <h2 class="section-heading reveal">Why Work With Me</h2>
+
+    <div class="pitch-deck reveal">
+      <div class="pitch-slides">
+
+        <!-- Slide 1: Opening -->
+        <div class="pitch-slide active">
+          <div class="pitch-progress" id="progress-bar"></div>
+          <div class="slide-num">01 / 07</div>
+          <div class="slide-eyebrow">The Case for Dr. Alanna Harris</div>
+          <h2 class="slide-headline">A decade of real work.<br><em>A record of real results.</em></h2>
+          <p class="slide-body">Not just a PhD. Not just a teacher. Someone who builds systems, moves people, and makes education actually work. I bring research-level thinking to day-one classroom realities. That combination is rare. Here's the evidence.</p>
+        </div>
+
+        <!-- Slide 2: The Numbers -->
+        <div class="pitch-slide">
+          <div class="slide-num">02 / 07</div>
+          <div class="slide-eyebrow">Impact at a Glance</div>
+          <h2 class="slide-headline">The numbers<br><em>speak first.</em></h2>
+          <div class="slide-stats">
+            <div class="stat-block">
+              <span class="stat-num">10+</span>
+              <span class="stat-label">Years in K-12, higher ed &amp; community orgs</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-num">13</span>
+              <span class="stat-label">Schools reached through DOE-funded ACCESS Grant</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-num">6</span>
+              <span class="stat-label">National conference presentations (NCTE, AERA, MLA, CQIE)</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-num">5+</span>
+              <span class="stat-label">Districts and institutions served across K-12 and higher ed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: What You Get -->
+        <div class="pitch-slide">
+          <div class="slide-num">03 / 07</div>
+          <div class="slide-eyebrow">The Differentiators</div>
+          <h2 class="slide-headline">What you get<br><em>that you won't find elsewhere.</em></h2>
+          <div class="slide-pillars">
+            <div class="slide-pillar">
+              <div class="slide-pillar-title">Research Meets Practice</div>
+              <div class="slide-pillar-body">PhD-level thinking applied to day-one classroom reality. I don't just study education. I do it. Both matter. Neither gets dropped.</div>
+            </div>
+            <div class="slide-pillar">
+              <div class="slide-pillar-title">Rigorous and Healing-Centered</div>
+              <div class="slide-pillar-body">LETRS-certified AND mindfulness-trained. Science of Reading AND healing-centered engagement. Not either/or. The work requires both.</div>
+            </div>
+            <div class="slide-pillar">
+              <div class="slide-pillar-title">Culture as Foundation</div>
+              <div class="slide-pillar-body">Black feminist epistemology and culturally sustaining pedagogy aren't additions to my framework. They are the framework. That's the difference.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: The Range -->
+        <div class="pitch-slide">
+          <div class="slide-num">04 / 07</div>
+          <div class="slide-eyebrow">The Range</div>
+          <h2 class="slide-headline">I don't just<br><em>do one thing.</em></h2>
+          <p class="slide-body">That range means I understand your context before I walk in the room. I've sat at every table: the classroom, the university lecture hall, the district office, the hospital, the community org, the conference stage.</p>
+          <div class="slide-roles">
+            <span class="slide-role-tag">K-12 Classroom Teacher</span>
+            <span class="slide-role-tag">University Lecturer</span>
+            <span class="slide-role-tag">Instructional Literacy Coach</span>
+            <span class="slide-role-tag">Community Health Educator</span>
+            <span class="slide-role-tag">Educational Consultant</span>
+            <span class="slide-role-tag">Clinical Supervisor</span>
+            <span class="slide-role-tag">Qualitative Researcher</span>
+            <span class="slide-role-tag">Conference Presenter</span>
+            <span class="slide-role-tag">CliftonStrengths Facilitator</span>
+          </div>
+        </div>
+
+        <!-- Slide 5: Recognition -->
+        <div class="pitch-slide">
+          <div class="slide-num">05 / 07</div>
+          <div class="slide-eyebrow">Recognition</div>
+          <h2 class="slide-headline">The work has<br><em>been seen.</em></h2>
+          <div class="slide-recognitions">
+            <div class="slide-rec">
+              <span class="slide-rec-star">★</span>
+              <div>
+                <div class="slide-rec-title">NCTE Professional Dyads &amp; Culturally Relevant Teaching Award</div>
+                <div class="slide-rec-detail">National Council of Teachers of English · 2023</div>
+              </div>
+            </div>
+            <div class="slide-rec">
+              <span class="slide-rec-star">★</span>
+              <div>
+                <div class="slide-rec-title">King/Chávez Scholar</div>
+                <div class="slide-rec-detail">University of Wisconsin-Whitewater · 2013</div>
+              </div>
+            </div>
+            <div class="slide-rec">
+              <span class="slide-rec-star">◈</span>
+              <div>
+                <div class="slide-rec-title">DOE ACCESS Grant Consultant</div>
+                <div class="slide-rec-detail">US Department of Education · 13 schools · 2018 - 2020</div>
+              </div>
+            </div>
+            <div class="slide-rec">
+              <span class="slide-rec-star">◈</span>
+              <div>
+                <div class="slide-rec-title">NCTE 2024 Featured Presenter</div>
+                <div class="slide-rec-detail">Writing Across America: DJ Presentation · November 2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Recent Work -->
+        <div class="pitch-slide">
+          <div class="slide-num">06 / 07</div>
+          <div class="slide-eyebrow">Recent Work</div>
+          <h2 class="slide-headline">What I've been<br><em>building right now.</em></h2>
+          <div class="slide-recent">
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">Brown Deer School District</div>
+              <div class="slide-recent-desc">Instructional Literacy Coach building district-wide literacy infrastructure. Science of Reading implementation, coaching cycles, data-informed instruction.</div>
+            </div>
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">Children's Hospital</div>
+              <div class="slide-recent-desc">Community Health Educator reaching families in clinical settings. Education doesn't stop at the school door. Sometimes it starts in a hospital.</div>
+            </div>
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">NCTE 2024</div>
+              <div class="slide-recent-desc">Presented DJ as Pedagogy research to a national audience. Building the scholarly argument for remix, synthesis, and reading the room as compositional methods.</div>
+            </div>
+            <div class="slide-recent-item">
+              <div class="slide-recent-org">Marquette University</div>
+              <div class="slide-recent-desc">9th Grade English Instructor preparing a new generation of students and teacher candidates. University rigor. Real classroom conditions.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="pitch-slide">
+          <div class="slide-num">07 / 07</div>
+          <div class="slide-eyebrow">The Bottom Line</div>
+          <h2 class="slide-headline">Here's the simple version:<br><em>I'm available.</em></h2>
+          <p class="slide-body">Open to full-time roles, consulting contracts, coaching engagements, speaking, and research collaboration. If the work is serious and the mission is real, I want to be in the room. Let's build something.</p>
+          <div class="slide-cta">
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+          </div>
+        </div>
+
+      </div><!-- /pitch-slides -->
+
+      <div class="pitch-controls">
+        <div class="pitch-dots" id="pitch-dots"></div>
+        <div class="pitch-arrows">
+          <button class="pitch-arrow" id="pitch-prev" aria-label="Previous slide">&#8592;</button>
+          <button class="pitch-arrow" id="pitch-next" aria-label="Next slide">&#8594;</button>
+        </div>
+      </div>
+    </div><!-- /pitch-deck -->
+  </div>
+</section>
+
+<!-- PRESENTATION DECK -->
+<section id="deck-section">
+  <div class="section-wrap">
+    <div class="section-label reveal">Presentation Deck</div>
+    <h2 class="section-heading reveal">The Full Story</h2>
+    <div class="deck-embed-wrap reveal">
+      <iframe src="deck.html" title="Alanna Harris Ph.D. Presentation Deck" allowfullscreen></iframe>
+      <div class="deck-fullscreen-bar">
+        <span>Use arrow keys inside the deck to navigate</span>
+        <a href="deck.html" target="_blank" class="deck-fullscreen-btn">Open Full Screen ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- EXPERIENCE / CV -->
 <section id="experience">
   <div class="section-wrap">
@@ -475,12 +1102,11 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 
       <div class="exp-item reveal">
         <div class="exp-meta">
-          <div class="exp-years">2023 – Present</div>
-          <div class="exp-org">Brown Deer School District</div>
+          <div class="exp-years">2023 – 2024</div>
+          <div class="exp-org">Children's Hospital</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">Instructional Literacy Coach</div>
-          <div class="exp-desc">Designed and implemented a K–12 district-wide culturally responsive literacy framework. Facilitated 25+ targeted professional learning sessions. Co-led MTSS for literacy including universal screeners and progress monitoring tools. Coaching cycles improved Tier 1 instruction and contributed to measurable student growth.</div>
+          <div class="exp-role">Community Health Educator</div>
         </div>
       </div>
 
@@ -491,7 +1117,6 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
         <div class="exp-body">
           <div class="exp-role">9th Grade English Instructor</div>
-          <div class="exp-desc">Developed and taught a culturally sustaining ELA curriculum emphasizing inquiry-based learning, reflective writing, and multimodal literacy. Mentored first-year students in academic self-advocacy and writing as empowerment and resistance.</div>
         </div>
       </div>
 
@@ -502,7 +1127,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
         <div class="exp-body">
           <div class="exp-role">Senior Lecturer</div>
-          <div class="exp-desc">Taught foundational methods courses in literacy, antiracist pedagogy, and urban teaching. Supervised clinical field placements across MPS and suburban districts. Co-facilitated curriculum redesign aligning state licensure standards with culturally responsive frameworks.</div>
+          <div class="exp-desc">Taught literacy methods, antiracist pedagogy, and urban teaching. Supervised clinical field placements across MPS and suburban districts.</div>
         </div>
       </div>
 
@@ -513,7 +1138,6 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
         <div class="exp-body">
           <div class="exp-role">Education Consultant</div>
-          <div class="exp-desc">Designed a national education strategy integrating hip-hop pedagogy, youth voice, and civic engagement. Secured grant funding and built community partnerships to launch pilot programming for youth in arts and literacy.</div>
         </div>
       </div>
 
@@ -524,7 +1148,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
         <div class="exp-body">
           <div class="exp-role">Adjunct Lecturer, School of Education</div>
-          <div class="exp-desc">Teach literacy methods, curriculum theory, and reflective teaching rooted in Black feminist pedagogy. Provide academic advising with a focus on pathways for teachers of color and bilingual educators.</div>
+          <div class="exp-desc">Literacy methods and curriculum theory.</div>
         </div>
       </div>
 
@@ -535,7 +1159,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
         <div class="exp-body">
           <div class="exp-role">Educational Consultant</div>
-          <div class="exp-desc">Supported 13 MPS schools with culturally responsive instruction. Collaborated with university researchers on qualitative data collection and scholarly dissemination. Co-authored publications for federal grant reporting and peer review.</div>
+          <div class="exp-desc">Supported 13 Milwaukee Public Schools with culturally responsive instructional practices.</div>
         </div>
       </div>
 
@@ -545,8 +1169,8 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
           <div class="exp-org">Wauwatosa &amp; Kenosha Unified Districts</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">High School English Teacher (Grades 9–12)</div>
-          <div class="exp-desc">Taught American Literature, British Literature, Composition, and AP Literature. Designed rigorous, culturally responsive units incorporating multimodal texts, student-led inquiry, and real-world writing tasks.</div>
+          <div class="exp-role">High School English Teacher, Grades 9–12</div>
+          <div class="exp-desc">American Literature, British Literature, Composition, and AP Literature.</div>
         </div>
       </div>
 
@@ -579,8 +1203,59 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="pub-card">
         <div class="pub-type">Doctoral Dissertation · UW-Milwaukee</div>
         <div class="pub-title">Critical Mindfulness in the English Language Arts Classroom</div>
-        <div class="pub-citation">Harris, A. (2024). Doctoral Dissertation. University of Wisconsin–Milwaukee.</div>
+        <div class="pub-citation">Harris, A. Doctoral Dissertation. University of Wisconsin–Milwaukee.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED VENUES -->
+<section id="featured">
+  <div class="featured-inner">
+    <div class="featured-eyebrow reveal">Conference Presentations</div>
+    <h2 class="featured-heading reveal">Presented at the<br><em>rooms that matter.</em></h2>
+
+    <div class="featured-grid reveal">
+      <div class="featured-cell">
+        <div class="featured-abbr">NCTE</div>
+        <div class="featured-name">National Council of Teachers of English</div>
+        <div class="featured-year">2019 · 2024</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">AERA</div>
+        <div class="featured-name">American Educational Research Association</div>
+        <div class="featured-year">2019</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">MLA</div>
+        <div class="featured-name">Modern Language Association International Symposium</div>
+        <div class="featured-year">2019</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">CQIE</div>
+        <div class="featured-name">Critical Questions in Education</div>
+        <div class="featured-year">2022</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">UWM</div>
+        <div class="featured-name">Black Feminist Symposium · UW-Milwaukee</div>
+        <div class="featured-year">2020</div>
+      </div>
+      <div class="featured-cell">
+        <div class="featured-abbr">DOE</div>
+        <div class="featured-name">US Department of Education · ACCESS Grant</div>
+        <div class="featured-year">2018 – 2020</div>
+      </div>
+    </div>
+
+    <hr class="featured-divider">
+
+    <div class="featured-affiliations reveal">
+      <span class="featured-affil">University of Wisconsin-Milwaukee</span>
+      <span class="featured-affil">Marquette University</span>
+      <span class="featured-affil">Alverno College</span>
+      <span class="featured-affil">Universal Hip Hop Museum</span>
+      <span class="featured-affil">Children's Hospital of Wisconsin</span>
     </div>
   </div>
 </section>
@@ -590,11 +1265,11 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <div class="section-wrap">
     <div class="section-label reveal">Speaking</div>
     <h2 class="section-heading reveal">On the Stage</h2>
-    <p class="section-subheading reveal">Available for keynotes, workshops, panels, and university guest lectures — on equity, literacy, healing-centered education, and the art of teaching.</p>
+    <p class="section-subheading reveal">Available for keynotes, workshops, panels, and university guest lectures. Topics span equity, literacy, healing-centered education, and the art of teaching.</p>
 
     <div class="speaking-layout">
       <div class="speaking-topics reveal">
-        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Available Topics</h3>
+        <h3 style="font-family:'Unbounded',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Available Topics</h3>
 
         <div class="topic-card">
           <div class="topic-type">Keynote · Workshop</div>
@@ -605,30 +1280,25 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="topic-card">
           <div class="topic-type">Keynote · Workshop</div>
           <div class="topic-title">Critical Mindfulness in the ELA Classroom</div>
-          <div class="topic-desc">Integrating critical mindfulness and healing-centered practices into English Language Arts instruction — grounded in doctoral research and certified practice.</div>
+          <div class="topic-desc">Integrating critical mindfulness and healing-centered practices into English Language Arts instruction. Grounded in doctoral research and certified practice.</div>
         </div>
 
         <div class="topic-card">
           <div class="topic-type">Keynote · Workshop · Guest Lecture</div>
           <div class="topic-title">Equity-Centered Literacy Leadership</div>
-          <div class="topic-desc">Building district-wide literacy systems that center Black and Brown students — where science of reading meets justice and both are non-negotiable.</div>
+          <div class="topic-desc">Building district-wide literacy systems that center Black and Brown students. Science of reading meets justice here, and both are non-negotiable.</div>
         </div>
 
         <div class="topic-card">
           <div class="topic-type">Workshop · Panel</div>
           <div class="topic-title">Healing-Centered Educator Wellness</div>
-          <div class="topic-desc">Sustainable educator practice rooted in somatic awareness, sound therapy, and joy — for individuals and whole school communities ready to shift the culture.</div>
+          <div class="topic-desc">Sustainable educator practice rooted in somatic awareness, sound therapy, and joy. For individuals and whole school communities ready to actually shift the culture.</div>
         </div>
 
-        <div class="speaking-booking">
-          <h3>Ready to Book?</h3>
-          <p>I speak to school districts, national conferences, university departments, and community organizations. Let's build something transformative together.</p>
-          <a href="#contact" class="btn btn-white">Inquire About Booking</a>
-        </div>
       </div>
 
       <div class="speaking-past reveal">
-        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Past Presentations</h3>
+        <h3 style="font-family:'Unbounded',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Past Presentations</h3>
         <div class="pres-list">
           <div class="pres-item">
             <div class="pres-year">NCTE 2024</div>
@@ -678,13 +1348,12 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   </div>
 </section>
 
-<!-- TEACHING & PD -->
-<section id="teaching">
+<section id="teaching" style="display:none">
   <div class="section-wrap">
-    <div class="section-label reveal">Professional Development</div>
-    <h2 class="section-heading reveal">PD Offerings</h2>
-    <p class="pd-intro reveal">Available for school districts, conferences, and professional organizations. Each offering can be tailored as a half-day session, full-day workshop, or multi-day series.</p>
-    <div class="pd-note reveal">Offered as workshops, coaching engagements, or embedded PD partnerships.</div>
+    <div class="section-label reveal">Services</div>
+    <h2 class="section-heading reveal">What I Do</h2>
+    <p class="pd-intro reveal">I work with school districts, universities, conferences, and organizations who need someone who can actually move people. Not just present at them. I consult, coach, facilitate, and embed into teams. The format depends on what you need.</p>
+    <div class="pd-note reveal">Available for full-time roles, consulting contracts, coaching engagements, and speaking.</div>
     <div class="teaching-grid reveal">
       <div class="teaching-card">
         <span class="teaching-icon">✦</span>
@@ -694,7 +1363,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="teaching-card">
         <span class="teaching-icon">◈</span>
         <div class="teaching-title">Literacy Coaching &amp; MTSS</div>
-        <div class="teaching-desc">Building district-wide literacy infrastructure through tiered instruction, universal screeners, progress monitoring, and data-informed coaching cycles. Science of Reading meets equity — not either/or.</div>
+        <div class="teaching-desc">Building district-wide literacy infrastructure through tiered instruction, universal screeners, progress monitoring, and data-informed coaching cycles. Science of Reading meets equity. Not either/or.</div>
       </div>
       <div class="teaching-card">
         <span class="teaching-icon">◉</span>
@@ -718,9 +1387,59 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       </div>
     </div>
     <div class="pd-cta-row reveal">
-      <a href="#contact" class="btn btn-primary">Book a PD Session</a>
-      <span class="pd-cta-note">Available for school districts, conferences, and professional organizations</span>
+      <a href="#contact" class="btn btn-primary">Work With Me</a>
+      <span class="pd-cta-note">Available for full-time, contract, consulting, and speaking engagements</span>
     </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section id="offerings">
+  <div class="section-wrap">
+    <div class="section-label reveal">Offerings</div>
+    <h2 class="section-heading reveal">Services</h2>
+    <p class="offerings-intro reveal">Three offerings. Each one assumes you know what you need.</p>
+
+    <!-- Working By Invitation -->
+    <div class="offerings-category">
+      <div class="offerings-category-label reveal">Working by Invitation</div>
+      <div class="offerings-grid">
+        <div class="offering-card reveal">
+          <div class="offering-title">Cover Letter &amp; CV Audit</div>
+          <div class="offering-for">For: PhD candidates, postdocs, faculty applicants, fellowship seekers, people pivoting roles and needing language for it</div>
+          <div class="offering-desc">Precision editing for fellowship applications, faculty searches, and funded roles. Your materials are probably doing too much, trying to say everything because you haven't yet decided what matters most. I read for clarity, not volume, and bring your argument to the surface.</div>
+          <div class="offering-meta"><strong>What happens:</strong> Send materials plus a one-paragraph description of where you're applying and why. I read everything. One 90-minute session. You get markup and a half-page of strategic notes, then decide what to change.</div>
+          <div class="offering-meta"><strong>Availability:</strong> Two slots per quarter, booked on a rolling basis.</div>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">CliftonStrengths Coaching for Educators &amp; Changemakers</div>
+          <div class="offering-for">For: Teachers, coaches, administrators, nonprofit leaders, anyone leading from a place of exhaustion and wondering if there's another way</div>
+          <div class="offering-desc">Learn to lead from your actual wiring, not the job description's. CliftonStrengths shows you what you're built for. Teachers who know their strengths stop performing strengths they don't have. Leaders who understand their wiring stop burning out trying to be well-rounded.</div>
+          <div class="offering-meta"><strong>What happens:</strong> Take the CliftonStrengths assessment (if you haven't already). Three sessions over six weeks, each building on the last, focused on what your top 5 mean in your actual classroom, team, or system.</div>
+          <div class="offering-meta"><strong>Availability:</strong> Three ongoing spots. I take on one new person per month, rolling.</div>
+        </div>
+        <div class="offering-card reveal">
+          <div class="offering-title">Grant Review &amp; Strategy</div>
+          <div class="offering-for">For: Educators writing their first grant, practitioners with a project and partial language, people resubmitting after feedback</div>
+          <div class="offering-desc">Close reading of your project against funder language. I read your proposal the way a program officer does: where's the problem statement, is the logic chain tight, does the budget narrative prove the project works. I don't write grants. I help you see what's already true in your proposal and where it needs sharpening.</div>
+          <div class="offering-meta"><strong>What happens:</strong> Send the full grant draft plus a brief note on the funder and the ask. One 2-hour session with specific moves: what to reorder, what claims need evidence, what to lead with. You get marked-up pages and a one-page strategic read.</div>
+          <div class="offering-meta"><strong>Availability:</strong> One per quarter, taken in the weeks between writing projects so I can give it real attention.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DJ -->
+    <div class="offerings-category">
+      <div class="offerings-category-label reveal">DJ &amp; Event Work</div>
+      <div class="offerings-grid">
+        <div class="offering-card dj-offer reveal">
+          <div class="offering-title">DJ Anomaly Soul: Cocktail Hours, Brand Activations &amp; Micro-Events</div>
+          <div class="offering-for">For: Small venues, nonprofit fundraisers, 30-50 person private events in MKE/Chicago</div>
+          <div class="offering-desc">Two-hour curated set built around your event's vibe. House, tech house, ghetto tech, neo-soul, hip-hop, R&B. Whatever the room needs. Good DJs at this scale book out fast. If you want the energy shifted, reach out early.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -748,7 +1467,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="award-star">◈</div>
         <div>
           <div class="award-name">Ph.D., Urban Education</div>
-          <div class="award-detail">University of Wisconsin-Milwaukee · 2024<br><em>Dissertation: Critical Mindfulness in the ELA Classroom</em></div>
+          <div class="award-detail">University of Wisconsin-Milwaukee<br><em>Dissertation: Critical Mindfulness in the ELA Classroom</em></div>
         </div>
       </div>
       <div class="award-cell">
@@ -804,43 +1523,64 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <h2 class="section-heading reveal">Signature Programs</h2>
     <div class="anomaly-header reveal">
       <p class="anomaly-intro">
-        Anomaly Soul is the vessel for transformative learning outside the institution —
-        where scholarship meets spirit, and education becomes a practice of liberation.
+        Anomaly Soul is the vessel for transformative learning outside the institution.
+        Scholarship meets spirit here, and education becomes a practice of liberation.
       </p>
       <p class="anomaly-tagline">
-        These offerings are available as standalone workshops, multi-session intensives, or as part of school and community PD programming. Each one is designed to shift — not just inform.
+        It's the brand, the vision, and the practice. Everything I do under Anomaly Soul is rooted in the same conviction: real transformation doesn't happen in spite of who you are. It happens because of it.
       </p>
     </div>
-    <div class="programs-grid">
-      <div class="program-card reveal">
-        <div class="program-num">01</div>
-        <div class="program-name">Pedagogy of the Whole Self</div>
-        <div class="program-desc">A healing-centered professional development experience for educators ready to teach from their full humanity — body, spirit, history, and practice integrated into one.</div>
+    <div class="anomaly-pillars reveal">
+      <div class="anomaly-pillar">
+        <div class="pillar-icon">◉</div>
+        <div class="pillar-label">Healing-Centered</div>
+        <div class="pillar-text">Education that integrates the whole person. Not just the student or the teacher, but the human being showing up every day.</div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">02</div>
-        <div class="program-name">DJ as Designer</div>
-        <div class="program-desc">A framework for teaching synthesis, reading the room, and composing meaning — using DJing as a methodology for creative and academic literacy.</div>
+      <div class="anomaly-pillar">
+        <div class="pillar-icon">◈</div>
+        <div class="pillar-label">Culturally Grounded</div>
+        <div class="pillar-text">Rooted in Black feminist epistemology, culturally sustaining pedagogy, and the deep knowledge communities already carry.</div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">03</div>
-        <div class="program-name">The Clout Detox</div>
-        <div class="program-desc">A critical inquiry into performative pedagogy and ragebait education culture — helping teachers reclaim their practice from the metrics of virality.</div>
+      <div class="anomaly-pillar">
+        <div class="pillar-icon">⬡</div>
+        <div class="pillar-label">Liberation-Focused</div>
+        <div class="pillar-text">The goal isn't compliance or performance. The goal is freedom. Freedom to learn, to teach, to exist fully in educational spaces.</div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">04</div>
-        <div class="program-name">Write to Heal / Write to Lead</div>
-        <div class="program-desc">Writing as a technology of transformation — for students and educators who are ready to use the page as a site of healing, resistance, and power.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DJ -->
+<section id="dj">
+  <div class="section-wrap">
+    <div class="section-label reveal">DJ Anomaly Soul</div>
+    <div class="dj-grid">
+      <div class="dj-text reveal">
+        <h2 class="section-heading">Behind<br>the Decks</h2>
+        <p>DJing is not a hobby. It's a practice. Reading the room, curating energy, creating space for people to feel something they didn't know they needed to feel. That's teaching. That's healing. That's exactly what I do.</p>
+        <p>I DJ events, celebrations, community gatherings, and educational spaces where music is part of the work. Hip-hop, R&B, neo-soul, old school, new school. Whatever the room needs.</p>
+        <p>Available for private events, school and district gatherings, conferences, and community celebrations. If you want the energy shifted, reach out.</p>
+        <div class="about-actions">
+          <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline-light">Connect on LinkedIn ↗</a>
+        </div>
       </div>
-      <div class="program-card reveal">
-        <div class="program-num">05</div>
-        <div class="program-name">Curriculum as Cultural Work</div>
-        <div class="program-desc">A deep-dive into curriculum design grounded in Black feminist epistemology, culturally sustaining pedagogy, and justice-centered learning outcomes.</div>
-      </div>
-      <div class="program-card reveal">
-        <div class="program-num">06</div>
-        <div class="program-name">CliftonStrengths for Educators</div>
-        <div class="program-desc">Strengths-based coaching and team development for educators — discovering and deploying your natural genius in service of your students and community.</div>
+      <div class="dj-facts reveal">
+        <div class="dj-fact">
+          <h4>What I Play</h4>
+          <p>Hip-hop, R&B, neo-soul, old school, afrobeats, and everything in between. Built for celebration, community, and joy.</p>
+        </div>
+        <div class="dj-fact">
+          <h4>The Scholarly Side</h4>
+          <p>DJ as pedagogy is the heart of my research. Remix, synthesis, and reading the room are compositional skills. I've presented on this at NCTE 2024 and it's the foundation of the DJ as Designer program.</p>
+        </div>
+        <div class="dj-fact">
+          <h4>Available For</h4>
+          <p>Private events · School and district celebrations · Conferences and convenings · Community gatherings · Educational spaces</p>
+        </div>
+        <div class="dj-fact">
+          <h4>Book a Set</h4>
+          <p>Reach out through the contact form below. Include your event date, vibe, and what you need the room to feel.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -852,8 +1592,9 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <div class="section-label reveal">Contact</div>
     <div class="contact-inner">
       <div class="reveal">
-        <h2 class="section-heading">Let's<br>Connect</h2>
-        <p>Whether you're looking to book a keynote, bring PD to your district, collaborate on research, explore Anomaly Soul programming, or just want to be in community — I'd love to hear from you.</p>
+        <h2 class="section-heading">Let's<br>Talk</h2>
+        <p>I'm open to full-time roles, consulting contracts, speaking engagements, and research collaborations. If you have something worth building, I want to hear about it. Reach out directly or use the form.</p>
+        <p>When you reach out, tell me: what you're building, applying for, or writing; why it matters, in one paragraph; and what you think you need. I respond to invitations that fit. Response time is typically one week.</p>
         <div class="contact-links">
           <a class="contact-link" href="mailto:harrisam03@gmail.com">
             <span class="contact-link-icon">✉</span>
@@ -911,8 +1652,9 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 <span class="footer-brand">Dr. Alanna Harris</span> · Anomaly Soul · Milwaukee, WI</p>
-  <p>Ph.D. Urban Education · Literacy · Justice · Spirit</p>
+  <p>© 2026 <span class="footer-brand">Dr. Alanna Harris</span> · Anomaly Soul · Milwaukee, WI · 414.336.6536</p>
+  <p>Working by Invitation · Precision Over Volume · Soul-Led</p>
+  <p style="font-size:.65rem; opacity:.5; margin-top:.6rem; text-align:center; width:100%;">In the spirit of transparency: this website was built with the assistance of AI. The words, the work, and the vision are mine.</p>
 </footer>
 
 <script>
@@ -923,6 +1665,86 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Pitch slideshow
+(function() {
+  const slides = Array.from(document.querySelectorAll('.pitch-slide'));
+  const dotsContainer = document.getElementById('pitch-dots');
+  const prevBtn = document.getElementById('pitch-prev');
+  const nextBtn = document.getElementById('pitch-next');
+  const progressBar = document.getElementById('progress-bar');
+  if (!slides.length) return;
+
+  let current = 0;
+  let autoTimer = null;
+  let progressTimer = null;
+  const INTERVAL = 6000;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'pitch-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(d);
+  });
+
+  function updateDots() {
+    dotsContainer.querySelectorAll('.pitch-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function startProgress() {
+    if (progressBar) {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          progressBar.style.transition = 'width ' + INTERVAL + 'ms linear';
+          progressBar.style.width = '100%';
+        });
+      });
+    }
+  }
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    updateDots();
+    clearInterval(autoTimer);
+    startProgress();
+    autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // Keyboard nav when slideshow is in view
+  document.addEventListener('keydown', e => {
+    const deck = document.querySelector('.pitch-deck');
+    if (!deck) return;
+    const rect = deck.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  // Pause auto-advance on hover
+  const deck = document.querySelector('.pitch-deck');
+  if (deck) {
+    deck.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    deck.addEventListener('mouseleave', () => {
+      autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+    });
+  }
+
+  // Start
+  startProgress();
+  autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+})();
 </script>
 </body>
 </html>
