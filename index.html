@@ -744,6 +744,118 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 /* ─── REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* ─── NCTE FEATURE BANNER ─── */
+.ncte-feature-banner {
+  background: linear-gradient(135deg, rgba(107,43,196,.22) 0%, rgba(46,197,200,.12) 100%);
+  border: 1px solid var(--border-mid);
+  border-left: 4px solid var(--cyan);
+  border-radius: var(--radius);
+  padding: 2.2rem 2.5rem;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.ncte-feature-banner::after {
+  content: '';
+  position: absolute; right: -30px; top: -30px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(118,240,222,.16), transparent 65%);
+  pointer-events: none;
+}
+.ncte-badge-label {
+  font-size: .63rem; letter-spacing: .22em; font-weight: 700; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: .7rem;
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+.ncte-feature-heading {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.15rem, 2.8vw, 1.65rem); font-weight: 700;
+  color: var(--text); margin-bottom: .6rem; line-height: 1.2;
+}
+.ncte-feature-text {
+  font-size: .9rem; color: var(--text-mid); line-height: 1.78;
+  max-width: 700px; margin-bottom: 1.3rem;
+}
+.ncte-feature-link {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .78rem; font-weight: 600; letter-spacing: .04em;
+  color: #0a0418; background: linear-gradient(100deg, var(--cyan), var(--purple-300));
+  padding: .6rem 1.4rem; border-radius: 100px;
+  text-decoration: none; box-shadow: var(--glow-teal);
+  transition: transform .2s, box-shadow .2s;
+}
+.ncte-feature-link:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(118,240,222,.55); }
+
+/* ─── CLIFTONSTRENGTHS SECTION ─── */
+#strengths { background: transparent; border-bottom: 1px solid var(--border); }
+.strengths-intro {
+  font-size: .95rem; color: var(--text-mid); line-height: 1.85; max-width: 640px; margin-bottom: 2rem;
+}
+.strengths-domain-label {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-size: .65rem; letter-spacing: .2em; font-weight: 700; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid var(--border-mid);
+  padding: .4rem 1rem; border-radius: 999px; margin-bottom: 2.8rem;
+  background: var(--surface); backdrop-filter: blur(8px);
+}
+.strengths-top5 {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: .8rem; margin-bottom: 3.5rem;
+}
+.strength-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--purple-300);
+  padding: 1.3rem 1rem; border-radius: var(--radius);
+  backdrop-filter: blur(12px); text-align: center;
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+}
+.strength-card:hover { box-shadow: var(--glow-purple); transform: translateY(-3px); border-color: var(--border-mid); }
+.strength-rank {
+  font-family: 'Unbounded', sans-serif; font-size: 1.5rem; font-weight: 800;
+  color: var(--purple-300); opacity: .45; margin-bottom: .3rem; line-height: 1;
+}
+.strength-name {
+  font-family: 'Unbounded', sans-serif; font-size: .68rem; font-weight: 700;
+  color: var(--text); letter-spacing: .02em; line-height: 1.3; margin-bottom: .4rem;
+}
+.strength-domain-tag {
+  font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim);
+}
+.strengths-services {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+.strengths-service-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--teal);
+  padding: 1.6rem; border-radius: var(--radius);
+  backdrop-filter: blur(16px);
+  display: flex; flex-direction: column; gap: .6rem;
+  transition: box-shadow .25s, transform .25s;
+}
+.strengths-service-card:hover { box-shadow: var(--glow-teal); transform: translateY(-3px); }
+.strengths-service-icon {
+  font-size: 1.2rem; color: var(--cyan); margin-bottom: .2rem;
+}
+.strengths-service-title {
+  font-family: 'Unbounded', sans-serif; font-size: .92rem; font-weight: 600;
+  color: var(--text); line-height: 1.25;
+}
+.strengths-service-desc {
+  font-size: .85rem; color: var(--text-mid); line-height: 1.75;
+}
+.strengths-closing {
+  font-size: .88rem; color: var(--text-dim); line-height: 1.8;
+  max-width: 580px; border-top: 1px solid var(--border); padding-top: 1.5rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .strengths-top5 { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+  .ncte-feature-banner { padding: 1.6rem 1.4rem; }
+}
 </style>
 </head>
 <body>
@@ -758,6 +870,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <li><a href="#featured">Featured At</a></li>
     <li><a href="#speaking">Speaking</a></li>
     <li><a href="#offerings">Offerings</a></li>
+    <li><a href="#strengths">Strengths</a></li>
     <li><a href="#anomaly">Anomaly Soul</a></li>
     <li><a href="#dj">DJ</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -1448,7 +1561,23 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <div class="section-wrap">
     <div class="section-label reveal">Awards &amp; Credentials</div>
     <h2 class="section-heading reveal">Recognition</h2>
+
+    <!-- NCTE CNV Fellows Feature -->
+    <div class="ncte-feature-banner reveal">
+      <div class="ncte-badge-label">★ &nbsp;Now Featured on NCTE's Website · 2026–2028</div>
+      <h3 class="ncte-feature-heading">NCTE Cultivating New Voices<br>Among Scholars of Color Fellow</h3>
+      <p class="ncte-feature-text">Named a Cultivating New Voices Fellow by the National Council of Teachers of English — a fellowship for emerging scholars of color shaping the future of English education. This recognition affirms research that centers equity, literacy, and the voices historically excluded from the academy. Now listed on NCTE's official CNV Fellows &amp; Mentors page.</p>
+      <a href="https://ncte.org/research/cultivating-new-voices-among-scholars-of-color/cnv-fellows-and-mentors/" target="_blank" rel="noopener noreferrer" class="ncte-feature-link">View on NCTE's Website ↗</a>
+    </div>
+
     <div class="awards-grid reveal">
+      <div class="award-cell">
+        <div class="award-star">★</div>
+        <div>
+          <div class="award-name">NCTE Cultivating New Voices Among Scholars of Color Fellowship</div>
+          <div class="award-detail">National Council of Teachers of English · 2026–2028</div>
+        </div>
+      </div>
       <div class="award-cell">
         <div class="award-star">★</div>
         <div>
@@ -1513,6 +1642,64 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- CLIFTONSTRENGTHS -->
+<section id="strengths">
+  <div class="section-wrap">
+    <div class="section-label reveal">CliftonStrengths</div>
+    <h2 class="section-heading reveal">Leading from<br><span class="gradient-text">Strength</span></h2>
+    <p class="strengths-intro reveal">Most people are taught to fix their weaknesses. I help people build from what's already there. CliftonStrengths is a framework for understanding how you're wired — and how to make that wiring work for you instead of against you.</p>
+    <div class="strengths-domain-label reveal">◉ &nbsp;Leading Domain: Relationship Building</div>
+
+    <div class="strengths-top5 reveal">
+      <div class="strength-card">
+        <div class="strength-rank">1</div>
+        <div class="strength-name">Individualization</div>
+        <div class="strength-domain-tag">Relationship Building</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-rank">2</div>
+        <div class="strength-name">Futuristic</div>
+        <div class="strength-domain-tag">Strategic Thinking</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-rank">3</div>
+        <div class="strength-name">Developer</div>
+        <div class="strength-domain-tag">Relationship Building</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-rank">4</div>
+        <div class="strength-name">Connectedness</div>
+        <div class="strength-domain-tag">Relationship Building</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-rank">5</div>
+        <div class="strength-name">Maximizer</div>
+        <div class="strength-domain-tag">Influencing</div>
+      </div>
+    </div>
+
+    <div class="strengths-services reveal">
+      <div class="strengths-service-card">
+        <div class="strengths-service-icon">◉</div>
+        <div class="strengths-service-title">1:1 Strengths Coaching</div>
+        <div class="strengths-service-desc">A deep-read of your CliftonStrengths profile in the context of your actual life — your classroom, your leadership role, your career transition. Not a generic debrief. I read what you're carrying, understand where you're going, and help you see how your top themes create your clearest path there. Three sessions. Real application. Done right.</div>
+      </div>
+      <div class="strengths-service-card">
+        <div class="strengths-service-icon">⬡</div>
+        <div class="strengths-service-title">Team Strengths Facilitation</div>
+        <div class="strengths-service-desc">For teams, departments, and organizations ready to move past personality typing and into actual collaboration. I facilitate strengths-based team sessions that help people understand their own wiring and everyone else's — so the work gets distributed in ways that make sense, not just in ways that are habitual. Education, nonprofit, and community organizations are my sweet spot.</div>
+      </div>
+      <div class="strengths-service-card">
+        <div class="strengths-service-icon">◈</div>
+        <div class="strengths-service-title">Educator &amp; Changemaker Mentoring</div>
+        <div class="strengths-service-desc">For teachers, coaches, and educational leaders who are doing meaningful work and burning out doing it. CliftonStrengths shows you what you're actually built for. Mentoring helps you redesign how you show up so your energy goes toward what moves people, not toward performing strengths you don't have. Available by invitation, one person per month.</div>
+      </div>
+    </div>
+
+    <p class="strengths-closing reveal">I've been trained in CliftonStrengths facilitation and have used it in classrooms, with leadership teams, and in individual coaching work for years. The strongest people I've worked with aren't the ones who tried to be everything — they're the ones who learned to be fully themselves.</p>
   </div>
 </section>
 
