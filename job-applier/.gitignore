@@ -1,0 +1,6 @@
+profile.json
+jobs.db
+resume.*
+screenshots/
+__pycache__/
+.pytest_cache/
