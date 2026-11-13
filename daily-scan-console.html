@@ -1,0 +1,289 @@
+<title>Daily Scan Console</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: one narrow reading column; sticky action bar on top, then run checklist, watch list, brief text. */
+:root{
+  --bg:#f6f5f8; --surface:#ffffff; --fg:#1d1b26; --muted:#6a6678; --line:#dedbe6;
+  --accent:#4b3fb0; --accent-fg:#ffffff; --ok:#1f7a4d; --ok-bg:#e1f3ea;
+  --font-d:"Space Grotesk",system-ui,sans-serif; --font-b:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14121c; --surface:#1d1a29; --fg:#ece9f5; --muted:#a29db4; --line:#332f45;
+  --accent:#a99dff; --accent-fg:#14121c; --ok:#6fd6a0; --ok-bg:#16352a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14121c; --surface:#1d1a29; --fg:#ece9f5; --muted:#a29db4; --line:#332f45;
+  --accent:#a99dff; --accent-fg:#14121c; --ok:#6fd6a0; --ok-bg:#16352a; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-b);font-size:15px;line-height:1.55;
+  padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+h1,h2,h3{font-family:var(--font-d);text-wrap:balance;margin:0}
+h1{font-size:30px;line-height:1.15}
+h2{font-size:20px}
+h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--font-b);font-weight:600}
+p{margin:0}
+.lede{color:var(--muted);max-width:65ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button,.btn{font:inherit;font-weight:600;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:9px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+button.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+.status{color:var(--ok);font-weight:600;min-height:1.4em}
+section{display:flex;flex-direction:column;gap:12px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 16px}
+.row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row input{margin-top:4px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.row label{flex:1;min-width:0;cursor:pointer}
+.row small{display:block;color:var(--muted)}
+.row input:checked + label{color:var(--muted);text-decoration:line-through}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.grp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.grp li{display:flex;gap:8px;align-items:center}
+.grp li input{accent-color:var(--accent);flex:none}
+.grp li a{overflow-wrap:anywhere}
+.count{font-variant-numeric:tabular-nums;color:var(--muted)}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.55;max-height:420px;overflow:auto}
+.rules{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--ok-bg);color:var(--ok);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600}
+</style>
+
+<main>
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <h3 id="date"></h3>
+    <h1>Daily job and fellowship scan for Alanna Harris, Ph.D.</h1>
+    <p class="lede">Copy the brief into a Claude session that has web search, Gmail, and the job apps connected. Use this page to track which lanes and watch list organizations have been checked today. Checks reset each day.</p>
+    <div class="bar">
+      <button class="primary" id="copy">Copy full brief</button>
+      <button id="reset">Reset today's checks</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+    <div class="rules">
+      <span class="chip">No salary filter</span>
+      <span class="chip">Skip already applied</span>
+      <span class="chip">No em dashes</span>
+      <span class="chip">List in reply, no tables</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Run order <span class="count" id="runCount"></span></h2>
+    <div class="panel" id="steps"></div>
+  </section>
+
+  <section>
+    <h2>Jobs and Careers lanes <span class="count" id="laneCount"></span></h2>
+    <p class="lede">Run each as its own search. Use keywordsAnd with an occupation group plus a domain group. Exclude counseling, therapy, clinical, nursing, social work, math with keywordsNot. Never pass salaryMin.</p>
+    <div class="panel" id="lanes"></div>
+  </section>
+
+  <section>
+    <h2>Instagram watch list <span class="count" id="watchCount"></span></h2>
+    <p class="lede">Instagram cannot be read directly. Each link searches the organization's careers page. Check the box once reviewed.</p>
+    <div class="grid" id="watch"></div>
+  </section>
+
+  <section>
+    <h2>Cross-posting boards</h2>
+    <div class="grp"><ul id="boards"></ul></div>
+  </section>
+
+  <section>
+    <h2>The brief</h2>
+    <pre id="brief"></pre>
+  </section>
+</main>
+
+<script>
+const today = new Date().toISOString().slice(0,10);
+document.getElementById('date').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+const g = q => 'https://www.google.com/search?q=' + encodeURIComponent(q);
+
+const steps = [
+  ['email','Already-applied check in Gmail','Search at least 6 months of application confirmations and ATS senders. Build the applied list first.'],
+  ['tools','Load job tools with ToolSearch','Jobs and Careers, Indeed, ZipRecruiter, Job Spotter, Workable.'],
+  ['lanes','Jobs and Careers, six lanes','See the lane list below.'],
+  ['apps','Indeed, ZipRecruiter, Job Spotter','Remote plus Chicago and Milwaukee: education research, literacy, curriculum, professional learning.'],
+  ['mail','Email discovery','HigherEdJobs, AERA, NCTE, MLA, LinkedIn, Lensa, recruiters, fellowship announcements.'],
+  ['fac','Faculty, including a dedicated secondary English and ELA search','English education, literacy, teacher education, curriculum and instruction, urban education, Black studies and humanities.'],
+  ['res','Research roles and organizations','AIR (including its Greenhouse board), WestEd, MDRC, EDC, NORC, ETS, SRI, Mathematica, RAND, TNTP, and the rest of the list.'],
+  ['ctr','University research centers and HBCUs','Literacy, urban education, writing studies, Black studies, humanities centers.'],
+  ['fel','Fellowships and postdocs, including upcoming cycles','State residency for each. Spencer and NAEd get searched and judged on fit.'],
+  ['assoc','Professional associations','NCTE, AERA, LRA, ILA, NWP, MLA, CCCC, AESA, ASALH.'],
+  ['watch','Instagram watch list and boards','Use the sections below.'],
+  ['verify','Verify status, then write the reply','Do not reject a job only because an ATS page will not load.']
+];
+const lanes = [
+  ['l1','Remote education research, program evaluation, qualitative research'],
+  ['l2','Remote literacy, ELA, curriculum, learning design, professional learning'],
+  ['l3','Education research, evaluation, literacy in Chicago, IL'],
+  ['l4','Education research, evaluation, literacy in Milwaukee, WI and Madison, WI'],
+  ['l5','Education research, literacy, teacher education in Atlanta, GA'],
+  ['l6','Faculty: English education, literacy education, teacher education, curriculum and instruction (no location)']
+];
+const watch = {
+  'Milwaukee':['Rethinking Schools','America\'s Black Holocaust Museum','Greater Milwaukee Foundation and Milwaukee Succeeds','City Forward Collective','Wisconsin Policy Forum','Wisconsin Humanities','TRUE Skool','Milwaukee Public Schools central office'],
+  'Chicago':['UChicago Consortium on School Research','Young Chicago Authors','Illinois Humanities','The Chicago Public Education Fund','Kids First Chicago','DuSable Black History Museum','Poetry Foundation','Chicago Public Schools central office'],
+  'Atlanta and the South':['Southern Education Foundation','Black Teacher Collaborative','Learning for Justice (SPLC)','Atlanta Public Schools central office'],
+  'National':['Facing History & Ourselves','Center for Black Educator Development','The Education Trust','Leading Educators','Children\'s Literacy Initiative','UNCF','Thurgood Marshall College Fund','Teach Plus','Words Beats & Life','Universal Hip Hop Museum','Smithsonian NMAAHC (USAJOBS)']
+};
+const boards = [
+  ['Chalkbeat Jobs','https://jobs.chalkbeat.org'],
+  ['Idealist (education, arts and humanities; Milwaukee, Chicago, Atlanta, remote)','https://www.idealist.org'],
+  ['Top School Jobs','https://www.topschooljobs.org'],
+  ['Diverse: Issues In Higher Education jobs',g('Diverse Issues in Higher Education jobs')]
+];
+
+const KEY = 'scan-checks-' + today;
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
+
+function checkbox(id, labelHtml, wrapClass){
+  const row = document.createElement('div'); row.className = wrapClass;
+  const cb = document.createElement('input'); cb.type='checkbox'; cb.id='c-'+id; cb.checked = !!state[id];
+  cb.addEventListener('change', () => { state[id]=cb.checked; save(); counts(); });
+  const lb = document.createElement('label'); lb.htmlFor = cb.id; lb.innerHTML = labelHtml;
+  row.append(cb, lb); return row;
+}
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const stepsEl = document.getElementById('steps');
+steps.forEach(([id,t,d]) => stepsEl.append(checkbox('s-'+id, esc(t)+'<small>'+esc(d)+'</small>','row')));
+const lanesEl = document.getElementById('lanes');
+lanes.forEach(([id,t]) => lanesEl.append(checkbox(id, esc(t),'row')));
+
+const watchEl = document.getElementById('watch');
+let watchIds = [];
+Object.entries(watch).forEach(([region, orgs]) => {
+  const grp = document.createElement('div'); grp.className='grp';
+  grp.innerHTML = '<h3>'+esc(region)+'</h3>';
+  const ul = document.createElement('ul');
+  orgs.forEach((o,i) => {
+    const id = 'w-'+region+'-'+i; watchIds.push(id);
+    const li = document.createElement('li');
+    const cb = document.createElement('input'); cb.type='checkbox'; cb.id='c-'+id; cb.checked=!!state[id];
+    cb.setAttribute('aria-label','Checked '+o);
+    cb.addEventListener('change',()=>{state[id]=cb.checked;save();counts();});
+    const a = document.createElement('a'); a.href=g(o+' careers jobs'); a.target='_blank'; a.rel='noopener'; a.textContent=o;
+    li.append(cb,a); ul.append(li);
+  });
+  grp.append(ul); watchEl.append(grp);
+});
+const boardsEl = document.getElementById('boards');
+boards.forEach(([n,u],i) => {
+  const id='b-'+i; const li=document.createElement('li');
+  const cb=document.createElement('input'); cb.type='checkbox'; cb.id='c-'+id; cb.checked=!!state[id];
+  cb.setAttribute('aria-label','Checked '+n);
+  cb.addEventListener('change',()=>{state[id]=cb.checked;save();counts();});
+  const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener'; a.textContent=n;
+  li.append(cb,a); boardsEl.append(li);
+});
+
+function counts(){
+  const n = ids => ids.filter(i=>state[i]).length+' of '+ids.length;
+  document.getElementById('runCount').textContent = n(steps.map(s=>'s-'+s[0]));
+  document.getElementById('laneCount').textContent = n(lanes.map(l=>l[0]));
+  document.getElementById('watchCount').textContent = n(watchIds);
+}
+counts();
+
+const BRIEF = `Run the daily job and fellowship scan for Alanna Harris, Ph.D. Today is ${today}. Use web search, her connected Gmail, AND the connected job apps (Jobs and Careers, Indeed, ZipRecruiter, Job Spotter, Jobs by Workable). Write results directly in the final reply as a clean, scannable list. Never use a spreadsheet, tracker, table, or file. Never use em dashes anywhere in the output.
+
+STANDING RULES
+- No salary requirement. Never use salaryMin or any salary filter, and never exclude or deprioritize a role for low or missing pay. Show salary as information only ("Not listed" if absent).
+- Already-applied check first: search Gmail (last 6+ months) for application confirmations and status emails ("thank you for applying", "application received", "update on your application", "interview", Indeed Application, and ATS senders such as greenhouse-mail.io, myworkday.com, successfactors.com, applytojob.com, hire.lever.co, ashbyhq.com, icims.com, jobvite.com, pageuppeople.com, interfolio.com, wisconsin.gov). Build the applied list, then exclude those roles everywhere. If she applied to a different role at the same employer, note "You applied to [other role] here on [date]."
+- Do not let the search get too narrow. An ATS page that will not load (Workday, Interfolio, PeopleAdmin, PageUp, Oracle, SuccessFactors, Taleo, Greenhouse) does not mean the job is fake or closed. If an official department or university announcement plus an authoritative board (Chronicle, HigherEdJobs, AcademicJobsOnline, discipline association) confirm an active search with a future deadline, include it and state any uncertainty. Never knowingly list a closed job as open.
+
+JOB APPS (REQUIRED DAILY)
+Load tools with ToolSearch. Run Jobs and Careers (mcp__Jobs_and_Careers__job-search) as separate searches:
+1. Remote education research, program evaluation, qualitative research
+2. Remote literacy, ELA, curriculum, learning design, professional learning
+3. Education research, evaluation, literacy in Chicago, IL
+4. Same in Milwaukee, WI and Madison, WI
+5. Education research, literacy, teacher education in Atlanta, GA
+6. Faculty: English education, literacy education, teacher education, curriculum and instruction (no location)
+Use keywordsAnd (occupation group plus domain group) and keywordsNot for counseling, therapy, clinical, nursing, social work, math. Also run Indeed, ZipRecruiter, and Job Spotter for remote and Chicago/Milwaukee education research, literacy, curriculum, professional learning roles.
+
+WHO SHE IS
+Ph.D. Urban Education, Curriculum, Instruction, and Literacy (UW-Milwaukee, 2024); literacy master's; secondary English education B.A.; Wisconsin secondary English licensure; IRB certified; CliftonStrengths facilitator. Current Title I Instructional Leader at The Learning Exchange; former literacy coach, secondary ELA teacher, higher ed instructor, site lead, MPS Community Schools Coordinator. Lead Researcher on the ACCESS Project (U.S. Department of Education evaluation across 13 MPS schools). 2026 to 2028 NCTE Cultivating New Voices Among Scholars of Color Fellow; NCTE Professional Dyads and Culturally Relevant Teaching Award; Urban Education manuscript reviewer. Research: critical mindfulness in secondary ELA, writing and voice, Black DJ culture and synthesis as literacy/text, culturally sustaining pedagogy, teacher development, critical consciousness, educational healing.
+
+SEARCH TWO PHASES
+Phase 1 discovery (broad). Phase 2 verification and fit.
+
+FACULTY (broad, not only "literacy professor")
+English Education, Secondary English Education, ELA Education, Literacy Education, Adolescent Literacy, Language and Literacy, Reading and Writing, Writing Studies, Composition and Rhetoric (teacher prep relevant), Teacher Education, Curriculum and Instruction, Curriculum Studies, Urban Education, Educational Studies, Multicultural/Culturally Responsive/Sustaining Education, Teacher Development, Professional Learning, Education Policy, Education Research, Educational Leadership (research/teaching oriented), Higher Education, Learning Sciences (genuine overlap). Titles: Assistant, Associate, Open Rank, Professor, Lecturer, Senior Lecturer, Teaching Professor, Professor of Practice, Clinical Professor, Research Professor, non-tenure track, Visiting, Faculty Fellow. Do not require "literacy" in the title.
+Secondary English is a major dedicated lane: "English Education", "Secondary English Education", "English Language Arts Education", "Secondary Literacy", "Adolescent Literacy", "English teacher education", "ELA teacher education", "English methods", "literacy teacher education", "writing teacher education".
+
+RESEARCH JOBS (broad)
+Education Researcher, Senior Researcher, Research Associate, Research Analyst, Research Manager/Director, Evaluation Researcher/Manager/Specialist, Program Evaluator, Qualitative or Mixed Methods Researcher, Implementation Research/Manager, Education Policy Research/Analyst, Research Project/Program Manager, Research Operations/Strategy, Educational Measurement, Assessment Research, Learning Research, UX/User Research in education, Curriculum Research, Learning Sciences Research. Include youth-serving nonprofits, community college systems and foundations, higher ed research and evaluation, and staff roles in university labs and centers (for example Stanford GSE Black Academic Development Lab). Search university research centers: education, literacy, teacher education, urban education, education policy, higher education, learning sciences, humanities, Black studies, writing studies, children's literacy, evaluation.
+
+RESEARCH ORGANIZATIONS (individually)
+AIR, WestEd, MDRC, EDC, NORC, ETS, SRI Education, Mathematica, RAND, TNTP, Instruction Partners, Great Minds, Lexia, NWEA, Learning Policy Institute, New America, Brookings education, Education Northwest, Child Trends, Center for Applied Linguistics, RTI International, Public Impact, Education First, Bellwether, UnboundEd, state education agencies.
+AIR separately: site:air.org careers education researcher / literacy; site:job-boards.greenhouse.io/americaninstitutesforresearch literacy / education / researcher / evaluation. Do not reject AIR because Greenhouse is hard to load; determine whether it is active.
+
+EDUCATION STRATEGY AND L&D
+Learning Strategy, L&D, Education Strategy, Instructional Strategy, Professional Learning/Development, Educator/Teacher Development, Curriculum Strategy/Development/Leadership, Implementation, Program Strategy/Management, Education Partnerships/Consulting, Learning Experience/Design, Instructional Design, Organizational Learning, Higher Education Programs, Academic Programs, Education Innovation, Teacher Success, School Improvement, District and State Education Support.
+
+FELLOWSHIPS AND POSTDOCS (dedicated daily search)
+Postdoctoral Fellowship/Research Fellowship/Scholar/Associate, Humanities, Faculty, Literacy, Writing, Education, Black Studies, African American Studies, Cultural Studies, English, Writing Studies, Public Humanities, Education Policy, Teacher Education fellowships, Visiting Scholar, Research and Humanities Residency. Programs: Woodson Institute, Ford Foundation, Spencer, NAEd, AERA, NCTE, MLA, National Humanities Center, Schomburg Center, Library of Congress, NEH, humanities centers, Black studies institutes, literacy research institutes, HBCUs, major research universities. Do not exclude a fellowship because applications are not open yet; list it under UPCOMING FELLOWSHIPS with application opens, deadline, eligibility, residency, funding, fit. For every fellowship state Remote, Hybrid, or In person, whether residency is required, and where. Do not confuse remote application with remote fellowship. Search Spencer and NAEd, then judge career stage and eligibility.
+
+GEOGRAPHY
+Priority: remote, Milwaukee, Chicago, Madison, Atlanta, then strong relocation anywhere in the U.S. (HBCUs, R1s, strong literacy, English education, urban education, Black studies, humanities programs; DC, New York, Philadelphia, Boston, Baltimore, Chapel Hill, Nashville, Knoxville, Charlottesville, Boulder, Minneapolis, Los Angeles, Oakland, Seattle).
+
+HBCUs
+Spelman, Morehouse, Clark Atlanta, Howard, Hampton, Virginia State, Norfolk State, NC A&T, NC Central, Kentucky State, Tennessee State, Fisk, Jackson State, Alabama State, Alabama A&M, Tuskegee, Florida A&M, Florida Memorial, Xavier of Louisiana, Southern University, Prairie View A&M, Texas Southern, Delaware State, Morgan State, Bowie State, Coppin State, and others. Same fit standard.
+
+ASSOCIATIONS
+NCTE and affiliates, AERA and divisions, Literacy Research Association, International Literacy Association, National Writing Project, MLA, CCCC, American Educational Studies Association, NCME when relevant, ASALH, humanities and Black studies associations.
+
+ACADEMIC SOURCES
+Official university pages, department sites, Chronicle, HigherEdJobs, AcademicJobsOnline, Inside Higher Ed, association boards, employer career pages, connected apps. A secondary source may discover a job even if the official page is hard to open.
+
+EMAIL DISCOVERY
+Search Gmail for job alerts (HigherEdJobs, AERA, NCTE, MLA, LinkedIn, Lensa), university and fellowship announcements, recruiters, research orgs, nonprofits. Verify independently. Exclude closed jobs. List relevant open jobs from Lensa alerts too.
+
+INSTAGRAM WATCH LIST
+Do not open instagram.com. Check each organization at its own careers page, then Chalkbeat Jobs, Idealist, Top School Jobs, Diverse Jobs.
+Milwaukee: Rethinking Schools; America's Black Holocaust Museum; Greater Milwaukee Foundation and Milwaukee Succeeds; City Forward Collective; Wisconsin Policy Forum; Wisconsin Humanities; TRUE Skool; MPS central office (academics, research, curriculum, professional learning only).
+Chicago: UChicago Consortium on School Research; Young Chicago Authors; Illinois Humanities; Chicago Public Education Fund; Kids First Chicago; DuSable Black History Museum; Poetry Foundation; CPS central office (same limits).
+Atlanta and the South: Southern Education Foundation; Black Teacher Collaborative; Learning for Justice; Atlanta Public Schools central office (same limits).
+National: Facing History & Ourselves; Center for Black Educator Development; The Education Trust; Leading Educators; Children's Literacy Initiative; UNCF; Thurgood Marshall College Fund; Teach Plus; Words Beats & Life; Universal Hip Hop Museum; Smithsonian NMAAHC (USAJOBS).
+Tag jobs from this list "(Instagram watch list)" after the organization name. Hourly teaching artist, tutoring, and part-time instructor roles are excluded.
+
+VERIFICATION
+Highest confidence: current official employer or university posting; official department announcement; official announcement plus ATS; recent authoritative board listing matching official info; association announcement. If the ATS will not load, cross-check two authoritative sources. Flag conflicting evidence or exclude.
+
+FRESHNESS
+Three categories: NEW THIS SEARCH (posted or found in the last 2 to 3 days), STILL OPEN, STRONG FIT (older, open, not yet surfaced), DEADLINES COMING UP (strong roles due within 14 days). Do not repeat the same role daily unless the deadline is near, there is new information, or it is unusually strong.
+
+FIT
+Would a reviewer reasonably consider her a strong or plausible candidate? Include strong fit, good fit, strategic stretch (label "Stretch"). Do not pad the list: three excellent jobs beat fifteen weak ones.
+
+EXCLUDE
+Already applied; counseling; psychology; school psychology; mental health; therapy; social work; medical research; nursing; pharmacy; engineering; math-focused; unrelated STEM; clinical research needing clinical credentials; roles needing licenses she lacks (mandatory reading specialist or administrator license); tutoring and hourly adjunct gigs; UW-Whitewater and IACE. Do not exclude interdisciplinary humanities, Black cultural studies, literacy, writing, music, popular culture, or education roles.
+
+OUTPUT FORMAT
+Start with: Daily Job and Fellowship Scan: ${today}
+Sections: NEW THIS SEARCH, STILL OPEN, STRONG FIT, DEADLINES COMING UP (each item: Title; Organization; Location / Remote; Salary (information only); Deadline; Posted; Fit (one or two sentences); Status; Apply link), UPCOMING FELLOWSHIPS (Application opens; Deadline; Funding; Residency; Eligibility; Why it fits), SEARCH NOTES (brief: notable exclusions and why, apps searched and any unavailable, one line on how many watch list organizations had relevant openings, one line listing roles left out because she already applied).
+
+Before replying, confirm: broad search done; dedicated secondary English, literacy, and education research searches done; research centers, HBCUs, associations, research orgs, and AIR (with Greenhouse) searched; email and Lensa checked; all six Jobs and Careers lanes plus Indeed, ZipRecruiter, Job Spotter run; upcoming fellowships searched; openings verified; no ATS-only rejections; no excluded fields; stretch roles labeled; direct apply links and deadlines given; no repeats without reason; every watch list organization and board checked; already-applied roles removed; no salary filter used; no em dashes.`;
+
+document.getElementById('brief').textContent = BRIEF;
+const statusEl = document.getElementById('status');
+function flash(m){ statusEl.textContent=m; setTimeout(()=>{statusEl.textContent='';},2500); }
+document.getElementById('copy').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(BRIEF); flash('Brief copied'); }
+  catch(e){
+    const r=document.createRange(); r.selectNodeContents(document.getElementById('brief'));
+    const s=getSelection(); s.removeAllRanges(); s.addRange(r); flash('Press copy on the selected text');
+  }
+});
+document.getElementById('reset').addEventListener('click', () => {
+  state = {}; save();
+  document.querySelectorAll('input[type=checkbox]').forEach(c => c.checked=false);
+  counts(); flash('Checks cleared');
+});
+</script>
