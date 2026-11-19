@@ -326,6 +326,25 @@ section { position: relative; }
 }
 .program-name { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .8rem; }
 .program-desc { font-size: .88rem; font-style: italic; color: var(--text-mid); line-height: 1.8; font-family: 'Cormorant Garamond', serif; }
+.sound-card {
+  margin-top: 1.2rem; padding: 2.4rem 2.6rem; border-radius: 3px;
+  background: linear-gradient(120deg, var(--plum) 0%, #4A2160 55%, var(--slate) 100%);
+  color: #fff; display: grid; grid-template-columns: auto 1fr auto; gap: 2.2rem; align-items: center;
+}
+.sound-eq { display: flex; align-items: flex-end; gap: 5px; height: 48px; }
+.sound-eq span { width: 6px; border-radius: 2px; background: var(--plum-light); animation: eqPulse 1.4s ease-in-out infinite; }
+.sound-eq span:nth-child(1) { height: 40%; animation-delay: 0s; }
+.sound-eq span:nth-child(2) { height: 85%; animation-delay: .2s; background: var(--gold-light); }
+.sound-eq span:nth-child(3) { height: 60%; animation-delay: .4s; }
+.sound-eq span:nth-child(4) { height: 100%; animation-delay: .1s; background: var(--slate-light); }
+.sound-eq span:nth-child(5) { height: 50%; animation-delay: .3s; }
+@keyframes eqPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.45); } }
+.sound-eq span { transform-origin: bottom; }
+@media (prefers-reduced-motion: reduce) { .sound-eq span { animation: none; } }
+.sound-label { font-size: .65rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--plum-light); margin-bottom: .5rem; }
+.sound-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.2; margin-bottom: .4rem; }
+.sound-desc { font-size: .88rem; color: rgba(255,255,255,.8); line-height: 1.7; }
+.sound-card .btn { text-align: center; }
 
 /* ─── CONTACT ─── */
 #contact { background: var(--bg2); }
@@ -377,6 +396,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   .hero-cta-row { flex-direction: column; align-items: flex-start; }
   .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .hero-photo, .hero-photo-placeholder { width: 160px; height: 200px; }
+  .sound-card { grid-template-columns: 1fr; gap: 1.4rem; padding: 2rem 1.6rem; }
 }
 
 /* ─── REVEAL ─── */
@@ -859,6 +879,15 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="program-name">CliftonStrengths for Educators</div>
         <div class="program-desc">Strengths-based coaching and team development for educators — discovering and deploying your natural genius in service of your students and community.</div>
       </div>
+    </div>
+    <div class="sound-card reveal">
+      <div class="sound-eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div>
+        <div class="sound-label">Anomaly Soul on SoundCloud</div>
+        <div class="sound-title">Hear the mix</div>
+        <div class="sound-desc">The sound behind DJ as Designer. Listen to a sample mix on SoundCloud.</div>
+      </div>
+      <a href="https://on.soundcloud.com/AxYpKpxbtb3ZLAf6GF" target="_blank" rel="noopener" class="btn btn-white">Listen on SoundCloud ↗</a>
     </div>
   </div>
 </section>
