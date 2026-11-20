@@ -333,6 +333,10 @@ section { position: relative; }
   transition: max-height .5s ease, opacity .4s; opacity: 0;
 }
 .exp-item:hover .exp-desc { max-height: 300px; opacity: 1; }
+.exp-note { font-size: .86rem; color: var(--text-mid); line-height: 1.7; }
+.cv-subhead { font-family: 'Unbounded', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin: 3rem 0 .4rem; }
+.cv-actions { margin: -1rem 0 1rem; }
+@media (hover: none) { .exp-desc { max-height: none; opacity: 1; } }
 
 /* ─── PUBLICATIONS ─── */
 #publications { background: transparent; border-bottom: 1px solid var(--border); }
@@ -348,6 +352,8 @@ section { position: relative; }
 .pub-type { font-size: .62rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: .6rem; }
 .pub-title { font-family: 'Unbounded', sans-serif; font-weight: 500; font-size: 1.05rem; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
 .pub-citation { font-size: .82rem; color: var(--text-dim); line-height: 1.6; }
+.pub-citation a { color: var(--slate); text-decoration: none; white-space: nowrap; }
+.pub-citation a:hover { text-decoration: underline; }
 .pub-badge {
   position: absolute; top: 1.2rem; right: 1.2rem;
   font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
@@ -887,7 +893,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <p class="hero-title">Remixing Knowledge. Cultivating Possibility. Building Futures.</p>
       <p class="hero-philosophy">Not every conversation belongs in every room. I work selectively, with people who recognize what they need and are willing to be precise about it. I read what you're carrying, find the gap between where you are and where you're building toward, and give you only what matters.</p>
       <div class="hero-cta-row">
-        <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-outline">Download CV ↗</a>
+        <a href="https://drive.google.com/file/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/view" target="_blank" class="btn btn-outline">Download CV ↗</a>
         <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
       <div class="hero-badges">
@@ -916,7 +922,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <p>And yes, I DJ. Because teaching and DJing are the same thing: read the room, hold the energy, know when to shift the vibe. I bring that same skill everywhere I go.</p>
         <p>I use Human Design as a framework for how I show up. As a 6/2 Projector, my work is to see systems and people with precision, and to wait for invitation before I offer what I see. I work selectively because my energy is built for depth, not volume. This shapes how I take clients, how I teach, and what I will and won't do.</p>
         <div class="about-actions">
-          <a href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank" class="btn btn-primary">Download CV ↗</a>
+          <a href="https://drive.google.com/file/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/view" target="_blank" class="btn btn-primary">Download CV ↗</a>
           <a href="https://www.linkedin.com/in/alanna-harris-ph-d-713447100/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
         </div>
       </div>
@@ -1211,79 +1217,179 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
   <div class="section-wrap">
     <div class="section-label reveal">Curriculum Vitae</div>
     <h2 class="section-heading reveal">The Work</h2>
+    <div class="cv-actions reveal">
+      <a href="https://drive.google.com/file/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/view" target="_blank" rel="noopener" class="btn btn-outline">View Full CV ↗</a>
+    </div>
+
+    <h3 class="cv-subhead reveal">Education</h3>
     <div class="exp-timeline">
 
       <div class="exp-item reveal">
         <div class="exp-meta">
-          <div class="exp-years">2023 – 2024</div>
-          <div class="exp-org">Children's Hospital</div>
+          <div class="exp-years">Ph.D. · 2024</div>
+          <div class="exp-org">University of Wisconsin–Milwaukee</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">Community Health Educator</div>
+          <div class="exp-role">Urban Education</div>
+          <div class="exp-note">Emphasis: Curriculum &amp; Instruction, Literacy<br>Dissertation: <em>Critical Mindfulness in the Secondary English Language Arts Classroom</em></div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">M.S.</div>
+          <div class="exp-org">University of Wisconsin–Milwaukee</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Curriculum &amp; Instruction</div>
+          <div class="exp-note">Thesis: <em>Multicultural Literacy Instruction and Text Selection</em></div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">B.S.</div>
+          <div class="exp-org">University of Wisconsin–Whitewater</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Secondary English Education</div>
+          <div class="exp-note">King/Chávez Scholar</div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="cv-subhead reveal">Professional Positions</h3>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2026 – Present</div>
+          <div class="exp-org">The Learning Exchange<br>Milwaukee, WI</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Title I Instructional Leader and Site Supervisor</div>
+          <div class="exp-desc">Lead Title I instructional services for Milwaukee partner schools as site supervisor, working alongside school leaders and teachers to strengthen literacy instruction.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2024 – 2026</div>
+          <div class="exp-org">Brown Deer School District<br>Brown Deer, WI</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Instructional Literacy Coach</div>
+          <div class="exp-desc">Facilitated 25+ professional learning sessions on culturally responsive literacy coaching and Science of Reading implementation.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2015 – Present</div>
+          <div class="exp-org">UWM Writing Project (UWMWP)<br>University of Wisconsin–Milwaukee</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Teacher Consultant</div>
+          <div class="exp-desc">Facilitate writing and teacher inquiry workshops for the UWM Writing Project Summer Institute, including <em>Mixing Your Message</em> (2025), which uses DJing as a metaphor for reflective writing.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2019 – 2022</div>
+          <div class="exp-org">Alverno College<br>Milwaukee, WI</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">School of Education</div>
+          <div class="exp-desc">Taught Literacy Methods, Curriculum Theory, Reflective Teaching, and Culturally and Linguistically Affirming Instruction. Evaluated and supported preservice teachers through clinical experiences.</div>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
           <div class="exp-years">2023 – 2024</div>
-          <div class="exp-org">Marquette University</div>
+          <div class="exp-org">Children's Hospital of Wisconsin<br>Milwaukee, WI</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">9th Grade English Instructor</div>
+          <div class="exp-role">Community Health Educator, Trauma-Informed Care Team</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2023 – 2024</div>
+          <div class="exp-org">Marquette University<br>Milwaukee, WI</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Upward Bound Instructor</div>
+          <div class="exp-desc">Taught Upward Bound English: College Preparatory Writing &amp; Literacy for secondary students.</div>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
           <div class="exp-years">2021 – 2023</div>
-          <div class="exp-org">UW-Milwaukee School of Education</div>
+          <div class="exp-org">University of Wisconsin–Milwaukee</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">Senior Lecturer</div>
-          <div class="exp-desc">Taught literacy methods, antiracist pedagogy, and urban teaching. Supervised clinical field placements across MPS and suburban districts.</div>
+          <div class="exp-role">School of Education</div>
+          <div class="exp-desc">Taught Teachers as Writers and English Methods at the undergraduate and graduate levels. Supervised clinical field placements across Milwaukee Public Schools and suburban districts.</div>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
           <div class="exp-years">2021 – 2022</div>
-          <div class="exp-org">Universal Hip Hop Museum</div>
+          <div class="exp-org">Universal Hip Hop Museum<br>New York, NY (Remote)</div>
         </div>
         <div class="exp-body">
           <div class="exp-role">Education Consultant</div>
+          <div class="exp-desc">Developed a national education strategy and pilot arts-literacy program, and led an educator workshop series on hip-hop pedagogy as culturally sustaining practice.</div>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
-          <div class="exp-years">2019 – Present</div>
-          <div class="exp-org">Alverno College</div>
+          <div class="exp-years">2020 – 2021</div>
+          <div class="exp-org">Milwaukee Public Schools</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">Adjunct Lecturer, School of Education</div>
-          <div class="exp-desc">Literacy methods and curriculum theory.</div>
+          <div class="exp-role">Community Schools Coordinator</div>
+          <div class="exp-desc">Led grant-funded programming in youth leadership, family engagement, and health equity, along with staff professional development on restorative justice practices and culturally affirming wellness.</div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-years">2018 – 2021</div>
+          <div class="exp-org">ACCESS Project<br>Milwaukee Public Schools &amp; UW–Milwaukee</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Lead Researcher</div>
+          <div class="exp-desc">U.S. Department of Education SEED grant (Asset-Based Cultural Competence Ensuring Student Success). Designed professional development, collected qualitative data, and led culturally responsive teaching research across 13 Milwaukee Public Schools.</div>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
           <div class="exp-years">2018 – 2020</div>
-          <div class="exp-org">US Dept. of Education ACCESS Grant</div>
+          <div class="exp-org">University of Wisconsin–Milwaukee</div>
         </div>
         <div class="exp-body">
-          <div class="exp-role">Educational Consultant</div>
-          <div class="exp-desc">Supported 13 Milwaukee Public Schools with culturally responsive instructional practices.</div>
+          <div class="exp-role">Graduate Teaching Assistant, English Methods</div>
+          <div class="exp-desc">Led discussions, graded student work, delivered guest lectures, and held office hours.</div>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
           <div class="exp-years">2013 – 2018</div>
-          <div class="exp-org">Wauwatosa &amp; Kenosha Unified Districts</div>
+          <div class="exp-org">Wauwatosa &amp; Kenosha Unified School Districts</div>
         </div>
         <div class="exp-body">
           <div class="exp-role">High School English Teacher, Grades 9–12</div>
-          <div class="exp-desc">American Literature, British Literature, Composition, and AP Literature.</div>
+          <div class="exp-desc">American Literature, British Literature, Composition, and AP English Literature.</div>
         </div>
       </div>
 
@@ -1298,25 +1404,25 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     <h2 class="section-heading reveal">The Scholarship</h2>
     <div class="pub-grid reveal">
       <div class="pub-card">
-        <span class="pub-badge">Forthcoming 2026</span>
+        <span class="pub-badge">Published 2026</span>
         <div class="pub-type">Book Chapter · Routledge</div>
         <div class="pub-title">Mindfulness in Practice: Teachers as Agents of Healing and Growth in the Secondary ELA Classroom</div>
-        <div class="pub-citation">Harris, A. (Forthcoming, 2026). In <em>International Perspectives on the Teaching of English to Generate Hope: Inspiration in the Age of Anxiety</em> [IFTE Volume 6]. Routledge.</div>
+        <div class="pub-citation">Harris, A. (2026). In A. Goodwyn, C. Durrant, M. A. George, J. Manuel, W. Sawyer, &amp; M. Shoffner (Eds.), <em>International Perspectives on the Teaching of English to Generate Hope: Inspiration in an Age of Anxiety</em>. Routledge.</div>
       </div>
       <div class="pub-card">
         <div class="pub-type">Peer-Reviewed Article · New Jersey English Journal</div>
-        <div class="pub-title">Joy and Pain: Strategies for Transformative Learning in the English Language Arts Curriculum</div>
-        <div class="pub-citation">Harris, A. (2024). <em>New Jersey English Journal, 13</em>(8).</div>
+        <div class="pub-title">“Joy and Pain” Strategies for Transformative Learning in the English Language Arts Curriculum</div>
+        <div class="pub-citation">Harris, A. (2024). <em>New Jersey English Journal, 13</em>, Article 8. <a href="https://digitalcommons.montclair.edu/nj-english-journal/vol13/iss2024/8" target="_blank" rel="noopener">Read the article ↗</a></div>
       </div>
       <div class="pub-card">
-        <div class="pub-type">Peer-Reviewed Article · Journal of Urban Education</div>
+        <div class="pub-type">Peer-Reviewed Article · Urban Education</div>
         <div class="pub-title">The Sociohistorical Evolution of the Language of Culturally-Based Pedagogy and Its Impact on Teacher Education</div>
-        <div class="pub-citation">Pasternak, D. L., et al. (2020). <em>Journal of Urban Education</em>.</div>
+        <div class="pub-citation">Pasternak, D. L., Evans, L. M., Allen, K. R., Turner, C. R., Knapp, J. M., Harris, A., Wu, X., Bartlett, M., Habeck, T., Worm, J., Taylor, K., &amp; Nix, T. (2023). <em>Urban Education, 58</em>(10). <a href="https://doi.org/10.1177/0042085920959123" target="_blank" rel="noopener">doi.org/10.1177/0042085920959123 ↗</a></div>
       </div>
       <div class="pub-card">
-        <div class="pub-type">Doctoral Dissertation · UW-Milwaukee</div>
-        <div class="pub-title">Critical Mindfulness in the English Language Arts Classroom</div>
-        <div class="pub-citation">Harris, A. Doctoral Dissertation. University of Wisconsin–Milwaukee.</div>
+        <div class="pub-type">Doctoral Dissertation · UW–Milwaukee</div>
+        <div class="pub-title">Critical Mindfulness in the Secondary English Language Arts Classroom</div>
+        <div class="pub-citation">Harris, A. (2024). Doctoral dissertation, University of Wisconsin–Milwaukee.</div>
       </div>
     </div>
   </div>
@@ -1332,12 +1438,12 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="featured-cell">
         <div class="featured-abbr">NCTE</div>
         <div class="featured-name">National Council of Teachers of English</div>
-        <div class="featured-year">2019 · 2024</div>
+        <div class="featured-year">2019 · 2022 · 2023 · 2024 · 2026</div>
       </div>
       <div class="featured-cell">
         <div class="featured-abbr">AERA</div>
         <div class="featured-name">American Educational Research Association</div>
-        <div class="featured-year">2019</div>
+        <div class="featured-year">2019 · 2025</div>
       </div>
       <div class="featured-cell">
         <div class="featured-abbr">MLA</div>
@@ -1347,7 +1453,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       <div class="featured-cell">
         <div class="featured-abbr">CQIE</div>
         <div class="featured-name">Critical Questions in Education</div>
-        <div class="featured-year">2022</div>
+        <div class="featured-year">2019 · 2022</div>
       </div>
       <div class="featured-cell">
         <div class="featured-abbr">UWM</div>
@@ -1356,14 +1462,15 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       </div>
       <div class="featured-cell">
         <div class="featured-abbr">DOE</div>
-        <div class="featured-name">US Department of Education · ACCESS Grant</div>
-        <div class="featured-year">2018 – 2020</div>
+        <div class="featured-name">US Department of Education · ACCESS Project (SEED Grant)</div>
+        <div class="featured-year">2018 – 2021</div>
       </div>
     </div>
 
     <hr class="featured-divider">
 
     <div class="featured-affiliations reveal">
+      <span class="featured-affil">The Learning Exchange</span>
       <span class="featured-affil">University of Wisconsin-Milwaukee</span>
       <span class="featured-affil">Marquette University</span>
       <span class="featured-affil">Alverno College</span>
@@ -1411,13 +1518,65 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
       </div>
 
       <div class="speaking-past reveal">
-        <h3 style="font-family:'Unbounded',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Past Presentations</h3>
+        <h3 style="font-family:'Unbounded',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Upcoming</h3>
+        <div class="pres-list" style="margin-bottom:2.2rem;">
+          <div class="pres-item">
+            <div class="pres-year">MLA 2027</div>
+            <div>
+              <div class="pres-title">Remixing the Spirit: DJing as Black Diasporic Spiritual Practice</div>
+              <div class="pres-venue">Modern Language Association Convention · January 2027</div>
+            </div>
+          </div>
+        </div>
+        <h3 style="font-family:'Unbounded',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:1.2rem;">Presentations</h3>
         <div class="pres-list">
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2026</div>
+            <div>
+              <div class="pres-title">Joy as Resistance: Healing-Centered Pedagogies and the Transformation of the ELA Classroom</div>
+              <div class="pres-venue">NCTE Annual Convention, Philadelphia · Individual session · November 2026</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2026</div>
+            <div>
+              <div class="pres-title">Beyond the Mic: DJ Practice as a Theory of Synthesis in Secondary ELA</div>
+              <div class="pres-venue">NCTE Annual Convention, Philadelphia · Cultivating New Voices poster · November 2026</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">Invited 2026</div>
+            <div>
+              <div class="pres-title">Remixing English Education</div>
+              <div class="pres-venue">Invited talk · UW–Whitewater, Department of Languages and Literatures · February 2026</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">AERA 2025</div>
+            <div>
+              <div class="pres-title">Mindfulness in Urban ELA Classrooms: Examining Culturally Responsive Pedagogy and Systemic Bias</div>
+              <div class="pres-venue">American Educational Research Association · iPoster · April 2025</div>
+            </div>
+          </div>
           <div class="pres-item">
             <div class="pres-year">NCTE 2024</div>
             <div>
               <div class="pres-title">Writing Across America: DJ Presentation</div>
-              <div class="pres-venue">National Council of Teachers of English · November 2024</div>
+              <div class="pres-venue">NCTE Annual Convention, Boston · November 2024</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2023</div>
+            <div>
+              <div class="pres-title">“Write Across America” with the National Writing Project</div>
+              <div class="pres-venue">NCTE Annual Convention, Columbus · Roundtable · November 2023</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2022</div>
+            <div>
+              <div class="pres-title">This Little Light of Mine: Culturally Relevant and Sustaining Practices in Elementary and Early Childhood Education</div>
+              <div class="pres-venue">NCTE Annual Convention, Anaheim · Panel · November 2022</div>
             </div>
           </div>
           <div class="pres-item">
@@ -1425,6 +1584,20 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
             <div>
               <div class="pres-title">Beyond the Unitary Construct of School Culture: A Comparative Case Study</div>
               <div class="pres-venue">Critical Questions in Education · October 2022</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">NCTE 2022</div>
+            <div>
+              <div class="pres-title">Cultivating Student Voice Through Journaling</div>
+              <div class="pres-venue">NCTE Homecoming, Louisville · Workshop · July 2022</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">ICQI 2021</div>
+            <div>
+              <div class="pres-title">The Language of Culturally-Based Pedagogy in Teacher Education Research</div>
+              <div class="pres-venue">International Congress of Qualitative Inquiry (Virtual) · May 2021</div>
             </div>
           </div>
           <div class="pres-item">
@@ -1437,22 +1610,29 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
           <div class="pres-item">
             <div class="pres-year">NCTE 2019</div>
             <div>
-              <div class="pres-title">ACCESSING Student Success: Supporting Culturally Relevant Pedagogy Across PD Practice</div>
-              <div class="pres-venue">National Council of Teachers of English · November 2019</div>
+              <div class="pres-title">ACCESSING Student Success: Supporting Culturally Relevant Pedagogy Across Professional Development Practice</div>
+              <div class="pres-venue">NCTE Annual Convention, Baltimore · November 2019</div>
+            </div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-year">CQIE 2019</div>
+            <div>
+              <div class="pres-title">ACCESSING Culturally Relevant Practice Through Professional Development Schools</div>
+              <div class="pres-venue">Critical Questions in Education · October 2019</div>
             </div>
           </div>
           <div class="pres-item">
             <div class="pres-year">MLA 2019</div>
             <div>
-              <div class="pres-title">ACCESSING Culturally Relevant Practice through Professional Development Schools Focused on the Teaching of Writing</div>
+              <div class="pres-title">ACCESSING Culturally Relevant Practice Through Professional Development Schools Focused on the Teaching of Writing</div>
               <div class="pres-venue">Modern Language Association International Symposium · July 2019</div>
             </div>
           </div>
           <div class="pres-item">
             <div class="pres-year">AERA 2019</div>
             <div>
-              <div class="pres-title">Teacher Willingness to Participate in PD Focused on Cultural Responsiveness: A School District-University Collaboration</div>
-              <div class="pres-venue">American Educational Research Association · April 2019</div>
+              <div class="pres-title">Teacher Willingness to Participate in Professional Development Focused on Cultural Responsiveness: A School District–University Collaboration</div>
+              <div class="pres-venue">American Educational Research Association, Toronto · April 2019</div>
             </div>
           </div>
         </div>
@@ -1575,14 +1755,14 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="award-star">★</div>
         <div>
           <div class="award-name">NCTE Cultivating New Voices Among Scholars of Color Fellowship</div>
-          <div class="award-detail">National Council of Teachers of English · 2026–2028</div>
+          <div class="award-detail">NCTE Research Foundation · 2026–2028</div>
         </div>
       </div>
       <div class="award-cell">
         <div class="award-star">★</div>
         <div>
           <div class="award-name">NCTE Professional Dyads &amp; Culturally Relevant Teaching Award</div>
-          <div class="award-detail">National Council of Teachers of English · 2023</div>
+          <div class="award-detail">National Council of Teachers of English · Cohort V · 2021–2023</div>
         </div>
       </div>
       <div class="award-cell">
@@ -1596,7 +1776,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="award-star">◈</div>
         <div>
           <div class="award-name">Ph.D., Urban Education</div>
-          <div class="award-detail">University of Wisconsin-Milwaukee<br><em>Dissertation: Critical Mindfulness in the ELA Classroom</em></div>
+          <div class="award-detail">University of Wisconsin-Milwaukee · 2024<br><em>Dissertation: Critical Mindfulness in the Secondary English Language Arts Classroom</em></div>
         </div>
       </div>
       <div class="award-cell">
@@ -1610,7 +1790,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
         <div class="award-star">◈</div>
         <div>
           <div class="award-name">IRB Certified Researcher</div>
-          <div class="award-detail">Human subjects research certification · Valid 2025</div>
+          <div class="award-detail">Human subjects research certification</div>
         </div>
       </div>
       <div class="award-cell">
@@ -1795,7 +1975,7 @@ footer p { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
             <span class="contact-link-icon">in</span>
             LinkedIn Profile ↗
           </a>
-          <a class="contact-link" href="https://docs.google.com/document/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/export?format=pdf" target="_blank">
+          <a class="contact-link" href="https://drive.google.com/file/d/1l0pmZFCKez_dUw_fHm4PLzEck8tw8njo/view" target="_blank">
             <span class="contact-link-icon">↓</span>
             Download CV ↗
           </a>
